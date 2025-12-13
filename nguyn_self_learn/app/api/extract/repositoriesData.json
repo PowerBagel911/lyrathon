@@ -1,0 +1,1749 @@
+{
+  "type": "repositories",
+  "data": [
+    {
+      "repo": {
+        "name": "anotherTestingSite",
+        "url": "https://github.com/Fenny-Huy/anotherTestingSite",
+        "fork": false,
+        "pushed_at": "2025-05-22T16:19:27Z"
+      },
+      "evidence": {
+        "languages": {
+          "Python": 59072
+        },
+        "root_files": [
+          ".gitattributes",
+          ".gitignore",
+          "README.md",
+          "main.py",
+          "main2.py",
+          "map_only.py",
+          "results.json",
+          "route_finder.py",
+          "run_model.py",
+          "test_for_astar.py",
+          "test_for_edge_mapper.py",
+          "test_for_nodes_eges.py",
+          "test_graph_builder.py",
+          "test_lstm.py",
+          "traffic_gui.py",
+          "train_models.py",
+          "visualisation_test.py",
+          "visualize_predictions.py"
+        ],
+        "dependencies": null,
+        "imports": [
+          "argparse",
+          "algorithms",
+          "utils",
+          "models",
+          "sys",
+          "json",
+          "run_model",
+          "subprocess",
+          "streamlit",
+          "folium",
+          "streamlit_folium",
+          "datetime",
+          "os",
+          "torch",
+          "numpy",
+          "pandas",
+          "matplotlib",
+          "matplotlib.pyplot",
+          "sklearn"
+        ],
+        "recent_commits": [
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-22T16:19:25Z",
+            "message": "add print path"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-22T16:15:08Z",
+            "message": "adjust the arguments, again"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-22T16:05:07Z",
+            "message": "update boolean value"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-22T15:50:33Z",
+            "message": "kinda running"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-22T13:27:16Z",
+            "message": "initial commit"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-22T13:26:51Z",
+            "message": "Initial commit"
+          }
+        ],
+        "readme_excerpt": "# partBPlaceholder"
+      }
+    },
+    {
+      "repo": {
+        "name": "AWE-Store",
+        "url": "https://github.com/Fenny-Huy/AWE-Store",
+        "fork": false,
+        "pushed_at": "2025-06-06T11:41:21Z"
+      },
+      "evidence": {
+        "languages": {
+          "Python": 36402,
+          "JavaScript": 17792,
+          "CSS": 4923,
+          "HTML": 4142
+        },
+        "root_files": [
+          ".gitattributes",
+          ".gitignore",
+          "README.md"
+        ],
+        "dependencies": null,
+        "imports": null,
+        "recent_commits": [
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-06-06T11:38:32Z",
+            "message": "Revert \"adjust dataset\"\n\nThis reverts commit cbd5b6b014bfe1e59b83e0906104618db09b8d2d."
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-06-06T11:37:58Z",
+            "message": "Revert \"Add receipt, shipment and notification as JS alert\"\n\nThis reverts commit 0a7cfb93b3cb499fcc523cf37174fcf50c014ce1."
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-06-06T11:37:15Z",
+            "message": "adjust dataset"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-06-06T11:36:17Z",
+            "message": "Revert \"adjust the customer class a little\"\n\nThis reverts commit 6b4afedb564e2c35cdc45acac71365855d18677d."
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-06-06T11:19:52Z",
+            "message": "adjust the customer class a little"
+          },
+          {
+            "author": "ToanNguyenSwinAdventure",
+            "date": "2025-06-06T11:09:54Z",
+            "message": "Add receipt, shipment and notification as JS alert"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-06-06T03:13:12Z",
+            "message": "updated readme"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-06-06T02:40:51Z",
+            "message": "create invoice class\n\nadjust other classes to use the invoice class"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-06-06T02:24:44Z",
+            "message": "updated the csv files a little"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-06-05T14:07:33Z",
+            "message": "adjust the passed arguments of order\n\ninstead of passing customer_id, now pass the whole customer object, to avoid creating another redundant shoppingCart object"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-06-05T13:54:55Z",
+            "message": "adjust order.py to avoid declaring databaseManager as an attribute"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-06-05T13:50:58Z",
+            "message": "adjust app.py to avoid intializing redundant objects"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-06-05T11:41:35Z",
+            "message": "adjust the comments"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-06-05T11:24:54Z",
+            "message": "adjust the functions a little to match the naming"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-06-05T11:06:50Z",
+            "message": "add a bit of styles to the analytics page"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-06-05T10:56:41Z",
+            "message": "remove unused functions in customer class"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-06-05T10:51:31Z",
+            "message": "new version from finn"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-06-04T09:40:05Z",
+            "message": "remove redundant data folder"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-06-04T09:38:21Z",
+            "message": "currently have the carts and the checkout"
+          },
+          {
+            "author": "ToanNguyenSwinAdventure",
+            "date": "2025-06-03T17:07:30Z",
+            "message": "Merge branch 'Huy'"
+          }
+        ],
+        "readme_excerpt": "# AWE Electronics Online Store (Assignment 3)\r\n\r\nThis is a starter Flask project for implementing the object-oriented design of the AWE Electronics online store.\r\n\r\n## To Run\r\nFirst, install all the necessary dependencies for the project\r\n\r\n```bash\r\npip install flask flask-cors\r\n```\r\n\r\nThen change the directory to backend folder and run app.py\r\n\r\n```bash\r\ncd backend\r\npython app.py\r\n```\r\n\r\nTo host the frontend website, you can either host it with python built in function on another terminal and open localhost:8000 on a browser\r\n```bash\r\ncd frontend\r\npython -m http.server\r\n```\r\n\r\nOr you can host it using live server extension on VSCode\r\n\r\n\r\n## Folder Structure\r\n\r\n- `/backend/models/` – the class implementations\r\n- `/backend/app.py` – the application endpoints (e.g., add to cart, place order)\r\n- `/backend/data` - the datasets\r\n- `/frontend` - the frontend web interface"
+      }
+    },
+    {
+      "repo": {
+        "name": "BundooraPathSearcher",
+        "url": "https://github.com/Fenny-Huy/BundooraPathSearcher",
+        "fork": false,
+        "pushed_at": "2025-05-25T12:41:15Z"
+      },
+      "evidence": {
+        "languages": {
+          "Python": 61010
+        },
+        "root_files": [
+          ".gitignore",
+          "README.md",
+          "core.py",
+          "generate_test_cases.py",
+          "main.py",
+          "requirements.txt",
+          "streamlit_app.py",
+          "test_cases.txt",
+          "test_routes.py",
+          "train_models.py"
+        ],
+        "dependencies": [
+          "streamlit",
+          "pandas",
+          "numpy",
+          "scikit-learn",
+          "matplotlib",
+          "folium",
+          "streamlit-folium"
+        ],
+        "imports": [
+          "pandas",
+          "networkx",
+          "os",
+          "utils",
+          "models",
+          "algorithms",
+          "random",
+          "datetime",
+          "argparse",
+          "streamlit",
+          "folium",
+          "streamlit_folium",
+          "torch",
+          "numpy",
+          "matplotlib",
+          "matplotlib.pyplot",
+          "sklearn",
+          "core",
+          "ast",
+          "time"
+        ],
+        "recent_commits": [
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-25T12:41:13Z",
+            "message": "Update README.md"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-25T11:52:28Z",
+            "message": "Update test_routes.py"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-25T11:36:57Z",
+            "message": "add elapsed time to measure the perfomance"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-25T05:35:23Z",
+            "message": "updated test cases"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-25T05:03:31Z",
+            "message": "add random test case generating"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-25T04:26:52Z",
+            "message": "test file added"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-24T08:21:45Z",
+            "message": "Update README.md"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-24T08:19:04Z",
+            "message": "final repository"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-24T07:06:11Z",
+            "message": "copy from test repository\n\nFinal submission"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-21T06:13:18Z",
+            "message": "minor adjustment in the output"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-20T14:21:21Z",
+            "message": "Update traffic_model_ready.csv"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-20T07:19:25Z",
+            "message": "added init.py to avoid conflicting relative paths"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-20T07:18:47Z",
+            "message": "updated the correct path for data processing script"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-20T07:13:02Z",
+            "message": "added the model training script and prediction visualization"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-20T07:08:17Z",
+            "message": "copy the code from all the previous repositories"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-20T07:04:37Z",
+            "message": "Initial commit"
+          }
+        ],
+        "readme_excerpt": "# BundooraPathSeacher\n\nFirstly, install the neccessary dependencies using pip install -r requirements.txt\nThen install torch using pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128\nTo run the application, run streamlit run traffic_app.py\n\nTo generate the random test cases, run generate_test_cases.py, and remove the last empty line in the output test_cases.txt\n\nAnd to run the test, run python test_routes.py"
+      }
+    },
+    {
+      "repo": {
+        "name": "Business_Multiagent_System_Placeholder",
+        "url": "https://github.com/Fenny-Huy/Business_Multiagent_System_Placeholder",
+        "fork": false,
+        "pushed_at": "2025-11-04T13:46:52Z"
+      },
+      "evidence": {
+        "languages": {
+          "Python": 132144
+        },
+        "root_files": [
+          ".env.sample",
+          ".gitignore",
+          "README.md",
+          "__init__.py",
+          "langchain-demo-env.yml",
+          "llm_wrapper.py",
+          "multiagent_system.py"
+        ],
+        "dependencies": null,
+        "imports": [
+          "os",
+          "typing",
+          "llm",
+          "langgraph",
+          "typing_extensions",
+          "json",
+          "pprint",
+          "agents",
+          "config"
+        ],
+        "recent_commits": [
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-11-04T13:46:52Z",
+            "message": "Merge pull request #1 from Fenny-Huy/still-testing\n\nMerge Still testing"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-11-04T13:45:59Z",
+            "message": "update the readme"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-11-02T15:40:28Z",
+            "message": "Minor update to the prompt of response agent"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-10-27T04:30:37Z",
+            "message": "minor adjustment to supervisor on knowing about analysis result"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-10-26T12:11:04Z",
+            "message": "minor adjustments"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-10-25T06:28:38Z",
+            "message": "remove redundancy\n\nalmost finalizing the system"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-10-24T15:02:57Z",
+            "message": "adjust analysis agent entirely, update response agent"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-10-24T07:15:47Z",
+            "message": "an example workflow for business info?"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-10-24T06:30:29Z",
+            "message": "adjust the search tools to output the business id as a key"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-10-23T15:26:54Z",
+            "message": "continue testing with review retrieve"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-10-18T05:55:10Z",
+            "message": "adjust main system search agents\n\nalso adjust the default number of returned values of some function"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-10-16T15:44:38Z",
+            "message": "adjust the duckdb output so that it is in the correct json format\n\nsome records with the the fields in attributes field have wrong format in the first place, causing error in parsing"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-10-16T07:36:58Z",
+            "message": "Delete test_react_agents.py"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-10-16T07:32:44Z",
+            "message": "still trying to figure out the parsing"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-10-14T00:20:42Z",
+            "message": "nothing"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-10-12T03:27:57Z",
+            "message": "Create test_parse.py"
+          },
+          {
+            "author": "PowerBagel911",
+            "date": "2025-10-11T19:56:36Z",
+            "message": "Update search_agent.py\n\ntried to update the prompt but still not working"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-10-04T11:39:02Z",
+            "message": "update the tools for search agents"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-10-04T11:09:56Z",
+            "message": "update the search tools again to match those available back in G1"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-10-03T08:51:00Z",
+            "message": "update the agents to use react agent and update agent state"
+          }
+        ],
+        "readme_excerpt": "this system requires the chroma server from G1 system to be active\n\nto install the conda environments\n\n```bash\nconda env create -f langchain-demo-env.yml -y\n```\n\nthen activate the environment\n```bash\nconda activate multi-agent-env\n```\n\ncreate the .env file from the sample file .env.sample \n\nto run the system\n```bash\npython multiagent_system.py\n```\n"
+      }
+    },
+    {
+      "repo": {
+        "name": "Dynamic-Event-Platform",
+        "url": "https://github.com/Fenny-Huy/Dynamic-Event-Platform",
+        "fork": false,
+        "pushed_at": "2024-10-25T09:29:35Z"
+      },
+      "evidence": {
+        "languages": {
+          "JavaScript": 73044,
+          "HTML": 1721,
+          "CSS": 930
+        },
+        "root_files": [],
+        "dependencies": null,
+        "imports": null,
+        "recent_commits": [
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-25T09:29:34Z",
+            "message": "Delete .github/workflows/justtest.yml"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-22T02:38:11Z",
+            "message": "Update package.json to change api"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-21T13:34:18Z",
+            "message": "Create justtest.yml"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-21T12:17:03Z",
+            "message": "Change the welcoming line"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-21T11:42:21Z",
+            "message": "change the app names to the correct ones"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-21T11:40:42Z",
+            "message": "change the branch from master to main"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-21T11:39:42Z",
+            "message": "change the welcome sentence, change the publish profile"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-21T03:16:25Z",
+            "message": "reupload"
+          }
+        ],
+        "readme_excerpt": null
+      }
+    },
+    {
+      "repo": {
+        "name": "Event-Platform",
+        "url": "https://github.com/Fenny-Huy/Event-Platform",
+        "fork": false,
+        "pushed_at": "2024-10-17T03:32:00Z"
+      },
+      "evidence": {
+        "languages": {
+          "JavaScript": 71116,
+          "HTML": 1721,
+          "CSS": 930
+        },
+        "root_files": [
+          ".DS_Store"
+        ],
+        "dependencies": null,
+        "imports": null,
+        "recent_commits": [
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-17T03:32:00Z",
+            "message": "Merge pull request #1 from Fenny-Huy/Staging\n\nDeploy from Staging to Production"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-17T03:17:35Z",
+            "message": "update api url"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-17T03:04:20Z",
+            "message": "Updating home page"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-17T02:11:43Z",
+            "message": "Update main.yml"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-17T01:44:32Z",
+            "message": "change api url"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-17T01:36:13Z",
+            "message": "change production app name"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-16T15:05:53Z",
+            "message": "Update main.yml"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-16T14:26:20Z",
+            "message": "Update main.yml"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-16T14:14:48Z",
+            "message": "remove install serve"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-16T14:09:06Z",
+            "message": "update main.yml"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-16T13:38:57Z",
+            "message": "update home page"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-16T13:02:43Z",
+            "message": "add need for frontend and change api url"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-16T12:53:15Z",
+            "message": "Create staging.yml"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-16T11:50:48Z",
+            "message": "right publish profile"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-16T11:46:36Z",
+            "message": "change the publish profile"
+          },
+          {
+            "author": "Arefin090",
+            "date": "2024-10-15T12:10:27Z",
+            "message": "craeted testing job and automated testing for the pipeline"
+          },
+          {
+            "author": "Arefin090",
+            "date": "2024-10-15T11:42:27Z",
+            "message": "added jest testing for the API endpoints"
+          },
+          {
+            "author": "Arefin090",
+            "date": "2024-10-14T18:00:20Z",
+            "message": "automated table creation process for new database setups"
+          },
+          {
+            "author": "Arefin090",
+            "date": "2024-10-14T11:34:22Z",
+            "message": "added frontend env in build package for explicit call"
+          },
+          {
+            "author": "Arefin090",
+            "date": "2024-10-14T10:42:28Z",
+            "message": "added serve in frotnend build script"
+          }
+        ],
+        "readme_excerpt": null
+      }
+    },
+    {
+      "repo": {
+        "name": "Genshin-ZZZ",
+        "url": "https://github.com/Fenny-Huy/Genshin-ZZZ",
+        "fork": false,
+        "pushed_at": "2025-11-15T15:31:53Z"
+      },
+      "evidence": {
+        "languages": {
+          "JavaScript": 57696,
+          "Python": 18089,
+          "CSS": 7107,
+          "HTML": 1721
+        },
+        "root_files": [
+          "README.md"
+        ],
+        "dependencies": null,
+        "imports": null,
+        "recent_commits": [
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-12-12T08:38:12Z",
+            "message": "python files to convert from Access to MySQL"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-12-10T13:16:48Z",
+            "message": "Some features added to leveling table\n\nA new page ArtifactLevelingList to view all records from 'Artifact leveling' table\n\nButton added to open modal to change the leveling roll count, which are also restricted\n\nRecords from both Listing pages will be updated and re-rendered right after edit the record, no need to refresh the page"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-12-09T11:34:36Z",
+            "message": "just change the addedSubstat default value to None instead of ''"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-12-08T16:01:02Z",
+            "message": "add notification for artifact leveling modal\n\nNotification message can now be dynamically changed based on what components call it"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-12-08T15:35:41Z",
+            "message": "separate css for edit modal"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-12-08T09:57:42Z",
+            "message": "add style and fix problem\n\nadd separate styles to leveling modal\n\nfix the problem where new input is not rendered when choosing added substat"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-12-08T08:44:35Z",
+            "message": "Leveling rolls modal added\n\nFunctions as expected so far\n\nTotal values of rolls are restricted based on the number of substats\n\nIt can add or update a record to `Artifact leveling` table automatically\n\nNo styles are added yet"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-12-02T13:52:15Z",
+            "message": "editing artifact records\n\nin listing form, artifact records can now be edited. Successful updates will prompt a notification"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-29T03:03:45Z",
+            "message": "add Search Page\n\nSearch page added with links included in Header and homepage\n\nbackend updated to accommodate search page"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-27T13:56:58Z",
+            "message": "added homepage and header"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-27T10:35:22Z",
+            "message": "added pagination\n\nuse react-paginate for pagination\n\nadd a bit of styles for the the listing table and the pagination bar, the substats are now checkboxes\n\nArtifact class now also has ID field"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-26T13:18:15Z",
+            "message": "add Listing form\n\nCreate a page to list all the artifacts in the database (no styles added)\n\nAdd id in artifact listing in backend\n\nPagination as a placeholder"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-21T16:45:59Z",
+            "message": "Change the structure to component-based\n\ndivide to Pages and Components"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-21T08:39:47Z",
+            "message": "Submit now works and database integrated\n\nFrontend can now submit form and create new artifacts in database\n\nBackend can take post request to create new artifacts and get request to display all artifacts\n\nAdd git ignore in backend to prevent __pycache__ being uploaded"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-21T04:31:15Z",
+            "message": "change some drop down box\n\nuse react select to allow text typing in some dropdown box"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-19T14:41:04Z",
+            "message": "Add a little bit of style in App.css"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-19T14:10:31Z",
+            "message": "initial frontend\n\na basic form still integrated in App.js that takes and add appropriate restrictions to the inputs"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-19T14:03:40Z",
+            "message": "Initial commit"
+          }
+        ],
+        "readme_excerpt": "# Genshin-ZZZ\n\n\n\npip install fastapi uvicorn pymysql sqlalchemy crytopgraphy\n"
+      }
+    },
+    {
+      "repo": {
+        "name": "HousingPrediction",
+        "url": "https://github.com/Fenny-Huy/HousingPrediction",
+        "fork": false,
+        "pushed_at": "2024-11-03T02:44:15Z"
+      },
+      "evidence": {
+        "languages": {
+          "JavaScript": 26137,
+          "Python": 9563,
+          "HTML": 1725,
+          "CSS": 1360
+        },
+        "root_files": [],
+        "dependencies": null,
+        "imports": null,
+        "recent_commits": [
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-03T02:43:46Z",
+            "message": "Merge branch 'main' of https://github.com/Fenny-Huy/HousingPrediction"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-03T02:43:35Z",
+            "message": "final update I hope\n\nchange the comment a little\nchange the result prompt in liveable result\nupdate the API url to new azure web app"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-03T02:35:12Z",
+            "message": "Update frontend.yml to change the app name"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-03T02:34:53Z",
+            "message": "Update backend.yml to change the app name"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-02T22:45:13Z",
+            "message": "change the yellow dot in maximum price chart to blue dot"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-02T10:02:22Z",
+            "message": "update the app name"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-02T09:45:25Z",
+            "message": "add some restriction to the form"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-02T06:49:03Z",
+            "message": "set the distance to 0 when invalid in MaximumPrice Page"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-02T06:34:55Z",
+            "message": "update from Maddy's\n\nchange the maximum price to not show the chart when inappropriate value\nadd home and header"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-02T03:07:02Z",
+            "message": "update the api url to housingbackend"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-02T03:03:46Z",
+            "message": "Update frontend.yml"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-02T03:01:03Z",
+            "message": "Update package.json"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-02T02:57:53Z",
+            "message": "Create frontend.yml"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-02T02:52:07Z",
+            "message": "change the trigger to only trigger backend when backend folder is changed"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-02T01:52:19Z",
+            "message": "delete the run thing in main"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-02T01:16:55Z",
+            "message": "change publish profile, use $"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-02T01:06:50Z",
+            "message": "Update backend.yml"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-02T00:58:05Z",
+            "message": "Update backend.yml"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-02T00:53:08Z",
+            "message": "change python version to 3.12.2"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-11-02T00:30:59Z",
+            "message": "Update backend.yml"
+          }
+        ],
+        "readme_excerpt": null
+      }
+    },
+    {
+      "repo": {
+        "name": "IoT-based-fan-system",
+        "url": "https://github.com/Fenny-Huy/IoT-based-fan-system",
+        "fork": false,
+        "pushed_at": "2025-05-09T03:43:24Z"
+      },
+      "evidence": {
+        "languages": {
+          "Python": 10749,
+          "C++": 5827,
+          "HTML": 3638,
+          "JavaScript": 3627,
+          "CSS": 465
+        },
+        "root_files": [
+          "README.md",
+          "create table.txt",
+          "edge.py",
+          "for_edge.ino"
+        ],
+        "dependencies": null,
+        "imports": [
+          "serial",
+          "pymysql",
+          "datetime",
+          "time"
+        ],
+        "recent_commits": [
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-09T03:43:13Z",
+            "message": "files transferred"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-09T03:40:33Z",
+            "message": "Initial commit"
+          }
+        ],
+        "readme_excerpt": "# IoT-based-fan-system"
+      }
+    },
+    {
+      "repo": {
+        "name": "justtesting",
+        "url": "https://github.com/Fenny-Huy/justtesting",
+        "fork": false,
+        "pushed_at": "2025-03-02T06:22:30Z"
+      },
+      "evidence": {
+        "languages": {
+          "JavaScript": 2185,
+          "CSS": 1048,
+          "HTML": 763
+        },
+        "root_files": [
+          "index.html"
+        ],
+        "dependencies": null,
+        "imports": null,
+        "recent_commits": [
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-03-02T06:22:22Z",
+            "message": "tiny bit of restructure"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-03-02T04:00:22Z",
+            "message": "some minor removal"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-03-02T02:09:03Z",
+            "message": "first commit"
+          }
+        ],
+        "readme_excerpt": null
+      }
+    },
+    {
+      "repo": {
+        "name": "PartB-Placeholder",
+        "url": "https://github.com/Fenny-Huy/PartB-Placeholder",
+        "fork": false,
+        "pushed_at": "2025-05-06T14:49:18Z"
+      },
+      "evidence": {
+        "languages": {
+          "Python": 4823
+        },
+        "root_files": [
+          "README.md"
+        ],
+        "dependencies": null,
+        "imports": null,
+        "recent_commits": [
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-06T14:49:10Z",
+            "message": "traffic count data added"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-06T14:27:25Z",
+            "message": "data and data processing files added"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-06T13:10:39Z",
+            "message": "Initial commit"
+          }
+        ],
+        "readme_excerpt": "# PartB-Placeholder"
+      }
+    },
+    {
+      "repo": {
+        "name": "partBPlaceholder",
+        "url": "https://github.com/Fenny-Huy/partBPlaceholder",
+        "fork": false,
+        "pushed_at": "2025-05-20T05:15:48Z"
+      },
+      "evidence": {
+        "languages": {
+          "Python": 31575
+        },
+        "root_files": [
+          ".gitignore",
+          "README.md",
+          "main.py",
+          "test_for_astar.py",
+          "test_for_edge_mapper.py",
+          "test_for_nodes_eges.py",
+          "test_graph_builder.py",
+          "test_lstm.py",
+          "train_models.py",
+          "visualize_predictions.py"
+        ],
+        "dependencies": null,
+        "imports": [
+          "argparse",
+          "algorithms",
+          "utils",
+          "models",
+          "os",
+          "torch",
+          "numpy",
+          "pandas",
+          "matplotlib",
+          "matplotlib.pyplot",
+          "sklearn"
+        ],
+        "recent_commits": [
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-20T05:15:43Z",
+            "message": "added visualization for predicted data"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-19T15:23:46Z",
+            "message": "minor adjustment\n\ngru and lstm should be working"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-19T15:01:10Z",
+            "message": "adding GRU model"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-19T11:10:00Z",
+            "message": "new dataset and trained data"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-19T02:08:40Z",
+            "message": "remove redundant lines"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-18T08:36:26Z",
+            "message": "change files loading in predictor to allow every device can run"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-18T08:27:10Z",
+            "message": "adjusted the path and folder location"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-18T07:59:48Z",
+            "message": "adjusted speed conversion, the input days for specific site id and location, add 30s to travel time for each node"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-18T06:20:38Z",
+            "message": "remove unneccessary files"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-18T05:57:31Z",
+            "message": "adjust the naming a little to avoid minor conflicts between uppercase and lowercase"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-18T05:13:54Z",
+            "message": "adjusted edge_mapper to correctly give the right entry"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-17T02:12:15Z",
+            "message": "added the pth files"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-17T02:07:40Z",
+            "message": "adjust speed conversion and add init files to avoid path conflicts"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-16T18:03:02Z",
+            "message": "add weights_only = false to torch.load"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-16T17:56:54Z",
+            "message": "update lstm_predictor to attempt to train using GPU"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-16T17:10:05Z",
+            "message": "added main for central controlling"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-16T15:59:39Z",
+            "message": "kinda working"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-16T15:07:11Z",
+            "message": "lstm model"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-16T10:45:42Z",
+            "message": "initial commit"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-05-16T07:57:41Z",
+            "message": "Initial commit"
+          }
+        ],
+        "readme_excerpt": "# partBPlaceholder"
+      }
+    },
+    {
+      "repo": {
+        "name": "PathSearch",
+        "url": "https://github.com/Fenny-Huy/PathSearch",
+        "fork": false,
+        "pushed_at": "2025-05-18T04:47:20Z"
+      },
+      "evidence": {
+        "languages": {
+          "Python": 15686
+        },
+        "root_files": [
+          "DFS.py",
+          "README.md",
+          "graph.txt",
+          "plot.py",
+          "search.py"
+        ],
+        "dependencies": null,
+        "imports": [
+          "matplotlib",
+          "matplotlib.pyplot",
+          "networkx",
+          "sys",
+          "heapq",
+          "collections",
+          "math",
+          "time"
+        ],
+        "recent_commits": [
+          {
+            "author": "Robinsidhu20",
+            "date": "2025-04-11T03:48:47Z",
+            "message": "Add categorized test cases: normal and extreme"
+          },
+          {
+            "author": "Robinsidhu20",
+            "date": "2025-04-11T03:47:02Z",
+            "message": "Add categorized test cases: normal and extreme"
+          },
+          {
+            "author": "Robinsidhu20",
+            "date": "2025-04-11T03:44:29Z",
+            "message": "Delete test_cases_robin directory"
+          },
+          {
+            "author": "Robinsidhu20",
+            "date": "2025-04-09T06:18:39Z",
+            "message": "Add categorized test cases: normal and extreme"
+          },
+          {
+            "author": "Robinsidhu20",
+            "date": "2025-04-09T06:08:54Z",
+            "message": "Add categorized test cases: normal and extreme scenarios"
+          },
+          {
+            "author": "Robinsidhu20",
+            "date": "2025-04-09T05:26:23Z",
+            "message": "Delete bfs_method directory"
+          },
+          {
+            "author": "Robinsidhu20",
+            "date": "2025-04-09T05:25:29Z",
+            "message": "Update search.py"
+          },
+          {
+            "author": "Robinsidhu20",
+            "date": "2025-04-09T04:50:23Z",
+            "message": "Update search.py"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-04-08T05:09:39Z",
+            "message": "remove duplicate nodes and edges"
+          },
+          {
+            "author": "Miran3535",
+            "date": "2025-04-07T20:06:43Z",
+            "message": "Add files via upload"
+          },
+          {
+            "author": "Robinsidhu20",
+            "date": "2025-04-07T11:54:10Z",
+            "message": "Update search.py"
+          },
+          {
+            "author": "Robinsidhu20",
+            "date": "2025-04-07T11:08:36Z",
+            "message": "Add BFS implementation (search.py)"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-04-07T05:17:39Z",
+            "message": "add hsm custom search method into main branch"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-04-07T04:54:20Z",
+            "message": "delete bidirectional a* search method"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-04-06T13:10:01Z",
+            "message": "delete dfs.py"
+          },
+          {
+            "author": "Miran3535",
+            "date": "2025-04-06T08:07:31Z",
+            "message": "DFS.py"
+          },
+          {
+            "author": "Miran3535",
+            "date": "2025-04-06T08:06:56Z",
+            "message": " DFS.py"
+          },
+          {
+            "author": "Miran3535",
+            "date": "2025-04-06T08:06:35Z",
+            "message": "Update DFS.py"
+          },
+          {
+            "author": "Miran3535",
+            "date": "2025-04-06T08:05:54Z",
+            "message": "Add files via upload"
+          },
+          {
+            "author": "Miran3535",
+            "date": "2025-04-06T08:05:20Z",
+            "message": "Delete DFS"
+          }
+        ],
+        "readme_excerpt": "# PathSearchPlaceholder"
+      }
+    },
+    {
+      "repo": {
+        "name": "PathSearchPlaceholder",
+        "url": "https://github.com/Fenny-Huy/PathSearchPlaceholder",
+        "fork": false,
+        "pushed_at": "2025-03-18T11:18:10Z"
+      },
+      "evidence": {
+        "languages": {
+          "Python": 3539
+        },
+        "root_files": [
+          "README.md",
+          "graph.txt",
+          "search.py"
+        ],
+        "dependencies": null,
+        "imports": [
+          "sys",
+          "heapq",
+          "collections",
+          "math"
+        ],
+        "recent_commits": [
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-03-18T11:18:07Z",
+            "message": "initial commit"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-03-18T11:16:19Z",
+            "message": "Initial commit"
+          }
+        ],
+        "readme_excerpt": "# PathSearchPlaceholder"
+      }
+    },
+    {
+      "repo": {
+        "name": "php-docs-hello-world",
+        "url": "https://github.com/Fenny-Huy/php-docs-hello-world",
+        "fork": true,
+        "pushed_at": "2024-09-03T11:55:55Z"
+      },
+      "evidence": {
+        "languages": {
+          "PHP": 28
+        },
+        "root_files": [
+          ".gitignore",
+          "LICENSE",
+          "README.md",
+          "index.php"
+        ],
+        "dependencies": null,
+        "imports": null,
+        "recent_commits": [
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-09-03T11:55:55Z",
+            "message": "Add or update the Azure App Service build and deployment workflow config"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-09-03T11:33:15Z",
+            "message": "Add or update the Azure App Service build and deployment workflow config"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-09-03T11:24:42Z",
+            "message": "Add or update the Azure App Service build and deployment workflow config"
+          },
+          {
+            "author": "glibnub",
+            "date": "2019-10-15T20:31:56Z",
+            "message": "Update README.md"
+          },
+          {
+            "author": "v-rajagt-zz",
+            "date": "2019-09-13T18:05:42Z",
+            "message": "Update README.md"
+          },
+          {
+            "author": "cephalin",
+            "date": "2019-04-08T16:29:54Z",
+            "message": "Update README.md"
+          },
+          {
+            "author": "msangapu-msft",
+            "date": "2018-10-02T14:48:00Z",
+            "message": "Merge pull request #2 from jschram/omit-closing-tag\n\nOmit closing PHP tag"
+          },
+          {
+            "author": "jschram",
+            "date": "2018-10-02T13:41:08Z",
+            "message": "Omit closing PHP tag"
+          },
+          {
+            "author": "SyntaxC4",
+            "date": "2017-03-31T21:26:52Z",
+            "message": "force push"
+          },
+          {
+            "author": "SyntaxC4",
+            "date": "2017-03-31T19:11:23Z",
+            "message": "initial commit"
+          },
+          {
+            "author": "microsoftopensource",
+            "date": "2017-03-31T19:08:08Z",
+            "message": "Initial commit"
+          },
+          {
+            "author": "microsoftopensource",
+            "date": "2017-03-31T19:08:07Z",
+            "message": "Initial commit"
+          },
+          {
+            "author": "msftgits",
+            "date": "2017-03-31T19:08:01Z",
+            "message": "Initial commit"
+          }
+        ],
+        "readme_excerpt": "---\r\npage_type: sample\r\nlanguages:\r\n- php\r\nproducts:\r\n- azure\r\ndescription: \"This sample demonstrates a tiny Hello World PHP app for App Service.\"\r\nurlFragment: php-docs-hello-world\r\n---\r\n\r\n# PHP Hello World\r\n\r\nThis sample demonstrates a tiny Hello World PHP app for [App Service](https://docs.microsoft.com/azure/app-service).\r\n\r\n## Contributing\r\n\r\nThis project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.\r\n"
+      }
+    },
+    {
+      "repo": {
+        "name": "Replica-of-Event",
+        "url": "https://github.com/Fenny-Huy/Replica-of-Event",
+        "fork": false,
+        "pushed_at": "2024-10-15T11:55:32Z"
+      },
+      "evidence": {
+        "languages": {
+          "JavaScript": 63076,
+          "HTML": 1721,
+          "CSS": 930
+        },
+        "root_files": [
+          ".DS_Store"
+        ],
+        "dependencies": null,
+        "imports": null,
+        "recent_commits": [
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-15T11:55:27Z",
+            "message": "delete App.test.js, change the location of __test__"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-15T11:52:35Z",
+            "message": "add cd frontend, or more like working dir"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-15T11:50:09Z",
+            "message": "change a lot\n\nchange yaml to add test\nchange package.json the appi url\nadd test"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-15T11:30:09Z",
+            "message": "change the api url"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-15T11:16:39Z",
+            "message": "Update backend-deploy.yml to change the name of web app"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-15T11:14:30Z",
+            "message": "Update backend-deploy.yml to change the profile"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-15T10:53:25Z",
+            "message": "change the publish profile"
+          },
+          {
+            "author": "Arefin090",
+            "date": "2024-10-14T18:00:20Z",
+            "message": "automated table creation process for new database setups"
+          },
+          {
+            "author": "Arefin090",
+            "date": "2024-10-14T11:34:22Z",
+            "message": "added frontend env in build package for explicit call"
+          },
+          {
+            "author": "Arefin090",
+            "date": "2024-10-14T10:42:28Z",
+            "message": "added serve in frotnend build script"
+          },
+          {
+            "author": "Arefin090",
+            "date": "2024-10-14T10:10:28Z",
+            "message": "changes"
+          },
+          {
+            "author": "Arefin090",
+            "date": "2024-10-14T09:44:28Z",
+            "message": "updated packahe to add serve"
+          },
+          {
+            "author": "Arefin090",
+            "date": "2024-10-14T09:23:17Z",
+            "message": "added web.config"
+          },
+          {
+            "author": "Arefin090",
+            "date": "2024-10-14T08:54:00Z",
+            "message": "added frontend-deploy.yml"
+          },
+          {
+            "author": "Arefin090",
+            "date": "2024-10-14T08:25:46Z",
+            "message": "Merge remote-tracking branch 'origin/master'"
+          },
+          {
+            "author": "Arefin090",
+            "date": "2024-10-14T08:24:27Z",
+            "message": "Add backend deployment workflow"
+          },
+          {
+            "author": "Arefin090",
+            "date": "2024-10-14T08:18:58Z",
+            "message": "Delete .github/workflows directory"
+          },
+          {
+            "author": "Arefin090",
+            "date": "2024-10-14T08:08:12Z",
+            "message": "Add or update the Azure App Service build and deployment workflow config"
+          },
+          {
+            "author": "Arefin090",
+            "date": "2024-10-14T08:00:26Z",
+            "message": "resetting deployment"
+          },
+          {
+            "author": "Arefin090",
+            "date": "2024-10-11T07:57:04Z",
+            "message": "changes"
+          }
+        ],
+        "readme_excerpt": null
+      }
+    },
+    {
+      "repo": {
+        "name": "Testing",
+        "url": "https://github.com/Fenny-Huy/Testing",
+        "fork": false,
+        "pushed_at": "2024-10-10T10:49:25Z"
+      },
+      "evidence": {
+        "languages": {
+          "JavaScript": 61822,
+          "HTML": 1721,
+          "CSS": 930
+        },
+        "root_files": [
+          "README.md"
+        ],
+        "dependencies": null,
+        "imports": null,
+        "recent_commits": [
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-10T10:49:25Z",
+            "message": "Add or update the Azure App Service build and deployment workflow config"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-10T10:38:13Z",
+            "message": "Steal"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2024-10-10T10:14:28Z",
+            "message": "Initial commit"
+          }
+        ],
+        "readme_excerpt": "# Testing"
+      }
+    },
+    {
+      "repo": {
+        "name": "TrafficPredictor",
+        "url": "https://github.com/Fenny-Huy/TrafficPredictor",
+        "fork": false,
+        "pushed_at": "2025-04-16T06:41:44Z"
+      },
+      "evidence": {
+        "languages": {},
+        "root_files": [
+          "README.md"
+        ],
+        "dependencies": null,
+        "imports": null,
+        "recent_commits": [
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-04-16T06:41:13Z",
+            "message": "initial commit and data uploaded"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-04-16T06:39:41Z",
+            "message": "Initial commit"
+          }
+        ],
+        "readme_excerpt": "# TrafficPredictor"
+      }
+    },
+    {
+      "repo": {
+        "name": "ZZZ_Drive_Disc",
+        "url": "https://github.com/Fenny-Huy/ZZZ_Drive_Disc",
+        "fork": false,
+        "pushed_at": "2025-12-07T11:38:00Z"
+      },
+      "evidence": {
+        "languages": {
+          "JavaScript": 240696,
+          "CSS": 96114,
+          "Python": 41598,
+          "HTML": 1719
+        },
+        "root_files": [
+          "README.md"
+        ],
+        "dependencies": null,
+        "imports": null,
+        "recent_commits": [
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-12-07T11:37:58Z",
+            "message": "2 minor changes"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-11-15T15:43:29Z",
+            "message": "bit mistaken"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-11-15T15:11:42Z",
+            "message": "minor fix to added substat distribution"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-11-10T08:02:59Z",
+            "message": "add the new sets"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-11-10T06:10:30Z",
+            "message": "update the apis with correct ZZZ substat"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-11-10T02:27:18Z",
+            "message": "copy files over to this repo"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-07-11T02:22:05Z",
+            "message": "minor adjustment to the styles"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-07-07T15:14:02Z",
+            "message": "minor change to add the border curve to a container"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-07-07T15:00:17Z",
+            "message": "update Statistics and SubStatistics Pages"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-07-06T15:02:06Z",
+            "message": "adjust leveling list page"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-07-06T13:17:04Z",
+            "message": "Add reset button to Search form"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-07-05T16:16:11Z",
+            "message": "Adjust Search form\n\nAdd background to 2 previous pages\n\nAdd the increasing and decreasing buttons to the inputs fields in add leveling modal"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-07-05T06:43:53Z",
+            "message": "adjust add leveling and edit artifact modal"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-07-05T06:21:07Z",
+            "message": "update create form, listing form, and the 2 pages"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-07-05T05:47:33Z",
+            "message": "update header and homepage"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-07-03T12:33:01Z",
+            "message": "added leveling investment charts to Substatistics page"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-06-24T06:13:27Z",
+            "message": "add loading states to the pages"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-06-23T15:38:58Z",
+            "message": "add loading status to create form, put api url to .env instead"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-06-12T09:55:04Z",
+            "message": "add the new db to put api"
+          },
+          {
+            "author": "Fenny-Huy",
+            "date": "2025-06-12T07:14:55Z",
+            "message": "adjust config and main a little in backend"
+          }
+        ],
+        "readme_excerpt": "# ZZZ\n\n\n\npip install fastapi uvicorn pymysql sqlalchemy cryptography\n\n\nLOCAL_DB_HOST=\"\"\nLOCAL_DB_PORT=\"3306\"\nLOCAL_DB_USER=\"\"\nLOCAL_DB_PASSWORD=\"\"\nLOCAL_DB_NAME=\"\"\n\n\nREMOTE_DB_HOST=\"\"\nREMOTE_DB_PORT=\"3307\"\nREMOTE_DB_USER=\"\"\nREMOTE_DB_PASSWORD=\"\"\nREMOTE_DB_NAME=\"\"\n\n\nadd these in .env file in backend\n\nrun these to host the webpage on linux\n\nuvicorn main:app --host 0.0.0.0 --port 8001\n\nBROWSER=none PORT=3001 npm run start\n\n\nin frontend folder, create .env file with this\nREACT_APP_API_URL=http://127.0.0.1:8001"
+      }
+    }
+  ]
+}

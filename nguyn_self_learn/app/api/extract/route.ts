@@ -1,4 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { writeFile } from 'fs/promises'
+import { join, dirname } from 'path'
+import { fileURLToPath } from 'url'
 import pdfParse from 'pdf-parse'
 import mammoth from 'mammoth'
 import { GoogleGenerativeAI } from '@google/generative-ai'
@@ -190,11 +193,19 @@ Return ONLY the JSON object, no other text.`
       return NextResponse.json(extractedData)
     }
 
+
     // Scrape GitHub profile
     let repositoriesData
     try {
       const scraperModule = await import('../../../lib/github-scraper.mjs')
       repositoriesData = await scraperModule.scrapeGitHubProfile(githubUrl.trim())
+      // Export extractedData and repositoriesData to two separate files for inspection (relative to this file)
+      const __filename = fileURLToPath(import.meta.url)
+      const __dirname = dirname(__filename)
+      const extractedDataPath = join(__dirname, 'extractedData.json')
+      const repositoriesDataPath = join(__dirname, 'repositoriesData.json')
+      await writeFile(extractedDataPath, JSON.stringify(extractedData, null, 2), 'utf-8')
+      await writeFile(repositoriesDataPath, JSON.stringify(repositoriesData, null, 2), 'utf-8')
     } catch (error) {
       return NextResponse.json(
         { error: `Failed to scrape GitHub profile: ${error instanceof Error ? error.message : 'Unknown error'}` },
@@ -254,9 +265,13 @@ The summary must:
 
 Return ONLY the JSON object, no other text.`
 
+
     const comparisonResult = await model.generateContent(comparisonPrompt)
     const comparisonResponse = await comparisonResult.response
     const comparisonText = comparisonResponse.text()
+    // Write the raw LLM response for comparisonResult to a file for inspection
+    const comparisonRawPath = join(__dirname, 'comparisonResultRaw.txt')
+    await writeFile(comparisonRawPath, comparisonText, 'utf-8')
 
     // Extract JSON from comparison response
     let comparisonJsonText = comparisonText.trim()
@@ -370,9 +385,13 @@ The preferred_role should be "Job A" or "Job B" based on which has the higher ma
 The summary should explain the match reasoning and highlight key strengths/gaps.
 Return ONLY the JSON object, no other text.`
 
+
       const jobMatchingResult = await model.generateContent(jobMatchingPrompt)
       const jobMatchingResponse = await jobMatchingResult.response
       const jobMatchingText = jobMatchingResponse.text()
+      // Write the raw LLM response for jobMatchingResult to a file for inspection
+      const jobMatchingRawPath = join(__dirname, 'jobMatchingResultRaw.txt')
+      await writeFile(jobMatchingRawPath, jobMatchingText, 'utf-8')
 
       // Extract JSON from job matching response
       let jobMatchingJsonText = jobMatchingText.trim()
