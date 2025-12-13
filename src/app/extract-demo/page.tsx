@@ -99,11 +99,25 @@ export default function ExtractDemoPage() {
     }
 
     try {
+      console.log('[Frontend] Starting file conversion...')
+      console.log('[Frontend] File name:', file.name)
+      console.log('[Frontend] File type:', file.type)
+      console.log('[Frontend] File size:', file.size)
+      
       // Convert file to base64
       const fileBuffer = await file.arrayBuffer()
-      const base64 = Buffer.from(fileBuffer).toString('base64')
-
-      extractCV.mutate({
+      console.log('[Frontend] ArrayBuffer size:', fileBuffer.byteLength)
+      
+      const base64 = btoa(
+        new Uint8Array(fileBuffer).reduce(
+          (data, byte) => data + String.fromCharCode(byte),
+          ''
+        )
+      )
+      console.log('[Frontend] Base64 length:', base64.length)
+      console.log('[Frontend] Base64 preview:', base64.substring(0, 50))
+      
+      const payload = {
         cvFile: base64,
         cvFileType: file.type,
         cvFileName: file.name,
@@ -111,8 +125,14 @@ export default function ExtractDemoPage() {
         githubUrl: githubUrl.trim() || undefined,
         jobSpecA: jobSpecA.trim() || undefined,
         jobSpecB: jobSpecB.trim() || undefined,
-      })
+      }
+      
+      console.log('[Frontend] Payload keys:', Object.keys(payload))
+      console.log('[Frontend] Calling mutation...')
+      
+      extractCV.mutate(payload)
     } catch (err) {
+      console.error('[Frontend] Error:', err)
       setError(err instanceof Error ? err.message : 'An error occurred')
     }
   }

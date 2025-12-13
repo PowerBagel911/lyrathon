@@ -23,26 +23,77 @@ export const extractRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ input }) => {
+      console.log("\n============ [CV Extract] START ============");
+      console.log("[CV Extract] Received input keys:", Object.keys(input));
+      
       const { cvFile, cvFileType, cvFileName, geminiKey, githubUrl, jobSpecA, jobSpecB } = input;
-      if (!cvFile) throw new Error("CV file is required");
-      if (!geminiKey || !geminiKey.trim()) throw new Error("Gemini API key is required");
+      
+      console.log("[CV Extract] File name:", cvFileName);
+      console.log("[CV Extract] File type:", cvFileType);
+      console.log("[CV Extract] CV file length:", cvFile?.length || 0, "chars");
+      console.log("[CV Extract] Gemini key provided:", !!geminiKey);
+      console.log("[CV Extract] GitHub URL provided:", !!githubUrl);
+      
+      if (!cvFile) {
+        console.error("[CV Extract] ERROR: CV file is missing");
+        throw new Error("CV file is required");
+      }
+      if (!geminiKey || !geminiKey.trim()) {
+        console.error("[CV Extract] ERROR: Gemini API key is missing");
+        throw new Error("Gemini API key is required");
+      }
 
       // Decode base64 file
+      console.log("[CV Extract] Decoding base64 file...");
       const buffer = Buffer.from(cvFile, "base64");
+      console.log("[CV Extract] Buffer size:", buffer.length, "bytes");
+      
       let resumeText = "";
       if (cvFileType === "application/pdf") {
-        const pdfData = await pdfParse(buffer);
-        resumeText = pdfData.text;
+        console.log("[CV Extract] Processing PDF file...");
+        try {
+          console.log("[CV Extract] Attempting pdfParse...");
+          const pdfData = await pdfParse(buffer);
+          console.log("[CV Extract] pdfParse SUCCESS");
+          console.log("[CV Extract] PDF text length:", pdfData.text?.length || 0);
+          resumeText = pdfData.text;
+        } catch (pdfError) {
+          console.error("[CV Extract] ❌ PDF PARSING FAILED ❌");
+          console.error("[CV Extract] Error type:", typeof pdfError);
+          console.error("[CV Extract] Error name:", pdfError instanceof Error ? pdfError.name : 'Unknown');
+          console.error("[CV Extract] Error message:", pdfError instanceof Error ? pdfError.message : String(pdfError));
+          console.error("[CV Extract] Error stack:", pdfError instanceof Error ? pdfError.stack : 'No stack trace');
+          throw new Error(`PDF parsing failed: ${pdfError instanceof Error ? pdfError.message : String(pdfError)}`);
+        }
       } else if (
         cvFileType === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||
         cvFileName.endsWith(".docx")
       ) {
-        const result = await mammoth.extractRawText({ buffer });
-        resumeText = result.value;
+        console.log("[CV Extract] Processing DOCX file...");
+        try {
+          const result = await mammoth.extractRawText({ buffer });
+          console.log("[CV Extract] DOCX extraction SUCCESS");
+          console.log("[CV Extract] DOCX text length:", result.value?.length || 0);
+          resumeText = result.value;
+        } catch (docxError) {
+          console.error("[CV Extract] ❌ DOCX PARSING FAILED ❌");
+          console.error("[CV Extract] Error:", docxError);
+          throw new Error(`DOCX parsing failed: ${docxError instanceof Error ? docxError.message : String(docxError)}`);
+        }
       } else {
+        console.error("[CV Extract] ERROR: Unsupported file type:", cvFileType);
         throw new Error("Unsupported file type. Please upload a PDF or DOCX file");
       }
-      if (!resumeText || resumeText.trim().length === 0) throw new Error("Could not extract text from file");
+      
+      console.log("[CV Extract] Extracted text length:", resumeText?.length || 0);
+      console.log("[CV Extract] First 100 chars:", resumeText?.substring(0, 100));
+      
+      if (!resumeText || resumeText.trim().length === 0) {
+        console.error("[CV Extract] ERROR: No text extracted from file");
+        throw new Error("Could not extract text from file");
+      }
+      
+      console.log("[CV Extract] Text extraction complete ✓");
 
       // Call Gemini
       const genAI = new GoogleGenerativeAI(geminiKey.trim());
