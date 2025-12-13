@@ -7,7 +7,7 @@ export default function ApplicantPage() {
   const [companyInput, setCompanyInput] = useState("");
 
   return (
-    <main className="min-h-screen bg-linear-to-br from-[#5A38A4] to-[#254BA4] font-sans pb-10 md:pb-16 lg:pb-20">
+    <main className="min-h-screen bg-gradient-to-br from-[#5A38A4] to-[#254BA4] font-sans pb-10 md:pb-16 lg:pb-20">
       {/* Main Card */}
       {/* Navbar */}
       <nav className="relative z-10 flex items-center justify-between px-4 py-6 sm:px-6 sm:py-8 lg:px-12 lg:py-10">
@@ -56,7 +56,10 @@ export default function ApplicantPage() {
         {/* Sample Company Cards */}
         <div className="mt-8 sm:mt-10 md:mt-12 space-y-4 sm:space-y-6">
           {/* Google Card */}
-          <div className="group relative overflow-hidden rounded-2xl border border-white/30 bg-white/10 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 text-base sm:text-lg md:text-xl font-normal tracking-wide text-white shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20 hover:shadow-2xl">
+          <Link 
+            href="/applicant/google"
+            className="group relative block overflow-hidden rounded-2xl border border-white/30 bg-white/10 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 text-base sm:text-lg md:text-xl font-normal tracking-wide text-white shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20 hover:shadow-2xl cursor-pointer"
+          >
             <h2 className="mb-3 sm:mb-4 text-2xl sm:text-3xl font-bold text-white">Google</h2>
             <p className="leading-relaxed text-sm sm:text-base md:text-lg text-white/90">
               Google is a leading technology company that builds products and
@@ -67,7 +70,10 @@ export default function ApplicantPage() {
           </Link>
 
           {/* Amazon Card */}
-          <div className="group relative overflow-hidden rounded-2xl border border-white/30 bg-white/10 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 text-base sm:text-lg md:text-xl font-normal tracking-wide text-white shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20 hover:shadow-2xl">
+          <Link 
+            href="/applicant/amazon"
+            className="group relative block overflow-hidden rounded-2xl border border-white/30 bg-white/10 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 text-base sm:text-lg md:text-xl font-normal tracking-wide text-white shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20 hover:shadow-2xl cursor-pointer"
+          >
             <h2 className="mb-3 sm:mb-4 text-2xl sm:text-3xl font-bold text-white">Amazon</h2>
             <p className="leading-relaxed text-sm sm:text-base md:text-lg text-white/90">
               a global tech giant known for its massive e-commerce platform,

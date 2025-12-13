@@ -66,13 +66,8 @@ export default function Home() {
               </p>
               <div className="flex flex-col gap-4 sm:flex-row sm:gap-6 w-full sm:w-auto">
                 <Link
-<<<<<<< HEAD
                   href="/recruiter-choice"
                   className="group relative overflow-hidden rounded-2xl border border-white/30 bg-white/10 px-12 py-6 text-xl font-semibold tracking-wide text-white shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20 hover:shadow-2xl"
-=======
-                  href="/recruiter"
-                  className="group relative overflow-hidden rounded-2xl border border-white/30 bg-white/10 px-8 py-4 sm:px-10 sm:py-5 md:px-12 md:py-6 text-base sm:text-lg md:text-xl font-semibold tracking-wide text-white shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20 hover:shadow-2xl"
->>>>>>> 0bac9cad2935da3c27269441e8c3eb680bc21ca0
                 >
                   <span className="relative z-10">For Recruiters</span>
                   <div className="absolute inset-0 bg-linear-to-r from-blue-400 to-blue-500 opacity-0 transition-opacity duration-300 group-hover:opacity-20"></div>
