@@ -1,0 +1,21 @@
+{
+  "name": "github-profile-scraper",
+  "version": "1.0.0",
+  "description": "Minimal Node.js script to scrape GitHub profiles using GitHub API",
+  "type": "module",
+  "main": "scrape.mjs",
+  "scripts": {
+    "scrape": "node scrape.mjs"
+  },
+  "keywords": [
+    "github",
+    "scraping",
+    "api"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}
+

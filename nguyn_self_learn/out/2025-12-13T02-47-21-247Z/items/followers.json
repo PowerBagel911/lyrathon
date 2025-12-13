@@ -1,0 +1,47 @@
+{
+  "type": "followers",
+  "data": [
+    {
+      "login": "NevanPham",
+      "id": 143194005,
+      "node_id": "U_kgDOCIj3lQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/143194005?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/NevanPham",
+      "html_url": "https://github.com/NevanPham",
+      "followers_url": "https://api.github.com/users/NevanPham/followers",
+      "following_url": "https://api.github.com/users/NevanPham/following{/other_user}",
+      "gists_url": "https://api.github.com/users/NevanPham/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/NevanPham/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/NevanPham/subscriptions",
+      "organizations_url": "https://api.github.com/users/NevanPham/orgs",
+      "repos_url": "https://api.github.com/users/NevanPham/repos",
+      "events_url": "https://api.github.com/users/NevanPham/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/NevanPham/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    {
+      "login": "PowerBagel911",
+      "id": 182729491,
+      "node_id": "U_kgDOCuQ7Ew",
+      "avatar_url": "https://avatars.githubusercontent.com/u/182729491?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/PowerBagel911",
+      "html_url": "https://github.com/PowerBagel911",
+      "followers_url": "https://api.github.com/users/PowerBagel911/followers",
+      "following_url": "https://api.github.com/users/PowerBagel911/following{/other_user}",
+      "gists_url": "https://api.github.com/users/PowerBagel911/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/PowerBagel911/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/PowerBagel911/subscriptions",
+      "organizations_url": "https://api.github.com/users/PowerBagel911/orgs",
+      "repos_url": "https://api.github.com/users/PowerBagel911/repos",
+      "events_url": "https://api.github.com/users/PowerBagel911/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/PowerBagel911/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    }
+  ]
+}

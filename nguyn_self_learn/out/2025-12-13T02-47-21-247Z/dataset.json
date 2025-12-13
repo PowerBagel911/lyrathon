@@ -1,0 +1,1291 @@
+[
+  {
+    "type": "profile",
+    "data": {
+      "login": "anne-tr-anh",
+      "id": 103912350,
+      "node_id": "U_kgDOBjGTng",
+      "avatar_url": "https://avatars.githubusercontent.com/u/103912350?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/anne-tr-anh",
+      "html_url": "https://github.com/anne-tr-anh",
+      "followers_url": "https://api.github.com/users/anne-tr-anh/followers",
+      "following_url": "https://api.github.com/users/anne-tr-anh/following{/other_user}",
+      "gists_url": "https://api.github.com/users/anne-tr-anh/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/anne-tr-anh/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/anne-tr-anh/subscriptions",
+      "organizations_url": "https://api.github.com/users/anne-tr-anh/orgs",
+      "repos_url": "https://api.github.com/users/anne-tr-anh/repos",
+      "events_url": "https://api.github.com/users/anne-tr-anh/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/anne-tr-anh/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Hoang Trang Anh Pham",
+      "company": null,
+      "blog": "",
+      "location": null,
+      "email": "105006870@student.swin.edu.au",
+      "hireable": null,
+      "bio": null,
+      "twitter_username": null,
+      "public_repos": 4,
+      "public_gists": 0,
+      "followers": 2,
+      "following": 3,
+      "created_at": "2022-04-18T02:20:23Z",
+      "updated_at": "2025-11-17T13:52:34Z"
+    }
+  },
+  {
+    "type": "repositories",
+    "data": [
+      {
+        "repo": {
+          "name": "Cyber-Agent",
+          "url": "https://github.com/anne-tr-anh/Cyber-Agent",
+          "fork": true,
+          "pushed_at": "2025-11-02T01:42:54Z"
+        },
+        "evidence": {
+          "languages": {
+            "Python": 1439445,
+            "Jupyter Notebook": 45979
+          },
+          "root_files": [
+            ".gitattributes",
+            ".gitignore",
+            "README.md",
+            "app.py",
+            "requirements.in",
+            "requirements.txt"
+          ],
+          "dependencies": [
+            "aiohappyeyeballs",
+            "aiohttp",
+            "aiosignal",
+            "altair",
+            "annotated-types",
+            "antlr4-python3-runtime",
+            "anyio",
+            "argparse",
+            "attrs",
+            "backoff",
+            "bcrypt",
+            "blinker",
+            "build",
+            "cachetools",
+            "certifi",
+            "charset-normalizer",
+            "chromadb",
+            "click",
+            "colorama",
+            "coloredlogs",
+            "colour",
+            "dataclasses-json",
+            "deepdiff",
+            "distro",
+            "drawsvg",
+            "durationpy",
+            "et-xmlfile",
+            "filelock",
+            "filetype",
+            "flatbuffers",
+            "frozenlist",
+            "fsspec",
+            "gitdb",
+            "gitpython",
+            "google-ai-generativelanguage",
+            "google-api-core[grpc]",
+            "google-auth",
+            "googleapis-common-protos",
+            "greenlet",
+            "groq",
+            "grpcio",
+            "grpcio-status",
+            "h11",
+            "httpcore",
+            "httptools",
+            "httpx",
+            "httpx-sse",
+            "huggingface-hub",
+            "humanfriendly",
+            "idna",
+            "importlib-metadata",
+            "importlib-resources",
+            "jinja2",
+            "jiter",
+            "joblib",
+            "jsonpatch",
+            "jsonpointer",
+            "jsonschema",
+            "jsonschema-specifications",
+            "kubernetes",
+            "langchain",
+            "langchain-chroma",
+            "langchain-community",
+            "langchain-core",
+            "langchain-google-genai",
+            "langchain-groq",
+            "langchain-huggingface",
+            "langchain-ollama",
+            "langchain-openai",
+            "langchain-tavily",
+            "langchain-text-splitters",
+            "langgraph",
+            "langgraph-checkpoint",
+            "langgraph-prebuilt",
+            "langgraph-sdk",
+            "langgraph-supervisor",
+            "langsmith",
+            "loguru",
+            "markdown",
+            "markdown-it-py",
+            "markupsafe",
+            "marshmallow",
+            "mdurl",
+            "mitreattack-python",
+            "mmh3",
+            "mpmath",
+            "multidict",
+            "mypy-extensions",
+            "narwhals",
+            "networkx",
+            "nltk",
+            "numpy",
+            "oauthlib",
+            "ollama",
+            "onnxruntime",
+            "openai",
+            "openpyxl",
+            "opentelemetry-api",
+            "opentelemetry-exporter-otlp-proto-common",
+            "opentelemetry-exporter-otlp-proto-grpc",
+            "opentelemetry-proto",
+            "opentelemetry-sdk",
+            "opentelemetry-semantic-conventions",
+            "orderly-set",
+            "orjson",
+            "ormsgpack",
+            "overrides",
+            "packaging",
+            "pandas",
+            "pillow",
+            "pip-tools",
+            "platformdirs",
+            "pooch",
+            "posthog",
+            "propcache",
+            "proto-plus",
+            "protobuf",
+            "pyarrow",
+            "pyasn1",
+            "pyasn1-modules",
+            "pybase64",
+            "pydantic",
+            "pydantic-core",
+            "pydantic-settings",
+            "pydeck",
+            "pygments",
+            "pypdf2",
+            "pypika",
+            "pyproject-hooks",
+            "pyreadline3",
+            "python-dateutil",
+            "python-dotenv",
+            "pytz",
+            "pyyaml",
+            "rank-bm25",
+            "referencing",
+            "regex",
+            "requests",
+            "requests-oauthlib",
+            "requests-toolbelt",
+            "rich",
+            "rpds-py",
+            "rsa",
+            "safetensors",
+            "scikit-learn",
+            "scipy",
+            "sentence-transformers",
+            "shellingham",
+            "simplejson",
+            "six",
+            "smmap",
+            "sniffio",
+            "sqlalchemy",
+            "stix2",
+            "stix2-patterns",
+            "streamlit",
+            "sympy",
+            "tabulate",
+            "tenacity",
+            "threadpoolctl",
+            "tiktoken",
+            "tokenizers",
+            "toml",
+            "torch",
+            "tornado",
+            "tqdm",
+            "transformers",
+            "typer",
+            "typing-extensions",
+            "typing-inspect",
+            "typing-inspection",
+            "tzdata",
+            "urllib3",
+            "uvicorn[standard]",
+            "watchdog",
+            "watchfiles",
+            "websocket-client",
+            "websockets",
+            "wheel",
+            "win32-setctime",
+            "xlsxwriter",
+            "xxhash",
+            "yarl",
+            "zipp",
+            "zstandard"
+          ],
+          "imports": [
+            "os",
+            "sys",
+            "tempfile",
+            "shutil",
+            "time",
+            "streamlit",
+            "pathlib",
+            "typing",
+            "src",
+            "dotenv",
+            "huggingface_hub"
+          ],
+          "recent_commits": [
+            {
+              "author": "minhan6559",
+              "date": "2025-11-02T01:42:52Z",
+              "message": "Update README.md"
+            },
+            {
+              "author": "minhan6559",
+              "date": "2025-11-01T22:37:27Z",
+              "message": "update readme"
+            },
+            {
+              "author": "Rinekochan",
+              "date": "2025-10-31T23:00:51Z",
+              "message": "Fix Google Cloud Credentials bugs"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-10-30T11:11:05Z",
+              "message": "reformat evaluation"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-10-30T00:14:41Z",
+              "message": "update evaluation of gpt-oss and gemini-2.0-flash"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-10-29T22:07:56Z",
+              "message": "2.5 flash lite response and evaluation"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-10-29T12:32:39Z",
+              "message": "Merge branch 'main' of https://github.com/minhan6559/Cyber-Agent"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-10-29T12:32:29Z",
+              "message": "modify analysis format and add evaluation for 2.0 flash and 2.0 flash lite"
+            },
+            {
+              "author": "minhan6559",
+              "date": "2025-10-29T07:57:12Z",
+              "message": "Update README.md"
+            },
+            {
+              "author": "minhan6559",
+              "date": "2025-10-29T07:55:15Z",
+              "message": "Delete .idea directory"
+            },
+            {
+              "author": "minhan6559",
+              "date": "2025-10-29T07:55:04Z",
+              "message": "Delete .cursor/rules directory"
+            },
+            {
+              "author": "minhan6559",
+              "date": "2025-10-29T06:41:13Z",
+              "message": "Merge branch 'main' of https://github.com/minhan6559/Cyber-Agent"
+            },
+            {
+              "author": "minhan6559",
+              "date": "2025-10-29T06:40:29Z",
+              "message": "Add GPT-5 support and improve log analysis token handling\n\nAdded GPT-5 and related models to the provider list and updated pipeline logic to handle them with appropriate reasoning effort. Improved log analysis agent to dynamically determine max input tokens based on model capabilities, switched token encoding to 'o200k_base', and enhanced logging and preprocessing for better performance and clarity. Updated database agent and log analysis utilities for consistent tokenization. Minor prompt and output formatting adjustments."
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-10-28T23:59:43Z",
+              "message": "evaluation of flash lite"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-10-28T23:15:42Z",
+              "message": "change response format and truncate token for log agent"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-10-28T11:33:35Z",
+              "message": "modify log agent and test run"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-10-28T10:56:03Z",
+              "message": "Merge branch 'main' of https://github.com/minhan6559/Cyber-Agent"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-10-28T10:55:57Z",
+              "message": "modify log analysis agent to increase sample size and line-aware sampling"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-10-28T09:58:18Z",
+              "message": "remove redundant part"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-10-28T09:54:50Z",
+              "message": "Merge branch 'main' of https://github.com/minhan6559/Cyber-Agent"
+            }
+          ]
+        }
+      },
+      {
+        "repo": {
+          "name": "Safe-Roads-Initiative---Data-Visualisations",
+          "url": "https://github.com/anne-tr-anh/Safe-Roads-Initiative---Data-Visualisations",
+          "fork": false,
+          "pushed_at": "2025-11-17T05:14:04Z"
+        },
+        "evidence": {
+          "languages": {
+            "JavaScript": 141564,
+            "CSS": 22516,
+            "HTML": 12094
+          },
+          "root_files": [
+            "README.md",
+            "australiaLow.json",
+            "bar.js",
+            "card.js",
+            "filter.js",
+            "finaldata.csv",
+            "finesbyjurisdiction.json",
+            "index.html",
+            "interaction.js",
+            "line-chart.js",
+            "load-bar-data.js",
+            "load-card-data.js",
+            "load-linechart-data.js",
+            "load-map-data.js",
+            "load-stacked-bar-data.js",
+            "main.js",
+            "map.js",
+            "package-lock.json",
+            "package.json",
+            "scales.js",
+            "script.js",
+            "shared-constants.js",
+            "stacked-bar-data-1.csv",
+            "stacked-bar-data.csv",
+            "stacked-bar.js",
+            "stacked.json"
+          ],
+          "dependencies": [
+            "d3-array",
+            "d3-axis",
+            "d3-brush",
+            "d3-force",
+            "d3-format",
+            "d3-geo",
+            "d3-random",
+            "d3-scale",
+            "d3-scale-chromatic",
+            "d3-selection",
+            "d3-shape",
+            "d3-transition",
+            "d3-zoom",
+            "parcel"
+          ],
+          "imports": [
+            "map",
+            "fines"
+          ],
+          "recent_commits": [
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-11-16T13:49:56Z",
+              "message": "upload old repo"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-11-16T13:40:07Z",
+              "message": "Update README.md"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-11-16T13:25:24Z",
+              "message": "Initial commit"
+            }
+          ]
+        }
+      },
+      {
+        "repo": {
+          "name": "Spam-Detection-COS30049",
+          "url": "https://github.com/anne-tr-anh/Spam-Detection-COS30049",
+          "fork": true,
+          "pushed_at": "2025-11-09T12:13:01Z"
+        },
+        "evidence": {
+          "languages": {
+            "Python": 320423,
+            "Jupyter Notebook": 227753,
+            "JavaScript": 110885,
+            "CSS": 85568,
+            "HTML": 22891
+          },
+          "root_files": [
+            ".gitignore",
+            "README_PHASE1.md",
+            "README_PHASE2.md",
+            "combined_notebook.ipynb",
+            "requirements.txt"
+          ],
+          "dependencies": [
+            "pandas",
+            "pyarrow",
+            "fastparquet",
+            "numpy",
+            "scikit-learn",
+            "seaborn",
+            "matplotlib",
+            "nltk",
+            "xgboost",
+            "torch",
+            "joblib",
+            "fastapi",
+            "uvicorn"
+          ],
+          "imports": null,
+          "recent_commits": [
+            {
+              "author": "minhan6559",
+              "date": "2025-11-09T11:32:07Z",
+              "message": "Update README_PHASE2.md"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-11-09T07:37:08Z",
+              "message": "show error when pasted text exceeds 1000 words"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-11-08T11:13:43Z",
+              "message": "Update page title to 'Spam or Ham?'\n\nChanged the HTML title from 'spam-detection-app' to 'Spam or Ham?' to better reflect the application's purpose."
+            },
+            {
+              "author": "minhan6559",
+              "date": "2025-11-07T12:06:39Z",
+              "message": "Add Phase 2 documentation and update backend setup\n\nRenamed README.md to README_PHASE1.md and added a comprehensive README_PHASE2.md detailing the web application, setup, API, and features. Added .claude/settings.local.json for local permissions. Minor cleanup in backend/main.py to remove a commented uvicorn command."
+            },
+            {
+              "author": "minhan6559",
+              "date": "2025-11-07T11:22:57Z",
+              "message": "Merge branch 'main' of https://github.com/minhan6559/Spam-Detection-COS30049"
+            },
+            {
+              "author": "minhan6559",
+              "date": "2025-11-07T11:22:54Z",
+              "message": "Add batch prediction endpoint to FastAPI backend\n\nIntroduces a /predict/batch endpoint supporting batch spam detection requests, including input validation, per-text statistics, and summary aggregation. Refactors model selection and prediction logic for consistency and maintainability. Updates About.jsx to clarify BiLSTM description. Dependency lock files updated for peer field and new platform support."
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-11-07T11:22:29Z",
+              "message": "Change default model to LSTM in SpamDetector\n\nUpdated the initial state of selectedModels from 'xgboost' to 'lstm' in SpamDetector.jsx to set LSTM as the default model for spam detection."
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-11-07T11:01:22Z",
+              "message": "Add metric overrides and adjust chart layout\n\nIntroduces metric overrides for LSTM and XGBoost models in ModelComparisonChart.jsx to ensure consistent display values. Updates CSS to refine grid column sizing and gaps for improved chart header layout, and adds a comment in backend/main.py for running the server."
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-11-06T10:06:19Z",
+              "message": "web icon"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-11-06T09:47:58Z",
+              "message": "update error handling"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-11-06T09:47:30Z",
+              "message": "spelling"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-11-05T02:15:02Z",
+              "message": "Big updates on responsiveness and kmeans fix"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-11-04T11:13:34Z",
+              "message": "Merge branch 'main' of https://github.com/minhan6559/Spam-Detection-COS30049"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-11-04T11:11:59Z",
+              "message": "test"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-11-04T10:45:37Z",
+              "message": "visualisations"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-11-04T10:45:14Z",
+              "message": "update package json"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-11-04T10:44:54Z",
+              "message": "backend update"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-10-30T13:28:19Z",
+              "message": "Merge branch 'main' of https://github.com/minhan6559/Spam-Detection-COS30049"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-10-30T10:13:02Z",
+              "message": "Sort clusters and update legend instructions\n\nClusters in KMeansClusterChart are now sorted as ham, mixed, spam for both chart legend and summary cards. The legend instructions in ModelComparisonChart were updated for clarity, and the font size was increased for better visibility."
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-10-30T05:38:00Z",
+              "message": "Style model selector title for improved UI\n\nAdjusted the font size, letter spacing, and alignment of the model selector section title to make it smaller, less wide, and better centered within the flex column layout."
+            }
+          ]
+        }
+      },
+      {
+        "repo": {
+          "name": "Traffic-Based-Route-Guidance-Problem",
+          "url": "https://github.com/anne-tr-anh/Traffic-Based-Route-Guidance-Problem",
+          "fork": false,
+          "pushed_at": "2025-05-25T13:49:07Z"
+        },
+        "evidence": {
+          "languages": {
+            "HTML": 106887,
+            "Python": 76658
+          },
+          "root_files": [
+            "09.pdf",
+            "data_processing.py",
+            "main.py",
+            "map.html",
+            "model_evaluating.py",
+            "model_training.py",
+            "prediction_making.py",
+            "requirements.txt"
+          ],
+          "dependencies": [
+            "category_encoders",
+            "folium",
+            "haversine",
+            "matplotlib",
+            "numpy",
+            "openpyxl",
+            "pandas",
+            "pillow",
+            "python-dateutil",
+            "pytz",
+            "scikit-learn",
+            "seaborn",
+            "streamlit",
+            "streamlit_folium",
+            "tensorflow",
+            "tensorboard",
+            "tqdm"
+          ],
+          "imports": [
+            "numpy",
+            "pandas",
+            "sklearn",
+            "os",
+            "pickle",
+            "warnings",
+            "networkx",
+            "folium",
+            "webbrowser",
+            "math",
+            "tkinter",
+            "geopy",
+            "heapq",
+            "collections",
+            "matplotlib",
+            "matplotlib.pyplot",
+            "seaborn",
+            "data_processing",
+            "pathlib",
+            "time",
+            "tensorflow",
+            "datetime"
+          ],
+          "recent_commits": [
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-05-25T13:48:59Z",
+              "message": "final"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-05-25T13:17:29Z",
+              "message": "change file name"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-05-24T17:36:13Z",
+              "message": "for submission"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-05-24T17:35:09Z",
+              "message": "final final"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-05-24T05:12:43Z",
+              "message": "update file name"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-05-24T05:11:12Z",
+              "message": "rename file"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-05-24T05:10:00Z",
+              "message": "rename file"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-05-24T05:07:55Z",
+              "message": "comments and code readability"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-05-24T05:07:24Z",
+              "message": "comments and code readability"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-05-24T05:06:47Z",
+              "message": "comments and code readability"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-05-24T05:03:58Z",
+              "message": "minor changes"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-05-22T15:39:08Z",
+              "message": "final program"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "type": "followers",
+    "data": [
+      {
+        "login": "NevanPham",
+        "id": 143194005,
+        "node_id": "U_kgDOCIj3lQ",
+        "avatar_url": "https://avatars.githubusercontent.com/u/143194005?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/NevanPham",
+        "html_url": "https://github.com/NevanPham",
+        "followers_url": "https://api.github.com/users/NevanPham/followers",
+        "following_url": "https://api.github.com/users/NevanPham/following{/other_user}",
+        "gists_url": "https://api.github.com/users/NevanPham/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/NevanPham/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/NevanPham/subscriptions",
+        "organizations_url": "https://api.github.com/users/NevanPham/orgs",
+        "repos_url": "https://api.github.com/users/NevanPham/repos",
+        "events_url": "https://api.github.com/users/NevanPham/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/NevanPham/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      {
+        "login": "PowerBagel911",
+        "id": 182729491,
+        "node_id": "U_kgDOCuQ7Ew",
+        "avatar_url": "https://avatars.githubusercontent.com/u/182729491?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/PowerBagel911",
+        "html_url": "https://github.com/PowerBagel911",
+        "followers_url": "https://api.github.com/users/PowerBagel911/followers",
+        "following_url": "https://api.github.com/users/PowerBagel911/following{/other_user}",
+        "gists_url": "https://api.github.com/users/PowerBagel911/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/PowerBagel911/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/PowerBagel911/subscriptions",
+        "organizations_url": "https://api.github.com/users/PowerBagel911/orgs",
+        "repos_url": "https://api.github.com/users/PowerBagel911/repos",
+        "events_url": "https://api.github.com/users/PowerBagel911/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/PowerBagel911/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      }
+    ]
+  },
+  {
+    "type": "following",
+    "data": [
+      {
+        "login": "DataTalksClub",
+        "id": 72699292,
+        "node_id": "MDEyOk9yZ2FuaXphdGlvbjcyNjk5Mjky",
+        "avatar_url": "https://avatars.githubusercontent.com/u/72699292?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/DataTalksClub",
+        "html_url": "https://github.com/DataTalksClub",
+        "followers_url": "https://api.github.com/users/DataTalksClub/followers",
+        "following_url": "https://api.github.com/users/DataTalksClub/following{/other_user}",
+        "gists_url": "https://api.github.com/users/DataTalksClub/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/DataTalksClub/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/DataTalksClub/subscriptions",
+        "organizations_url": "https://api.github.com/users/DataTalksClub/orgs",
+        "repos_url": "https://api.github.com/users/DataTalksClub/repos",
+        "events_url": "https://api.github.com/users/DataTalksClub/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/DataTalksClub/received_events",
+        "type": "Organization",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      {
+        "login": "NevanPham",
+        "id": 143194005,
+        "node_id": "U_kgDOCIj3lQ",
+        "avatar_url": "https://avatars.githubusercontent.com/u/143194005?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/NevanPham",
+        "html_url": "https://github.com/NevanPham",
+        "followers_url": "https://api.github.com/users/NevanPham/followers",
+        "following_url": "https://api.github.com/users/NevanPham/following{/other_user}",
+        "gists_url": "https://api.github.com/users/NevanPham/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/NevanPham/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/NevanPham/subscriptions",
+        "organizations_url": "https://api.github.com/users/NevanPham/orgs",
+        "repos_url": "https://api.github.com/users/NevanPham/repos",
+        "events_url": "https://api.github.com/users/NevanPham/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/NevanPham/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      {
+        "login": "PowerBagel911",
+        "id": 182729491,
+        "node_id": "U_kgDOCuQ7Ew",
+        "avatar_url": "https://avatars.githubusercontent.com/u/182729491?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/PowerBagel911",
+        "html_url": "https://github.com/PowerBagel911",
+        "followers_url": "https://api.github.com/users/PowerBagel911/followers",
+        "following_url": "https://api.github.com/users/PowerBagel911/following{/other_user}",
+        "gists_url": "https://api.github.com/users/PowerBagel911/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/PowerBagel911/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/PowerBagel911/subscriptions",
+        "organizations_url": "https://api.github.com/users/PowerBagel911/orgs",
+        "repos_url": "https://api.github.com/users/PowerBagel911/repos",
+        "events_url": "https://api.github.com/users/PowerBagel911/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/PowerBagel911/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      }
+    ]
+  },
+  {
+    "type": "starred",
+    "data": [
+      {
+        "id": 419661684,
+        "node_id": "R_kgDOGQOHdA",
+        "name": "data-engineering-zoomcamp",
+        "full_name": "DataTalksClub/data-engineering-zoomcamp",
+        "private": false,
+        "owner": {
+          "login": "DataTalksClub",
+          "id": 72699292,
+          "node_id": "MDEyOk9yZ2FuaXphdGlvbjcyNjk5Mjky",
+          "avatar_url": "https://avatars.githubusercontent.com/u/72699292?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/DataTalksClub",
+          "html_url": "https://github.com/DataTalksClub",
+          "followers_url": "https://api.github.com/users/DataTalksClub/followers",
+          "following_url": "https://api.github.com/users/DataTalksClub/following{/other_user}",
+          "gists_url": "https://api.github.com/users/DataTalksClub/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/DataTalksClub/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/DataTalksClub/subscriptions",
+          "organizations_url": "https://api.github.com/users/DataTalksClub/orgs",
+          "repos_url": "https://api.github.com/users/DataTalksClub/repos",
+          "events_url": "https://api.github.com/users/DataTalksClub/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/DataTalksClub/received_events",
+          "type": "Organization",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/DataTalksClub/data-engineering-zoomcamp",
+        "description": "Data Engineering Zoomcamp is a free 9-week course on building production-ready data pipelines. The next cohort starts in January 2026. Join the course here 👇🏼",
+        "fork": false,
+        "url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp",
+        "forks_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/forks",
+        "keys_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/teams",
+        "hooks_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/hooks",
+        "issue_events_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/events",
+        "assignees_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/tags",
+        "blobs_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/languages",
+        "stargazers_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/stargazers",
+        "contributors_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/contributors",
+        "subscribers_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/subscribers",
+        "subscription_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/subscription",
+        "commits_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/merges",
+        "archive_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/downloads",
+        "issues_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/labels{/name}",
+        "releases_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/DataTalksClub/data-engineering-zoomcamp/deployments",
+        "created_at": "2021-10-21T09:32:50Z",
+        "updated_at": "2025-12-13T00:15:15Z",
+        "pushed_at": "2025-12-03T19:10:43Z",
+        "git_url": "git://github.com/DataTalksClub/data-engineering-zoomcamp.git",
+        "ssh_url": "git@github.com:DataTalksClub/data-engineering-zoomcamp.git",
+        "clone_url": "https://github.com/DataTalksClub/data-engineering-zoomcamp.git",
+        "svn_url": "https://github.com/DataTalksClub/data-engineering-zoomcamp",
+        "homepage": "https://airtable.com/appzbS8Pkg9PL254a/shr6oVXeQvSI5HuWD",
+        "size": 8806,
+        "stargazers_count": 33840,
+        "watchers_count": 33840,
+        "language": "Jupyter Notebook",
+        "has_issues": true,
+        "has_projects": true,
+        "has_downloads": true,
+        "has_wiki": true,
+        "has_pages": false,
+        "has_discussions": false,
+        "forks_count": 7168,
+        "mirror_url": null,
+        "archived": false,
+        "disabled": false,
+        "open_issues_count": 3,
+        "license": null,
+        "allow_forking": true,
+        "is_template": false,
+        "web_commit_signoff_required": false,
+        "topics": [
+          "course",
+          "data-engineering",
+          "dbt",
+          "docker",
+          "free",
+          "kafka",
+          "kestra",
+          "spark"
+        ],
+        "visibility": "public",
+        "forks": 7168,
+        "open_issues": 3,
+        "watchers": 33840,
+        "default_branch": "main",
+        "permissions": {
+          "admin": false,
+          "maintain": false,
+          "push": false,
+          "triage": false,
+          "pull": true
+        }
+      }
+    ]
+  },
+  {
+    "type": "organizations",
+    "data": []
+  },
+  {
+    "type": "events",
+    "data": [
+      {
+        "id": "5217284053",
+        "type": "ForkEvent",
+        "actor": {
+          "id": 103912350,
+          "login": "anne-tr-anh",
+          "display_login": "anne-tr-anh",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/anne-tr-anh",
+          "avatar_url": "https://avatars.githubusercontent.com/u/103912350?"
+        },
+        "repo": {
+          "id": 1050954922,
+          "name": "minhan6559/Spam-Detection-COS30049",
+          "url": "https://api.github.com/repos/minhan6559/Spam-Detection-COS30049"
+        },
+        "payload": {
+          "action": "forked",
+          "forkee": {
+            "id": 1113818607,
+            "node_id": "R_kgDOQmOF7w",
+            "name": "Spam-Detection-COS30049",
+            "full_name": "anne-tr-anh/Spam-Detection-COS30049",
+            "private": false,
+            "owner": {
+              "login": "anne-tr-anh",
+              "id": 103912350,
+              "node_id": "U_kgDOBjGTng",
+              "avatar_url": "https://avatars.githubusercontent.com/u/103912350?v=4",
+              "gravatar_id": "",
+              "url": "https://api.github.com/users/anne-tr-anh",
+              "html_url": "https://github.com/anne-tr-anh",
+              "followers_url": "https://api.github.com/users/anne-tr-anh/followers",
+              "following_url": "https://api.github.com/users/anne-tr-anh/following{/other_user}",
+              "gists_url": "https://api.github.com/users/anne-tr-anh/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/anne-tr-anh/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/anne-tr-anh/subscriptions",
+              "organizations_url": "https://api.github.com/users/anne-tr-anh/orgs",
+              "repos_url": "https://api.github.com/users/anne-tr-anh/repos",
+              "events_url": "https://api.github.com/users/anne-tr-anh/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/anne-tr-anh/received_events",
+              "type": "User",
+              "user_view_type": "public",
+              "site_admin": false
+            },
+            "html_url": "https://github.com/anne-tr-anh/Spam-Detection-COS30049",
+            "description": null,
+            "fork": true,
+            "url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049",
+            "forks_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/forks",
+            "keys_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/keys{/key_id}",
+            "collaborators_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/collaborators{/collaborator}",
+            "teams_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/teams",
+            "hooks_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/hooks",
+            "issue_events_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/issues/events{/number}",
+            "events_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/events",
+            "assignees_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/assignees{/user}",
+            "branches_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/branches{/branch}",
+            "tags_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/tags",
+            "blobs_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/git/blobs{/sha}",
+            "git_tags_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/git/tags{/sha}",
+            "git_refs_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/git/refs{/sha}",
+            "trees_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/git/trees{/sha}",
+            "statuses_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/statuses/{sha}",
+            "languages_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/languages",
+            "stargazers_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/stargazers",
+            "contributors_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/contributors",
+            "subscribers_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/subscribers",
+            "subscription_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/subscription",
+            "commits_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/commits{/sha}",
+            "git_commits_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/git/commits{/sha}",
+            "comments_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/comments{/number}",
+            "issue_comment_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/issues/comments{/number}",
+            "contents_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/contents/{+path}",
+            "compare_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/compare/{base}...{head}",
+            "merges_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/merges",
+            "archive_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/{archive_format}{/ref}",
+            "downloads_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/downloads",
+            "issues_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/issues{/number}",
+            "pulls_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/pulls{/number}",
+            "milestones_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/milestones{/number}",
+            "notifications_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/notifications{?since,all,participating}",
+            "labels_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/labels{/name}",
+            "releases_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/releases{/id}",
+            "deployments_url": "https://api.github.com/repos/anne-tr-anh/Spam-Detection-COS30049/deployments",
+            "created_at": "2025-12-10T14:03:15Z",
+            "updated_at": "2025-12-10T14:03:15Z",
+            "pushed_at": "2025-11-09T12:13:01Z",
+            "git_url": "git://github.com/anne-tr-anh/Spam-Detection-COS30049.git",
+            "ssh_url": "git@github.com:anne-tr-anh/Spam-Detection-COS30049.git",
+            "clone_url": "https://github.com/anne-tr-anh/Spam-Detection-COS30049.git",
+            "svn_url": "https://github.com/anne-tr-anh/Spam-Detection-COS30049",
+            "homepage": null,
+            "size": 426786,
+            "stargazers_count": 0,
+            "watchers_count": 0,
+            "language": null,
+            "has_issues": false,
+            "has_projects": true,
+            "has_downloads": true,
+            "has_wiki": true,
+            "has_pages": false,
+            "has_discussions": false,
+            "forks_count": 0,
+            "mirror_url": null,
+            "archived": false,
+            "disabled": false,
+            "open_issues_count": 0,
+            "license": null,
+            "allow_forking": true,
+            "is_template": false,
+            "web_commit_signoff_required": false,
+            "topics": [],
+            "visibility": "public",
+            "forks": 0,
+            "open_issues": 0,
+            "watchers": 0,
+            "default_branch": "main"
+          }
+        },
+        "public": true,
+        "created_at": "2025-12-10T14:03:15Z"
+      },
+      {
+        "id": "6004282241",
+        "type": "PushEvent",
+        "actor": {
+          "id": 103912350,
+          "login": "anne-tr-anh",
+          "display_login": "anne-tr-anh",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/anne-tr-anh",
+          "avatar_url": "https://avatars.githubusercontent.com/u/103912350?"
+        },
+        "repo": {
+          "id": 1097589586,
+          "name": "anne-tr-anh/Safe-Roads-Initiative---Data-Visualisations",
+          "url": "https://api.github.com/repos/anne-tr-anh/Safe-Roads-Initiative---Data-Visualisations"
+        },
+        "payload": {
+          "repository_id": 1097589586,
+          "push_id": 28298247724,
+          "ref": "refs/heads/main",
+          "head": "d918927c4c8fbf85b10b093c637ff336c6aeba5b",
+          "before": "30b48ec4a6a3facaa1473fcf51cf9183b30fb650"
+        },
+        "public": true,
+        "created_at": "2025-11-17T05:14:05Z"
+      },
+      {
+        "id": "5992603296",
+        "type": "PushEvent",
+        "actor": {
+          "id": 103912350,
+          "login": "anne-tr-anh",
+          "display_login": "anne-tr-anh",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/anne-tr-anh",
+          "avatar_url": "https://avatars.githubusercontent.com/u/103912350?"
+        },
+        "repo": {
+          "id": 1097589586,
+          "name": "anne-tr-anh/Safe-Roads-Initiative---Data-Visualisations",
+          "url": "https://api.github.com/repos/anne-tr-anh/Safe-Roads-Initiative---Data-Visualisations"
+        },
+        "payload": {
+          "repository_id": 1097589586,
+          "push_id": 28286553798,
+          "ref": "refs/heads/main",
+          "head": "30b48ec4a6a3facaa1473fcf51cf9183b30fb650",
+          "before": "f4786c2f4bf1e435075f1783b1f1cce283b69b63"
+        },
+        "public": true,
+        "created_at": "2025-11-16T13:40:11Z"
+      },
+      {
+        "id": "5992423896",
+        "type": "CreateEvent",
+        "actor": {
+          "id": 103912350,
+          "login": "anne-tr-anh",
+          "display_login": "anne-tr-anh",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/anne-tr-anh",
+          "avatar_url": "https://avatars.githubusercontent.com/u/103912350?"
+        },
+        "repo": {
+          "id": 1097589586,
+          "name": "anne-tr-anh/Safe-Roads-Initiative---Data-Visualisations",
+          "url": "https://api.github.com/repos/anne-tr-anh/Safe-Roads-Initiative---Data-Visualisations"
+        },
+        "payload": {
+          "ref": "main",
+          "ref_type": "branch",
+          "full_ref": "refs/heads/main",
+          "master_branch": "main",
+          "description": null,
+          "pusher_type": "user"
+        },
+        "public": true,
+        "created_at": "2025-11-16T13:25:25Z"
+      },
+      {
+        "id": "4705681712",
+        "type": "ForkEvent",
+        "actor": {
+          "id": 103912350,
+          "login": "anne-tr-anh",
+          "display_login": "anne-tr-anh",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/anne-tr-anh",
+          "avatar_url": "https://avatars.githubusercontent.com/u/103912350?"
+        },
+        "repo": {
+          "id": 1038293516,
+          "name": "minhan6559/Cyber-Agent",
+          "url": "https://api.github.com/repos/minhan6559/Cyber-Agent"
+        },
+        "payload": {
+          "action": "forked",
+          "forkee": {
+            "id": 1097455906,
+            "node_id": "R_kgDOQWnZIg",
+            "name": "Cyber-Agent",
+            "full_name": "anne-tr-anh/Cyber-Agent",
+            "private": false,
+            "owner": {
+              "login": "anne-tr-anh",
+              "id": 103912350,
+              "node_id": "U_kgDOBjGTng",
+              "avatar_url": "https://avatars.githubusercontent.com/u/103912350?v=4",
+              "gravatar_id": "",
+              "url": "https://api.github.com/users/anne-tr-anh",
+              "html_url": "https://github.com/anne-tr-anh",
+              "followers_url": "https://api.github.com/users/anne-tr-anh/followers",
+              "following_url": "https://api.github.com/users/anne-tr-anh/following{/other_user}",
+              "gists_url": "https://api.github.com/users/anne-tr-anh/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/anne-tr-anh/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/anne-tr-anh/subscriptions",
+              "organizations_url": "https://api.github.com/users/anne-tr-anh/orgs",
+              "repos_url": "https://api.github.com/users/anne-tr-anh/repos",
+              "events_url": "https://api.github.com/users/anne-tr-anh/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/anne-tr-anh/received_events",
+              "type": "User",
+              "user_view_type": "public",
+              "site_admin": false
+            },
+            "html_url": "https://github.com/anne-tr-anh/Cyber-Agent",
+            "description": null,
+            "fork": true,
+            "url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent",
+            "forks_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/forks",
+            "keys_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/keys{/key_id}",
+            "collaborators_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/collaborators{/collaborator}",
+            "teams_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/teams",
+            "hooks_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/hooks",
+            "issue_events_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/issues/events{/number}",
+            "events_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/events",
+            "assignees_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/assignees{/user}",
+            "branches_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/branches{/branch}",
+            "tags_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/tags",
+            "blobs_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/git/blobs{/sha}",
+            "git_tags_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/git/tags{/sha}",
+            "git_refs_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/git/refs{/sha}",
+            "trees_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/git/trees{/sha}",
+            "statuses_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/statuses/{sha}",
+            "languages_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/languages",
+            "stargazers_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/stargazers",
+            "contributors_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/contributors",
+            "subscribers_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/subscribers",
+            "subscription_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/subscription",
+            "commits_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/commits{/sha}",
+            "git_commits_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/git/commits{/sha}",
+            "comments_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/comments{/number}",
+            "issue_comment_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/issues/comments{/number}",
+            "contents_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/contents/{+path}",
+            "compare_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/compare/{base}...{head}",
+            "merges_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/merges",
+            "archive_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/{archive_format}{/ref}",
+            "downloads_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/downloads",
+            "issues_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/issues{/number}",
+            "pulls_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/pulls{/number}",
+            "milestones_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/milestones{/number}",
+            "notifications_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/notifications{?since,all,participating}",
+            "labels_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/labels{/name}",
+            "releases_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/releases{/id}",
+            "deployments_url": "https://api.github.com/repos/anne-tr-anh/Cyber-Agent/deployments",
+            "created_at": "2025-11-16T07:57:36Z",
+            "updated_at": "2025-11-16T07:57:36Z",
+            "pushed_at": "2025-11-02T01:42:54Z",
+            "git_url": "git://github.com/anne-tr-anh/Cyber-Agent.git",
+            "ssh_url": "git@github.com:anne-tr-anh/Cyber-Agent.git",
+            "clone_url": "https://github.com/anne-tr-anh/Cyber-Agent.git",
+            "svn_url": "https://github.com/anne-tr-anh/Cyber-Agent",
+            "homepage": null,
+            "size": 65815,
+            "stargazers_count": 0,
+            "watchers_count": 0,
+            "language": null,
+            "has_issues": false,
+            "has_projects": true,
+            "has_downloads": true,
+            "has_wiki": true,
+            "has_pages": false,
+            "has_discussions": false,
+            "forks_count": 0,
+            "mirror_url": null,
+            "archived": false,
+            "disabled": false,
+            "open_issues_count": 0,
+            "license": null,
+            "allow_forking": true,
+            "is_template": false,
+            "web_commit_signoff_required": false,
+            "topics": [],
+            "visibility": "public",
+            "forks": 0,
+            "open_issues": 0,
+            "watchers": 0,
+            "default_branch": "main"
+          }
+        },
+        "public": true,
+        "created_at": "2025-11-16T07:57:36Z"
+      }
+    ]
+  }
+]
