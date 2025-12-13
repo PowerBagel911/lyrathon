@@ -1,0 +1,174 @@
+{
+  "type": "repositories",
+  "data": [
+    {
+      "repo": {
+        "name": "Archery-Database-Website-with-Security-Implementations",
+        "url": "https://github.com/NevanPham/Archery-Database-Website-with-Security-Implementations",
+        "fork": true,
+        "pushed_at": "2025-05-19T03:15:52Z"
+      },
+      "evidence": {
+        "languages": {
+          "Python": 116045
+        },
+        "root_files": [
+          ".gitignore",
+          "GEMINI_SETUP.md",
+          "README.md",
+          "SECRETS_SETUP.md",
+          "app.py",
+          "create_procedures.sql",
+          "create_tables.sql",
+          "requirements.txt"
+        ],
+        "dependencies": [
+          "mysql-connector-python",
+          "streamlit",
+          "pandas",
+          "google-generativeai",
+          "SQLAlchemy",
+          "PyMySQL                             # Latest on PyPI",
+          "numpy"
+        ],
+        "imports": [
+          "streamlit",
+          "datetime",
+          "archery_app"
+        ],
+        "recent_commits": [
+          {
+            "author": "NevanPham",
+            "date": "2025-05-19T03:15:47Z",
+            "message": "move index"
+          },
+          {
+            "author": "NevanPham",
+            "date": "2025-05-19T03:12:55Z",
+            "message": "Merge branch 'main' of https://github.com/PowerBagel911/COS20031-Database-Design-Project"
+          },
+          {
+            "author": "NevanPham",
+            "date": "2025-05-19T03:12:51Z",
+            "message": "add security log table"
+          },
+          {
+            "author": "minhan6559",
+            "date": "2025-05-19T03:04:12Z",
+            "message": "update the sidebar"
+          },
+          {
+            "author": "minhan6559",
+            "date": "2025-05-19T02:53:36Z",
+            "message": "Merge branch 'main' of https://github.com/PowerBagel911/COS20031-Database-Design-Project"
+          },
+          {
+            "author": "minhan6559",
+            "date": "2025-05-19T02:53:33Z",
+            "message": "Update chatbot.py"
+          },
+          {
+            "author": "NevanPham",
+            "date": "2025-05-19T01:08:24Z",
+            "message": "security log"
+          },
+          {
+            "author": "NevanPham",
+            "date": "2025-05-19T00:21:25Z",
+            "message": "sanitize and validate"
+          },
+          {
+            "author": "minhan6559",
+            "date": "2025-05-19T00:03:06Z",
+            "message": "update to gemini 2.0 flash"
+          },
+          {
+            "author": "minhan6559",
+            "date": "2025-05-18T13:52:37Z",
+            "message": "update readme and streamlit secret"
+          },
+          {
+            "author": "minhan6559",
+            "date": "2025-05-18T13:29:29Z",
+            "message": "add check connection and instruction to connect vpn"
+          },
+          {
+            "author": "minhan6559",
+            "date": "2025-05-18T13:04:51Z",
+            "message": "update chatbot"
+          },
+          {
+            "author": "NevanPham",
+            "date": "2025-05-18T11:55:19Z",
+            "message": "hide database credentials"
+          },
+          {
+            "author": "NevanPham",
+            "date": "2025-05-18T11:47:25Z",
+            "message": "add salt to password hash"
+          },
+          {
+            "author": "minhan6559",
+            "date": "2025-05-18T09:24:45Z",
+            "message": "update UI"
+          },
+          {
+            "author": "NevanPham",
+            "date": "2025-05-18T07:19:09Z",
+            "message": "add admin features and procedures"
+          },
+          {
+            "author": "NevanPham",
+            "date": "2025-05-18T05:48:01Z",
+            "message": "add login for users and recorders"
+          },
+          {
+            "author": "minhan6559",
+            "date": "2025-05-18T02:56:10Z",
+            "message": "initial commit"
+          },
+          {
+            "author": "PowerBagel911",
+            "date": "2025-05-15T06:30:00Z",
+            "message": "Create README.md"
+          },
+          {
+            "author": "PowerBagel911",
+            "date": "2025-05-15T06:13:38Z",
+            "message": "front end and basic backend\n\nstill need to figure out how to connect"
+          }
+        ]
+      }
+    },
+    {
+      "repo": {
+        "name": "Burp-Suite",
+        "url": "https://github.com/NevanPham/Burp-Suite",
+        "fork": false,
+        "pushed_at": "2025-01-27T13:33:22Z"
+      },
+      "evidence": {
+        "languages": {},
+        "root_files": [
+          ".gitattributes",
+          "Burp_Suite.pdf",
+          "README.md"
+        ],
+        "dependencies": null,
+        "imports": null,
+        "recent_commits": [
+          {
+            "author": "NevanPham",
+            "date": "2025-01-27T13:33:22Z",
+            "message": "Update README.md"
+          },
+          {
+            "author": "NevanPham",
+            "date": "2025-01-27T13:29:28Z",
+            "message": "Initial commit"
+          }
+        ]
+      }
+    }
+  ]
+}
