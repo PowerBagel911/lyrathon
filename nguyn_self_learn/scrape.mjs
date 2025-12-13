@@ -359,6 +359,49 @@ async function fetchImports(repo, token) {
 }
 
 /**
+ * Fetch README excerpt (first 2000 characters)
+ */
+async function fetchReadmeExcerpt(repo, token) {
+  try {
+    // Check if README.md exists in root files first
+    const contentsUrl = repo.contents_url.replace('{+path}', '');
+    const endpoint = contentsUrl.replace(GITHUB_API_BASE, '');
+    const contents = await fetchGitHubAPI(endpoint, token);
+    
+    if (!Array.isArray(contents)) {
+      return null;
+    }
+
+    // Look for README.md in root files
+    const readmeFile = contents.find(item => 
+      item.type === 'file' && 
+      (item.name.toLowerCase() === 'readme.md' || item.name.toLowerCase() === 'readme')
+    );
+
+    if (!readmeFile) {
+      return null;
+    }
+
+    // Fetch the README file content using the contents_url pattern
+    const readmeEndpoint = repo.contents_url.replace('{+path}', 'README.md');
+    const readmeEndpointPath = readmeEndpoint.replace(GITHUB_API_BASE, '');
+    const readmeData = await fetchGitHubAPI(readmeEndpointPath, token);
+
+    // Decode base64 content
+    if (readmeData.content && readmeData.encoding === 'base64') {
+      const content = Buffer.from(readmeData.content, 'base64').toString('utf-8');
+      // Return first 2000 characters
+      return content.slice(0, 2000);
+    }
+
+    return null;
+  } catch (error) {
+    // Silently skip if README doesn't exist or can't be fetched
+    return null;
+  }
+}
+
+/**
  * Fetch evidence data for a single repo (sequential requests)
  */
 async function fetchRepoEvidence(repo, token) {
@@ -370,6 +413,7 @@ async function fetchRepoEvidence(repo, token) {
   const dependencies = await fetchDependencies(repo, token);
   const imports = await fetchImports(repo, token);
   const recentCommits = await fetchRecentCommits(repo, token);
+  const readmeExcerpt = await fetchReadmeExcerpt(repo, token);
   
   return {
     repo: {
@@ -384,6 +428,7 @@ async function fetchRepoEvidence(repo, token) {
       dependencies,
       imports,
       recent_commits: recentCommits,
+      readme_excerpt: readmeExcerpt,
     },
   };
 }

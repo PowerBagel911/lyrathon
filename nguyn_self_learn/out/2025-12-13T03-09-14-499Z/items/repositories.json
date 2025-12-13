@@ -322,7 +322,8 @@
             "date": "2025-10-28T09:54:50Z",
             "message": "Merge branch 'main' of https://github.com/minhan6559/Cyber-Agent"
           }
-        ]
+        ],
+        "readme_excerpt": "# Cybersecurity Agent Pipeline - COS30049\n\nA comprehensive LLM-based multi-agent cybersecurity analysis system that processes security logs and correlates them with MITRE ATT&CK techniques to provide detailed threat intelligence and mitigation recommendations.\n\n## Table of Contents\n\n- [Project Overview](#project-overview)\n- [System Architecture](#system-architecture)\n- [File Structure](#file-structure)\n- [Quick Start Guide](#quick-start-guide)\n- [Advanced Usage](#advanced-usage)\n- [Evaluation and Testing](#evaluation-and-testing)\n- [Model Performance](#model-performance)\n- [Project Architecture](#project-architecture)\n\n## Project Overview\n\nThis project implements a sophisticated multi-agent cybersecurity analysis system that combines traditional log analysis with modern LLM-based reasoning. The system processes security logs from various sources and applies advanced AI techniques to:\n\n1. **Log Analysis Agent**: Detects suspicious activities and anomalies in security logs\n2. **Retrieval Supervisor**: Intelligently searches MITRE ATT&CK knowledge base for relevant techniques\n3. **Response Agent**: Synthesizes findings into comprehensive threat intelligence reports\n\n### Key Features\n\n- **Multi-Agent Architecture**: Hierarchical agent system using LangGraph for orchestration\n- **MITRE ATT&CK Integration**: Semantic search over comprehensive technique database\n- **Real-time Analysis**: Process security logs and generate immediate threat assessments\n- **Web Interface**: User-friendly Streamlit application for easy interaction\n- **Comprehensive Evaluation**: Built-in evaluation framework for system performance testing\n\n## System Architecture\n\n### Current System Architecture\n\n>**Note**: The full hierarchical design is still under development. Currently, the system uses a linear pipeline with separate reflection on each module.\n\n```\nLinear Pipeline (Current Implementation)\n├── Log Analysis Agent\n│   ├── Event ID Validation\n│   ├── Timeline Analysis\n│   ├── Command Decoding\n│"
       }
     },
     {
@@ -402,7 +403,8 @@
             "date": "2025-11-16T13:25:24Z",
             "message": "Initial commit"
           }
-        ]
+        ],
+        "readme_excerpt": "# Safe Roads Initiative — COS30045 / Data Visualisation Project\n\nInteractive client-side visualisations of 2023 speeding fines across Australian jurisdictions. Built with D3 v7, the project provides multiple coordinated charts (line, stacked bar, bar, summary card) and a choropleth map to explore fines by state/territory and month.\n\n## Table of Contents\n- [Project Overview](#project-overview)\n- [What’s Included](#whats-included)\n- [Folder Structure](#folder-structure)\n- [How to Run (Quick Start)](#how-to-run-quick-start)\n- [Data](#data)\n- [Development / Advanced Usage](#development--advanced-usage)\n- [Troubleshooting](#troubleshooting)\n- [License & Acknowledgements](#license--acknowledgements)\n\n## Project Overview\nThis is a static web project that visualises speeding fine data for Australia (2023). The UI contains:\n- Home page with project description\n- Visualisation page with:\n  - Small summary card (key metrics)\n  - Line chart (monthly trends)\n  - Stacked bar (composition by categories)\n  - Bar chart (comparisons)\n  - Choropleth map (geographic distribution)\n- Interactive jurisdiction filter to select states/territories\n\n## What’s Included\n- src/index.html — main page and layout\n- src/css/ — styling and layout files\n- src/js/ — chart modules, filters, and data loaders\n  - script.js (navigation + wiring)\n  - filter.js (UI filter handling)\n  - card.js, line-chart.js, stacked-bar.js, bar.js, map.js (visuals)\n  - load-*.js (data loading for each visual)\n- src/images/ — logo and team photos\n- src/data/ — CSV/JSON data files referenced by loaders\n\n## Folder Structure (recommended)\n- README.md\n- src/\n  - index.html\n  - css/\n    - style.css\n    - visualisation.css\n    - layout-row1.css\n    - layout-row2.css\n    - layout-row3.css\n    - home.css\n  - js/\n    - script.js\n    - filter.js\n    - card.js\n    - line-chart.js\n    - stacked-bar.js\n    - bar.js\n    - map.js\n    - load-linechart-data.js\n    - load-stacked-bar-data.js\n    - load-map-data.js\n    - load-card-data.js\n    "
       }
     },
     {
@@ -544,7 +546,8 @@
             "date": "2025-10-30T05:38:00Z",
             "message": "Style model selector title for improved UI\n\nAdjusted the font size, letter spacing, and alignment of the model selector section title to make it smaller, less wide, and better centered within the flex column layout."
           }
-        ]
+        ],
+        "readme_excerpt": null
       }
     },
     {
@@ -673,7 +676,8 @@
             "date": "2025-05-22T15:39:08Z",
             "message": "final program"
           }
-        ]
+        ],
+        "readme_excerpt": null
       }
     }
   ]
