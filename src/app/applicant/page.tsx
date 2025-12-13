@@ -56,7 +56,10 @@ export default function ApplicantPage() {
         {/* Sample Company Cards */}
         <div className="mt-12 space-y-6">
           {/* Google Card */}
-          <div className="group relative overflow-hidden rounded-2xl border border-white/30 bg-white/10 px-4 py-4 text-xl font-normal tracking-wide text-white shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20 hover:shadow-2xl">
+          <Link 
+            href="/applicant/google"
+            className="group relative block overflow-hidden rounded-2xl border border-white/30 bg-white/10 px-4 py-4 text-xl font-normal tracking-wide text-white shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20 hover:shadow-2xl cursor-pointer"
+          >
             <h2 className="mb-4 text-3xl font-bold text-white">Google</h2>
             <p className="leading-relaxed text-white/90">
               Google is a leading technology company that builds products and
@@ -64,10 +67,13 @@ export default function ApplicantPage() {
               including search, ads, cloud, software, and AI, all powered by its
               core mission to organize the world's information
             </p>
-          </div>
+          </Link>
 
           {/* Amazon Card */}
-          <div className="group relative overflow-hidden rounded-2xl border border-white/30 bg-white/10 px-4 py-4 text-xl font-normal tracking-wide text-white shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20 hover:shadow-2xl">
+          <Link 
+            href="/applicant/amazon"
+            className="group relative block overflow-hidden rounded-2xl border border-white/30 bg-white/10 px-4 py-4 text-xl font-normal tracking-wide text-white shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20 hover:shadow-2xl cursor-pointer"
+          >
             <h2 className="mb-4 text-3xl font-bold text-white">Amazon</h2>
             <p className="leading-relaxed text-white/90">
               a global tech giant known for its massive e-commerce platform,
@@ -76,7 +82,7 @@ export default function ApplicantPage() {
               everything store" offering everything from groceries to
               electronics, driven by customer obsession and innovation.
             </p>
-          </div>
+          </Link>
         </div>
       </div>
     </main>

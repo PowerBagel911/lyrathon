@@ -3,7 +3,7 @@ import { Sandwich } from "lucide-react";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-linear-to-br from-[#5A38A4] to-[#254BA4] font-sans">
+    <main className="min-h-screen bg-gradient-to-br from-[#5A38A4] to-[#254BA4] font-sans">
       {/* Navbar */}
       <nav className="relative z-10 flex items-center justify-start px-6 py-8 lg:px-12">
         <div className="flex items-center">
@@ -66,7 +66,7 @@ export default function Home() {
               </p>
               <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
                 <Link
-                  href="/recruiter"
+                  href="/recruiter-choice"
                   className="group relative overflow-hidden rounded-2xl border border-white/30 bg-white/10 px-12 py-6 text-xl font-semibold tracking-wide text-white shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20 hover:shadow-2xl"
                 >
                   <span className="relative z-10">For Recruiters</span>
