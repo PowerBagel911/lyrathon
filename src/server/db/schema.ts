@@ -87,3 +87,20 @@ export const repositories = pgTable("repositories", {
     .defaultNow()
     .notNull()
 });
+
+
+/* =======================
+   Applicant CVs
+   ======================= */
+export const applicantCV = pgTable("applicant_cv", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  applicantId: uuid("applicant_id")
+    .references(() => applicants.id)
+    .notNull(),
+  skills: jsonb("skills").notNull(), // array of skill objects
+  projects: jsonb("projects").notNull(), // array of project objects
+  certifications: jsonb("certifications").notNull(), // array of strings
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull()
+});

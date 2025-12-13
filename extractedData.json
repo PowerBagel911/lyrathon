@@ -1,0 +1,181 @@
+{
+  "skills": [
+    {
+      "name": "Python",
+      "category": "code",
+      "mention_count": 3
+    },
+    {
+      "name": "JavaScript/TypeScript",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "SQL",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "C#",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "C++",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "PHP",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "HTML/CSS",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "LangChain",
+      "category": "code",
+      "mention_count": 2
+    },
+    {
+      "name": "LangGraph",
+      "category": "code",
+      "mention_count": 2
+    },
+    {
+      "name": "Gemini API",
+      "category": "code",
+      "mention_count": 2
+    },
+    {
+      "name": "Scikit-learn",
+      "category": "code",
+      "mention_count": 2
+    },
+    {
+      "name": "Pandas",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "NumPy",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "React.js",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "Node.js",
+      "category": "code",
+      "mention_count": 2
+    },
+    {
+      "name": "FastAPI",
+      "category": "code",
+      "mention_count": 2
+    },
+    {
+      "name": "RESTful API Design",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "AWS (EC2, VPC, Security Groups)",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "AWS (EC2, VPC)",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "Docker",
+      "category": "tool",
+      "mention_count": 2
+    },
+    {
+      "name": "GitHub Actions (CI/CD)",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "GitHub Actions",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "Linux (Bash)",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "Git",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "PostgreSQL",
+      "category": "tool",
+      "mention_count": 2
+    },
+    {
+      "name": "MySQL",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "Arduino",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "Raspberry Pi",
+      "category": "tool",
+      "mention_count": 1
+    }
+  ],
+  "projects": [
+    {
+      "name": "Generative AI Business Chatbot",
+      "technologies": [
+        "LangChain",
+        "LangGraph",
+        "Gemini API"
+      ]
+    },
+    {
+      "name": "Real Estate Prediction Platform",
+      "technologies": [
+        "React",
+        "FastAPI",
+        "Python",
+        "Scikit-learn"
+      ]
+    },
+    {
+      "name": "Cloud Infrastructure and CI/CD Pipeline",
+      "technologies": [
+        "Docker",
+        "AWS (EC2, VPC)",
+        "GitHub Actions",
+        "Python",
+        "Ruby"
+      ]
+    },
+    {
+      "name": "Event Management System",
+      "technologies": [
+        "Node.js",
+        "PostgreSQL"
+      ]
+    }
+  ],
+  "certifications": []
+}

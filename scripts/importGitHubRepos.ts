@@ -6,7 +6,7 @@ import { db } from "../src/server/db/index.js";
 import { repositories } from "../src/server/db/schema.js";
 
 // ===== CONFIG =====
-const APPLICANT_ID = "0ff20105-a61e-488a-93fd-674221d45d09"; // placeholder
+const APPLICANT_ID = "3c761ae0-5d2a-4e39-b89e-d805efb53eed"; // placeholder
 const INPUT_FILE = path.join(process.cwd(), "test.json"); // adjust path
 
 // ==================
