@@ -12,6 +12,8 @@ export async function POST(request: NextRequest) {
     const cvFile = formData.get('cv') as File | null
     const geminiKey = formData.get('geminiKey') as string | null
     const githubUrl = formData.get('githubUrl') as string | null
+    const jobSpecA = formData.get('jobSpecA') as string | null
+    const jobSpecB = formData.get('jobSpecB') as string | null
 
     if (!cvFile) {
       return NextResponse.json(
@@ -325,6 +327,132 @@ Return ONLY the JSON object, no other text.`
           { status: 500 }
         )
       }
+    }
+
+    // If job specs provided, make second LLM call for job matching
+    if ((jobSpecA && jobSpecA.trim()) || (jobSpecB && jobSpecB.trim())) {
+      const jobMatchingPrompt = `Compare the validated candidate skills against two job specifications and determine which role is a better fit.
+
+Validated Candidate Skills (from GitHub validation):
+${JSON.stringify(matchData.skill_breakdown, null, 2)}
+
+Job Specification A:
+${jobSpecA?.trim() || 'Not provided'}
+
+Job Specification B:
+${jobSpecB?.trim() || 'Not provided'}
+
+IMPORTANT RULES:
+1. Do NOT re-evaluate GitHub evidence - trust the support_level from the validated candidate data
+2. Extract required skills from each job specification
+3. Compare against validated candidate skills
+4. Weight skills by support_level:
+   - directly_supported = highest weight (most reliable)
+   - indirectly_supported = medium weight (somewhat reliable)
+   - not_verifiable_via_github = lower weight (assume candidate has it if mentioned in CV)
+5. Do NOT penalize non-code or certification skills
+6. Calculate match scores (0-100) for each job based on skill overlap and support levels
+7. Determine preferred_role based on which job has higher match score
+
+Return ONLY valid JSON with this exact schema:
+{
+  "preferred_role": string,
+  "role_match_scores": {
+    "Job A": number,
+    "Job B": number
+  },
+  "summary": string,
+  "matched_skills": string[],
+  "missing_skills": string[]
+}
+
+The preferred_role should be "Job A" or "Job B" based on which has the higher match score.
+The summary should explain the match reasoning and highlight key strengths/gaps.
+Return ONLY the JSON object, no other text.`
+
+      const jobMatchingResult = await model.generateContent(jobMatchingPrompt)
+      const jobMatchingResponse = await jobMatchingResult.response
+      const jobMatchingText = jobMatchingResponse.text()
+
+      // Extract JSON from job matching response
+      let jobMatchingJsonText = jobMatchingText.trim()
+      
+      if (jobMatchingJsonText.startsWith('```json')) {
+        jobMatchingJsonText = jobMatchingJsonText.replace(/^```json\s*/, '').replace(/\s*```$/, '')
+      } else if (jobMatchingJsonText.startsWith('```')) {
+        jobMatchingJsonText = jobMatchingJsonText.replace(/^```\s*/, '').replace(/\s*```$/, '')
+      }
+
+      // Parse job matching JSON
+      let jobMatchData
+      try {
+        jobMatchData = JSON.parse(jobMatchingJsonText)
+      } catch (parseError) {
+        return NextResponse.json(
+          { error: 'Failed to parse job matching LLM response' },
+          { status: 500 }
+        )
+      }
+
+      // Validate job matching schema
+      if (!jobMatchData.preferred_role || typeof jobMatchData.preferred_role !== 'string') {
+        return NextResponse.json(
+          { error: 'Invalid response format: missing or invalid preferred_role' },
+          { status: 500 }
+        )
+      }
+
+      if (!jobMatchData.role_match_scores || typeof jobMatchData.role_match_scores !== 'object') {
+        return NextResponse.json(
+          { error: 'Invalid response format: missing or invalid role_match_scores' },
+          { status: 500 }
+        )
+      }
+
+      if (typeof jobMatchData.role_match_scores['Job A'] !== 'number' || 
+          jobMatchData.role_match_scores['Job A'] < 0 || 
+          jobMatchData.role_match_scores['Job A'] > 100) {
+        return NextResponse.json(
+          { error: 'Invalid response format: Job A match score must be a number between 0 and 100' },
+          { status: 500 }
+        )
+      }
+
+      if (typeof jobMatchData.role_match_scores['Job B'] !== 'number' || 
+          jobMatchData.role_match_scores['Job B'] < 0 || 
+          jobMatchData.role_match_scores['Job B'] > 100) {
+        return NextResponse.json(
+          { error: 'Invalid response format: Job B match score must be a number between 0 and 100' },
+          { status: 500 }
+        )
+      }
+
+      if (!jobMatchData.summary || typeof jobMatchData.summary !== 'string') {
+        return NextResponse.json(
+          { error: 'Invalid response format: missing or invalid summary' },
+          { status: 500 }
+        )
+      }
+
+      if (!Array.isArray(jobMatchData.matched_skills)) {
+        return NextResponse.json(
+          { error: 'Invalid response format: missing or invalid matched_skills array' },
+          { status: 500 }
+        )
+      }
+
+      if (!Array.isArray(jobMatchData.missing_skills)) {
+        return NextResponse.json(
+          { error: 'Invalid response format: missing or invalid missing_skills array' },
+          { status: 500 }
+        )
+      }
+
+      // Combine GitHub validation and job matching results
+      return NextResponse.json({
+        ...matchData,
+        ...jobMatchData,
+      })
     }
 
     return NextResponse.json(matchData)

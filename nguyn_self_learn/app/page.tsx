@@ -6,6 +6,8 @@ export default function Home() {
   const [file, setFile] = useState<File | null>(null)
   const [geminiKey, setGeminiKey] = useState('')
   const [githubUrl, setGithubUrl] = useState('')
+  const [jobSpecA, setJobSpecA] = useState('')
+  const [jobSpecB, setJobSpecB] = useState('')
   const [result, setResult] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -46,6 +48,12 @@ export default function Home() {
       if (githubUrl.trim()) {
         formData.append('githubUrl', githubUrl.trim())
       }
+      if (jobSpecA.trim()) {
+        formData.append('jobSpecA', jobSpecA.trim())
+      }
+      if (jobSpecB.trim()) {
+        formData.append('jobSpecB', jobSpecB.trim())
+      }
 
       const response = await fetch('/api/extract', {
         method: 'POST',
@@ -59,9 +67,13 @@ export default function Home() {
 
       const data = await response.json()
       
-      // If it's a match result, format it nicely
+      // Format results
+      let formatted = ''
+      
+      // GitHub validation results
       if (data.match_score !== undefined) {
-        let formatted = `Match Score: ${data.match_score}%\n\nSummary:\n${data.summary}\n\nSkill Breakdown:\n`
+        formatted += `GitHub Validation Results:\n`
+        formatted += `Match Score: ${data.match_score}%\n\nSummary:\n${data.summary}\n\nSkill Breakdown:\n`
         
         if (data.skill_breakdown && Array.isArray(data.skill_breakdown)) {
           for (const item of data.skill_breakdown) {
@@ -70,7 +82,36 @@ export default function Home() {
             formatted += `  Notes: ${item.notes}\n`
           }
         }
+      }
+      
+      // Job matching results
+      if (data.preferred_role !== undefined) {
+        if (formatted) formatted += `\n\n---\n\n`
+        formatted += `Job Matching Results:\n`
+        formatted += `Preferred Role: ${data.preferred_role}\n\n`
         
+        if (data.role_match_scores) {
+          formatted += `Match Scores:\n`
+          if (data.role_match_scores['Job A'] !== undefined) {
+            formatted += `  Job A: ${data.role_match_scores['Job A']}%\n`
+          }
+          if (data.role_match_scores['Job B'] !== undefined) {
+            formatted += `  Job B: ${data.role_match_scores['Job B']}%\n`
+          }
+        }
+        
+        formatted += `\nSummary:\n${data.summary}\n\n`
+        
+        if (data.matched_skills && Array.isArray(data.matched_skills) && data.matched_skills.length > 0) {
+          formatted += `Matched Skills:\n${data.matched_skills.join(', ')}\n\n`
+        }
+        
+        if (data.missing_skills && Array.isArray(data.missing_skills) && data.missing_skills.length > 0) {
+          formatted += `Missing Skills:\n${data.missing_skills.join(', ')}\n`
+        }
+      }
+      
+      if (formatted) {
         setResult(formatted)
       } else {
         setResult(JSON.stringify(data, null, 2))
@@ -113,6 +154,28 @@ export default function Home() {
             value={githubUrl}
             onChange={(e) => setGithubUrl(e.target.value)}
             placeholder="https://github.com/username"
+            disabled={loading}
+          />
+        </div>
+        <div>
+          <label htmlFor="jobSpecA">Job Specification A (optional):</label>
+          <textarea
+            id="jobSpecA"
+            value={jobSpecA}
+            onChange={(e) => setJobSpecA(e.target.value)}
+            placeholder="Paste job description here..."
+            rows={5}
+            disabled={loading}
+          />
+        </div>
+        <div>
+          <label htmlFor="jobSpecB">Job Specification B (optional):</label>
+          <textarea
+            id="jobSpecB"
+            value={jobSpecB}
+            onChange={(e) => setJobSpecB(e.target.value)}
+            placeholder="Paste job description here..."
+            rows={5}
             disabled={loading}
           />
         </div>
