@@ -5,6 +5,7 @@ import { useState } from 'react'
 export default function Home() {
   const [file, setFile] = useState<File | null>(null)
   const [geminiKey, setGeminiKey] = useState('')
+  const [githubUrl, setGithubUrl] = useState('')
   const [result, setResult] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -42,6 +43,9 @@ export default function Home() {
       const formData = new FormData()
       formData.append('cv', file)
       formData.append('geminiKey', geminiKey)
+      if (githubUrl.trim()) {
+        formData.append('githubUrl', githubUrl.trim())
+      }
 
       const response = await fetch('/api/extract', {
         method: 'POST',
@@ -54,7 +58,23 @@ export default function Home() {
       }
 
       const data = await response.json()
-      setResult(JSON.stringify(data, null, 2))
+      
+      // If it's a match result, format it nicely
+      if (data.match_score !== undefined) {
+        let formatted = `Match Score: ${data.match_score}%\n\nSummary:\n${data.summary}\n\nSkill Breakdown:\n`
+        
+        if (data.skill_breakdown && Array.isArray(data.skill_breakdown)) {
+          for (const item of data.skill_breakdown) {
+            formatted += `\n${item.skill} (${item.category})\n`
+            formatted += `  Support Level: ${item.support_level}\n`
+            formatted += `  Notes: ${item.notes}\n`
+          }
+        }
+        
+        setResult(formatted)
+      } else {
+        setResult(JSON.stringify(data, null, 2))
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred')
     } finally {
@@ -85,6 +105,17 @@ export default function Home() {
             disabled={loading}
           />
         </div>
+        <div>
+          <label htmlFor="githubUrl">GitHub Profile URL (optional):</label>
+          <input
+            type="text"
+            id="githubUrl"
+            value={githubUrl}
+            onChange={(e) => setGithubUrl(e.target.value)}
+            placeholder="https://github.com/username"
+            disabled={loading}
+          />
+        </div>
         <button type="submit" disabled={loading}>
           {loading ? 'Processing...' : 'Extract'}
         </button>
@@ -98,7 +129,7 @@ export default function Home() {
 
       {result && (
         <div>
-          <h2>Extracted Data:</h2>
+          <h2>Results:</h2>
           <pre>{result}</pre>
         </div>
       )}
