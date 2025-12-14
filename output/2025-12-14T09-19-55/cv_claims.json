@@ -1,0 +1,107 @@
+{
+  "skills": [
+    {
+      "name": "Python",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "C#",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "C++",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "Ruby",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "SQL",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "R",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": ".NET",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "Java",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "Docker",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "AWS Cloud Service",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "Azure",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "HTML/CSS",
+      "category": "code",
+      "mention_count": 1
+    }
+  ],
+  "projects": [
+    {
+      "name": "Multi-Agent Cybersecurity Analysis System",
+      "technologies": [
+        "LangChain",
+        "LangGraph",
+        "ChromaDB",
+        "sentence-transformers",
+        "mitreattack-python",
+        "CSV",
+        "JSON",
+        "Streamlit"
+      ]
+    },
+    {
+      "name": "Spam Detection System",
+      "technologies": [
+        "FastAPI",
+        "React",
+        "Vite",
+        "XGBoost",
+        "BiLSTM",
+        "PyTorch",
+        "K-Means",
+        "TF-IDF",
+        "Chart.js",
+        "D3"
+      ]
+    },
+    {
+      "name": "Safe Road Initiative – Data Visualisations",
+      "technologies": [
+        "D3 v7",
+        "CSV",
+        "JSON",
+        "HTML",
+        "CSS",
+        "SVG",
+        "GitHub Pages"
+      ]
+    }
+  ],
+  "certifications": []
+}

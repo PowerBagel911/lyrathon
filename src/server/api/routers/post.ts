@@ -2,7 +2,16 @@ import { z } from "zod";
 import { sql, eq } from "drizzle-orm";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { companies, jobs } from "~/server/db/schema";
+import { 
+  companies, 
+  jobs, 
+  applicants, 
+  applications,
+  cvClaims,
+  repositories,
+  evidenceValidation,
+  jobFitAnalysis
+} from "~/server/db/schema";
 
 export const postRouter = createTRPCRouter({
   // Fetch company names, optionally filtered by search string
@@ -131,5 +140,187 @@ export const postRouter = createTRPCRouter({
         .returning();
 
       return newJob!;
+    }),
+
+  // Create application (create applicant if needed, then application)
+  createApplication: publicProcedure
+    .input(
+      z.object({
+        companyId: z.string().uuid(),
+        email: z.string().email(),
+        name: z.string().optional(),
+        githubUrl: z.string().url(),
+        resumeText: z.string().optional(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      // Check if applicant exists by email
+      const [existingApplicant] = await ctx.db
+        .select()
+        .from(applicants)
+        .where(eq(applicants.email, input.email))
+        .limit(1);
+
+      let applicantId: string;
+      
+      if (existingApplicant) {
+        // Update existing applicant
+        const [updated] = await ctx.db
+          .update(applicants)
+          .set({
+            name: input.name || existingApplicant.name,
+            githubUrl: input.githubUrl,
+            resumeText: input.resumeText || existingApplicant.resumeText,
+          })
+          .where(eq(applicants.id, existingApplicant.id))
+          .returning();
+        applicantId = updated!.id;
+      } else {
+        // Create new applicant
+        const [newApplicant] = await ctx.db
+          .insert(applicants)
+          .values({
+            email: input.email,
+            name: input.name || null,
+            githubUrl: input.githubUrl,
+            resumeText: input.resumeText || null,
+          })
+          .returning();
+        applicantId = newApplicant!.id;
+      }
+
+      // Create application
+      const [newApplication] = await ctx.db
+        .insert(applications)
+        .values({
+          applicantId,
+          companyId: input.companyId,
+        })
+        .returning();
+
+      return { application: newApplication!, applicantId };
+    }),
+
+  // Store application analysis results (called after /api/extract)
+  storeApplicationAnalysis: publicProcedure
+    .input(
+      z.object({
+        applicationId: z.string().uuid(),
+        analysisResult: z.any(), // Accept any structure from route.ts
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { applicationId, analysisResult } = input;
+
+      // Store results in normalized tables
+      // 1. CV Claims
+      if (analysisResult.cv_claims) {
+        await ctx.db.insert(cvClaims).values({
+          applicationId,
+          skills: analysisResult.cv_claims.skills || [],
+          projects: analysisResult.cv_claims.projects || [],
+          certifications: analysisResult.cv_claims.certifications || [],
+        });
+      }
+
+      // 2. GitHub Repositories
+      if (analysisResult.github_evidence?.data) {
+        for (const repoData of analysisResult.github_evidence.data) {
+          await ctx.db.insert(repositories).values({
+            applicationId,
+            repoName: repoData.repo?.name || '',
+            repoUrl: repoData.repo?.url || '',
+            isFork: repoData.repo?.fork || false,
+            pushedAt: repoData.repo?.pushed_at ? new Date(repoData.repo.pushed_at) : null,
+            languages: repoData.evidence?.languages || null,
+            rootFiles: repoData.evidence?.root_files || null,
+            dependencies: repoData.evidence?.dependencies || null,
+            imports: repoData.evidence?.imports || null,
+            recentCommits: repoData.evidence?.recent_commits || null,
+            readmeExcerpt: repoData.evidence?.readme_excerpt || null,
+          });
+        }
+      }
+
+      // 3. Evidence Validation
+      if (analysisResult.evidence_validation) {
+        await ctx.db.insert(evidenceValidation).values({
+          applicationId,
+          matchScore: analysisResult.evidence_validation.match_score || 0,
+          summary: analysisResult.evidence_validation.summary || '',
+          skillBreakdown: analysisResult.evidence_validation.skill_breakdown || [],
+        });
+      }
+
+      // 4. Job Fit Analysis
+      if (analysisResult.job_fit) {
+        await ctx.db.insert(jobFitAnalysis).values({
+          applicationId,
+          preferredRole: analysisResult.job_fit.preferred_role || '',
+          roleMatchScores: analysisResult.job_fit.role_match_scores || {},
+          skillCoveragePercentage: analysisResult.job_fit.skill_coverage_percentage || 0,
+          summary: analysisResult.job_fit.summary || '',
+          matchedSkills: analysisResult.job_fit.matched_skills || [],
+          missingSkills: analysisResult.job_fit.missing_skills || [],
+        });
+      }
+
+      return { success: true };
+    }),
+
+  // Get all applications for a company (for Who Applied page)
+  getApplicationsByCompany: publicProcedure
+    .input(z.object({ companyId: z.string().uuid() }))
+    .query(async ({ ctx, input }) => {
+      const result = await ctx.db
+        .select({
+          application: applications,
+          applicant: applicants,
+        })
+        .from(applications)
+        .innerJoin(applicants, eq(applications.applicantId, applicants.id))
+        .where(eq(applications.companyId, input.companyId))
+        .orderBy(applications.appliedAt);
+
+      return result.map((row) => ({
+        id: row.application.id,
+        appliedAt: row.application.appliedAt,
+        applicant: row.applicant,
+      }));
+    }),
+
+  // Get full analysis for an application
+  getApplicationAnalysis: publicProcedure
+    .input(z.object({ applicationId: z.string().uuid() }))
+    .query(async ({ ctx, input }) => {
+      const [cvClaim] = await ctx.db
+        .select()
+        .from(cvClaims)
+        .where(eq(cvClaims.applicationId, input.applicationId))
+        .limit(1);
+
+      const repos = await ctx.db
+        .select()
+        .from(repositories)
+        .where(eq(repositories.applicationId, input.applicationId));
+
+      const [evidence] = await ctx.db
+        .select()
+        .from(evidenceValidation)
+        .where(eq(evidenceValidation.applicationId, input.applicationId))
+        .limit(1);
+
+      const [jobFit] = await ctx.db
+        .select()
+        .from(jobFitAnalysis)
+        .where(eq(jobFitAnalysis.applicationId, input.applicationId))
+        .limit(1);
+
+      return {
+        cvClaims: cvClaim || null,
+        repositories: repos,
+        evidenceValidation: evidence || null,
+        jobFitAnalysis: jobFit || null,
+      };
     }),
 });

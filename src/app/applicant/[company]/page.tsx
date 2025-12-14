@@ -16,8 +16,10 @@ export default function CompanyPage({ params }: CompanyPageProps) {
   const [githubUrl, setGithubUrl] = useState("");
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [companyId, setCompanyId] = useState<string | null>(null);
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<any>(null);
+  const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -62,6 +64,10 @@ export default function CompanyPage({ params }: CompanyPageProps) {
     }
   };
 
+  // Mutations
+  const createApplication = api.post.createApplication.useMutation();
+  const storeAnalysis = api.post.storeApplicationAnalysis.useMutation();
+
   const handleApply = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!githubUrl.trim()) {
@@ -72,20 +78,50 @@ export default function CompanyPage({ params }: CompanyPageProps) {
       setError("Please upload your resume");
       return;
     }
+    if (!email.trim()) {
+      setError("Email is required");
+      return;
+    }
+    if (!companyId) {
+      setError("Company ID is missing");
+      return;
+    }
 
     setLoading(true);
     setError(null);
-    setResult(null);
+    setSuccess(false);
 
     try {
-      const formData = new FormData();
-      formData.append('cv', uploadedFile);
-      formData.append('githubUrl', githubUrl.trim());
-      
-      // Add job specs from database jobs
+      // Step 1: Create application (and applicant if needed)
+      const { application, applicantId } = await createApplication.mutateAsync({
+        companyId,
+        email: email.trim(),
+        name: name.trim() || undefined,
+        githubUrl: githubUrl.trim(),
+      });
+
+      // Step 2: Show success immediately
+      setSuccess(true);
+      setLoading(false);
+
+      // Step 3: Process analysis in background (don't await)
+      processAnalysisInBackground(application.id, uploadedFile, githubUrl.trim(), jobs || []);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to submit application');
+      setLoading(false);
+    }
+  };
+
+  const processAnalysisInBackground = async (
+    applicationId: string,
+    file: File,
+    githubUrl: string,
+    jobsList: Array<{ id: string; title: string; description: string | null; requiredSkills: unknown }>
+  ) => {
+    try {
+      // Build job specs
       const jobSpecs: string[] = [];
-      jobs.forEach((job) => {
-        // Use description if available, otherwise combine title and requiredSkills
+      jobsList.forEach((job) => {
         if (job.description && job.description.trim()) {
           jobSpecs.push(job.description.trim());
         } else {
@@ -95,6 +131,10 @@ export default function CompanyPage({ params }: CompanyPageProps) {
         }
       });
 
+      // Call /api/extract
+      const formData = new FormData();
+      formData.append('cv', file);
+      formData.append('githubUrl', githubUrl);
       formData.append('jobCount', jobSpecs.length.toString());
       jobSpecs.forEach((spec, index) => {
         formData.append(`jobSpec${index + 1}`, spec);
@@ -106,16 +146,20 @@ export default function CompanyPage({ params }: CompanyPageProps) {
       });
 
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
-        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+        console.error('Analysis failed:', response.status);
+        return;
       }
 
-      const data = await response.json();
-      setResult(data);
+      const analysisResult = await response.json();
+
+      // Store results in database
+      await storeAnalysis.mutateAsync({
+        applicationId,
+        analysisResult,
+      });
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred while processing your application');
-    } finally {
-      setLoading(false);
+      console.error('Background processing error:', err);
+      // Don't show error to user - it's background processing
     }
   };
 
@@ -170,7 +214,30 @@ export default function CompanyPage({ params }: CompanyPageProps) {
         </div>
 
         {/* Input Section */}
-        <form onSubmit={handleApply} className="mb-12">
+        <form onSubmit={handleApply} className="mb-12 space-y-4">
+          {/* Email Input */}
+          <div>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Your email"
+              className="w-full px-6 py-4 bg-white text-gray-900 placeholder-gray-500 rounded-full border-0 focus:ring-4 focus:ring-white/20 focus:outline-none text-lg"
+              required
+            />
+          </div>
+
+          {/* Name Input (Optional) */}
+          <div>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Your name (optional)"
+              className="w-full px-6 py-4 bg-white text-gray-900 placeholder-gray-500 rounded-full border-0 focus:ring-4 focus:ring-white/20 focus:outline-none text-lg"
+            />
+          </div>
+
           <div className="flex flex-col sm:flex-row gap-4 items-center">
             {/* GitHub URL Input */}
             <div className="flex-1 w-full">
@@ -190,104 +257,25 @@ export default function CompanyPage({ params }: CompanyPageProps) {
               disabled={loading}
               className="bg-linear-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white px-8 py-4 rounded-full font-semibold transition-all duration-200 hover:shadow-lg whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? "Processing..." : "Apply"}
+              {loading ? "Submitting..." : "Apply"}
             </button>
           </div>
         </form>
+
+        {/* Success Message */}
+        {success && (
+          <div className="mb-6 p-6 bg-green-500/20 border border-green-500/50 rounded-xl">
+            <h3 className="text-xl font-bold text-green-200 mb-2">Application Submitted Successfully!</h3>
+            <p className="text-green-200/80">
+              Thank you for your application. We're processing your resume and will review it shortly.
+            </p>
+          </div>
+        )}
 
         {/* Error Message */}
         {error && (
           <div className="mb-6 p-4 bg-red-500/20 border border-red-500/50 rounded-xl text-red-200">
             {error}
-          </div>
-        )}
-
-        {/* Results Display */}
-        {result && (
-          <div className="mb-12 p-6 bg-white/5 border border-white/20 rounded-2xl">
-            <h2 className="text-2xl font-bold text-white mb-4">Analysis Results</h2>
-            
-            {/* GitHub Validation */}
-            {result.evidence_validation && (
-              <div className="mb-6 p-4 bg-white/5 rounded-xl">
-                <h3 className="text-lg font-semibold text-white mb-2">GitHub Validation</h3>
-                <p className="text-white/80 mb-2">
-                  <span className="font-semibold">Match Score:</span> {result.evidence_validation.match_score}%
-                </p>
-                <p className="text-white/70 text-sm whitespace-pre-wrap">
-                  {result.evidence_validation.summary}
-                </p>
-              </div>
-            )}
-
-            {/* Job Fit Results */}
-            {result.job_fit && (
-              <div className="mb-6 p-4 bg-white/5 rounded-xl">
-                <h3 className="text-lg font-semibold text-white mb-2">Job Match Analysis</h3>
-                <p className="text-white/80 mb-2">
-                  <span className="font-semibold">Preferred Role:</span> {result.job_fit.preferred_role}
-                </p>
-                <p className="text-white/80 mb-2">
-                  <span className="font-semibold">Skill Coverage:</span> {result.job_fit.skill_coverage_percentage}%
-                </p>
-                <div className="mb-3">
-                  <p className="text-white/80 font-semibold mb-1">Match Scores:</p>
-                  <div className="space-y-1">
-                    {Object.entries(result.job_fit.role_match_scores).map(([job, score]) => (
-                      <p key={job} className="text-white/70 text-sm">
-                        {job}: {score as number}%
-                      </p>
-                    ))}
-                  </div>
-                </div>
-                {result.job_fit.matched_skills && result.job_fit.matched_skills.length > 0 && (
-                  <div className="mb-3">
-                    <p className="text-white/80 font-semibold mb-1">Matched Skills:</p>
-                    <div className="flex flex-wrap gap-2">
-                      {result.job_fit.matched_skills.map((skill: string, idx: number) => (
-                        <span key={idx} className="px-2 py-1 bg-green-500/20 rounded text-sm text-green-200">
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                {result.job_fit.missing_skills && result.job_fit.missing_skills.length > 0 && (
-                  <div className="mb-3">
-                    <p className="text-white/80 font-semibold mb-1">Missing Skills:</p>
-                    <div className="flex flex-wrap gap-2">
-                      {result.job_fit.missing_skills.map((skill: string, idx: number) => (
-                        <span key={idx} className="px-2 py-1 bg-red-500/20 rounded text-sm text-red-200">
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                <p className="text-white/70 text-sm whitespace-pre-wrap mt-3">
-                  {result.job_fit.summary}
-                </p>
-              </div>
-            )}
-
-            {/* CV Claims */}
-            {result.cv_claims && (
-              <div className="p-4 bg-white/5 rounded-xl">
-                <h3 className="text-lg font-semibold text-white mb-2">Extracted Skills</h3>
-                {result.cv_claims.skills && result.cv_claims.skills.length > 0 && (
-                  <div className="mb-3">
-                    <p className="text-white/80 font-semibold mb-1">Skills:</p>
-                    <div className="flex flex-wrap gap-2">
-                      {result.cv_claims.skills.slice(0, 20).map((skill: any, idx: number) => (
-                        <span key={idx} className="px-2 py-1 bg-white/20 rounded text-sm text-white">
-                          {skill.name} ({skill.category})
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
           </div>
         )}
 
