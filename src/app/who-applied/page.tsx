@@ -2,11 +2,22 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { api } from "~/trpc/react";
 
 export default function WhoAppliedPage() {
+  const router = useRouter();
+  const [isExiting, setIsExiting] = useState(false);
   const [companyId, setCompanyId] = useState<string | null>(null);
   const [selectedApplicationId, setSelectedApplicationId] = useState<string | null>(null);
+
+  const handleNavigation = (path: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsExiting(true);
+    setTimeout(() => {
+      router.push(path);
+    }, 400);
+  };
 
   // Get companyId from sessionStorage on mount
   useEffect(() => {
@@ -37,24 +48,28 @@ export default function WhoAppliedPage() {
   return (
     <main className="min-h-screen bg-linear-to-br from-[#5A38A4] to-[#254BA4] font-sans pb-10 md:pb-16 lg:pb-20">
       {/* Navbar */}
-      <nav className="relative z-10 flex items-center justify-between px-4 py-6 sm:px-6 sm:py-8 lg:px-12 lg:py-10">
+      <nav className={`relative z-10 flex items-center justify-between px-4 py-6 sm:px-6 sm:py-8 lg:px-12 lg:py-10 ${isExiting ? 'animate-fade-out' : 'animate-fade-in'}`}>
         <div className="flex items-center">
           <Link href="/">
-            <span className="pb-1.5 text-xl sm:text-2xl md:text-3xl font-normal tracking-tight text-white italic cursor-pointer hover:opacity-80 transition-opacity">
+            <span
+              style={{ fontFamily: "var(--font-my-font)" }}
+              className="cursor-pointer pb-1.5 text-xl font-normal tracking-tight text-white transition-opacity hover:opacity-80 sm:text-2xl md:text-3xl"
+            >
               BanhMiBandit
             </span>
           </Link>
         </div>
         <Link
           href="/recruiter"
-          className="group relative overflow-hidden rounded-2xl border border-white/30 bg-white/10 px-4 py-3 sm:px-6 sm:py-4 text-base sm:text-lg md:text-xl font-semibold tracking-wide text-white shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20 hover:shadow-2xl"
+          onClick={handleNavigation('/recruiter')}
+          className="group relative overflow-hidden rounded-2xl border border-white/30 bg-white/10 px-4 py-3 text-base font-semibold tracking-wide text-white shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20 hover:shadow-2xl sm:px-6 sm:py-4 sm:text-lg md:text-xl"
         >
           <span className="relative z-10">Back to Recruiter</span>
         </Link>
       </nav>
 
       {/* Content */}
-      <div className="relative px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+      <div className={`relative px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 ${isExiting ? 'animate-fade-out' : 'animate-fade-in'}`}>
         {/* Headline */}
         <div className="max-w-4xl lg:max-w-5xl xl:max-w-6xl text-left mb-8">
           {company && (
@@ -126,7 +141,7 @@ export default function WhoAppliedPage() {
                 <p className="text-white/60">Analysis is still processing...</p>
               </div>
             ) : (
-              <div className="space-y-6 max-h-[600px] overflow-y-auto">
+              <div className="space-y-6 max-h-96 overflow-y-auto">
                 {/* Evidence Validation */}
                 {analysis.evidenceValidation && (
                   <div className="p-4 bg-white/5 rounded-xl">
@@ -160,7 +175,7 @@ export default function WhoAppliedPage() {
                         ))}
                       </div>
                     </div>
-                    {analysis.jobFitAnalysis.matchedSkills && (analysis.jobFitAnalysis.matchedSkills as string[]).length > 0 && (
+                    {analysis.jobFitAnalysis.matchedSkills && (analysis.jobFitAnalysis.matchedSkills as string[]).length > 0 ? (
                       <div className="mb-3">
                         <p className="text-white/80 font-semibold mb-1">Matched Skills:</p>
                         <div className="flex flex-wrap gap-2">
@@ -171,8 +186,8 @@ export default function WhoAppliedPage() {
                           ))}
                         </div>
                       </div>
-                    )}
-                    {analysis.jobFitAnalysis.missingSkills && (analysis.jobFitAnalysis.missingSkills as string[]).length > 0 && (
+                    ) : null}
+                    {analysis.jobFitAnalysis.missingSkills && (analysis.jobFitAnalysis.missingSkills as string[]).length > 0 ? (
                       <div className="mb-3">
                         <p className="text-white/80 font-semibold mb-1">Missing Skills:</p>
                         <div className="flex flex-wrap gap-2">
@@ -183,7 +198,7 @@ export default function WhoAppliedPage() {
                           ))}
                         </div>
                       </div>
-                    )}
+                    ) : null}
                     <p className="text-white/70 text-sm whitespace-pre-wrap mt-3">
                       {analysis.jobFitAnalysis.summary}
                     </p>
@@ -194,7 +209,7 @@ export default function WhoAppliedPage() {
                 {analysis.cvClaims && (
                   <div className="p-4 bg-white/5 rounded-xl">
                     <h3 className="text-lg font-semibold text-white mb-2">Extracted Skills</h3>
-                    {analysis.cvClaims.skills && (analysis.cvClaims.skills as any[]).length > 0 && (
+                    {analysis.cvClaims.skills && (analysis.cvClaims.skills as any[]).length > 0 ? (
                       <div className="mb-3">
                         <p className="text-white/80 font-semibold mb-1">Skills:</p>
                         <div className="flex flex-wrap gap-2">
@@ -205,7 +220,7 @@ export default function WhoAppliedPage() {
                           ))}
                         </div>
                       </div>
-                    )}
+                    ) : null}
                   </div>
                 )}
 
@@ -237,7 +252,34 @@ export default function WhoAppliedPage() {
           </div>
         </div>
       </div>
+      
+      <style jsx>{`
+        @keyframes fadeIn {
+          0% {
+            opacity: 0;
+          }
+          100% {
+            opacity: 1;
+          }
+        }
+
+        @keyframes fadeOut {
+          0% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 0;
+          }
+        }
+
+        .animate-fade-in {
+          animation: fadeIn 0.4s ease-in forwards;
+        }
+
+        .animate-fade-out {
+          animation: fadeOut 0.4s ease-out forwards;
+        }
+      `}</style>
     </main>
   );
 }
-
