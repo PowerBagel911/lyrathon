@@ -225,7 +225,7 @@ export default function RecruiterChoicePage() {
             >
               Back to options
             </Link>
-          </div>
+          </div> 
         </div>
       </div>
 
