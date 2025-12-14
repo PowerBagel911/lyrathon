@@ -3,7 +3,7 @@ import { Sandwich } from "lucide-react";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-linear-to-br from-[#5A38A4] to-[#254BA4] font-sans">
+    <main className="min-h-screen bg-gradient-to-br from-[#5A38A4] to-[#254BA4] font-sans">
       {/* Navbar */}
       <nav className="relative z-10 flex items-center justify-start px-4 py-6 sm:px-6 sm:py-8 lg:px-12 lg:py-10">
         <div className="flex items-center">
