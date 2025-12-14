@@ -1,30 +1,89 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Sandwich } from "lucide-react";
 import Link from "next/link";
+import { api } from "~/trpc/react";
 
 export default function RecruiterChoicePage() {
   const [companyName, setCompanyName] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const dropdownRef = useRef<HTMLUListElement>(null);
   const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Fetch company names based on search input
+  const { data: companyOptions = [], isFetching } = api.post.getCompanyNames.useQuery(
+    { search: companyName },
+    { 
+      enabled: companyName.length > 0,
+      staleTime: 60_000,
+    }
+  );
+
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!showDropdown || companyOptions.length === 0) return;
+
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        setSelectedIndex((prev) => 
+          prev < companyOptions.length - 1 ? prev + 1 : prev
+        );
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1));
+      } else if (e.key === "Enter" && selectedIndex >= 0) {
+        e.preventDefault();
+        handleSelectCompany(companyOptions[selectedIndex]!);
+      } else if (e.key === "Escape") {
+        setShowDropdown(false);
+        setSelectedIndex(-1);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [showDropdown, companyOptions, selectedIndex]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCompanyName(e.target.value);
+    setShowDropdown(true);
+    setSelectedIndex(-1);
+  };
+
+  const handleSelectCompany = (name: string) => {
+    setCompanyName(name);
+    setShowDropdown(false);
+    setSelectedIndex(-1);
+  };
+
+  // Mutation to get or create company
+  const getOrCreateCompany = api.post.getOrCreateCompany.useMutation();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!companyName.trim()) {
       return;
     }
 
-    console.log("Company Name:", companyName);
-    
-    // TODO: Add database interaction here
-    // - Check if the company exists in the database
-    // - If not, create a new company record
-    // - Store company information for the recruiter session
-    
-    // For now, navigate to the recruiter page
-    router.push("/recruiter");
+    try {
+      // Get or create the company
+      const company = await getOrCreateCompany.mutateAsync({ name: companyName });
+      
+      // Store company ID in session storage
+      sessionStorage.setItem("companyId", company.id);
+      
+      // Navigate to recruiter page without exposing company ID in URL
+      router.push("/recruiter");
+    } catch (error) {
+      console.error("Error creating/fetching company:", error);
+      alert("Failed to process company. Please try again.");
+    }
   };
 
   return (
@@ -50,15 +109,53 @@ export default function RecruiterChoicePage() {
           {/* Form */}
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 items-center justify-center max-w-3xl mx-auto">
             {/* Input Field */}
-            <div className="flex-1 w-full sm:w-auto">
+            <div className="flex-1 w-full sm:w-auto relative">
               <input
+                ref={inputRef}
                 type="text"
                 value={companyName}
-                onChange={(e) => setCompanyName(e.target.value)}
+                onChange={handleInputChange}
+                onFocus={() => companyName && setShowDropdown(true)}
+                onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
                 placeholder="Enter your company name"
                 className="w-full px-8 py-6 text-xl rounded-2xl bg-white text-gray-900 placeholder-gray-500 border-0 focus:ring-4 focus:ring-blue-500/50 focus:outline-none shadow-xl transition-all duration-200"
                 required
+                autoComplete="off"
               />
+              
+              {/* Dropdown */}
+              {showDropdown && companyOptions.length > 0 && (
+                <ul
+                  ref={dropdownRef}
+                  className="absolute left-0 right-0 top-full mt-2 bg-white rounded-xl shadow-2xl max-h-64 overflow-y-auto z-50 border border-gray-200"
+                >
+                  {companyOptions.map((name, idx) => (
+                    <li
+                      key={idx}
+                      className={`px-8 py-4 text-lg cursor-pointer transition-colors ${
+                        selectedIndex === idx
+                          ? "bg-blue-100 text-blue-900"
+                          : "text-gray-900 hover:bg-gray-100"
+                      } ${
+                        idx === 0 ? "rounded-t-xl" : ""
+                      } ${
+                        idx === companyOptions.length - 1 ? "rounded-b-xl" : "border-b border-gray-100"
+                      }`}
+                      onMouseDown={() => handleSelectCompany(name)}
+                      onMouseEnter={() => setSelectedIndex(idx)}
+                    >
+                      {name}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              
+              {/* Loading indicator */}
+              {isFetching && companyName && (
+                <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600"></div>
+                </div>
+              )}
             </div>
 
             {/* Submit Button */}
