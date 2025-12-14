@@ -446,7 +446,12 @@ ${jobSpecsSection}
 IMPORTANT RULES:
 1. Do NOT re-evaluate GitHub evidence - trust the support_level from the validated candidate data
 2. Extract required skills from each job specification
-3. Compare against validated candidate skills
+3. Compare against validated candidate skills using FLEXIBLE matching:
+   - Exact matches: "React" matches "React" = 100% credit
+   - Related/equivalent skills: "React" matches "Vue.js" or "Angular" (frontend frameworks) = 100% credit
+   - Broader categories: "AWS" matches "Cloud computing" or "Azure" (cloud platforms) = 100% credit
+   - Similar technologies: "PostgreSQL" matches "SQL" or "Database management" = 100% credit
+   - Use semantic understanding to identify related skills, not just exact string matching
 4. Weight skills by support_level:
    - directly_supported = highest weight (most reliable)
    - indirectly_supported = medium weight (somewhat reliable)
@@ -454,6 +459,11 @@ IMPORTANT RULES:
 5. Do NOT penalize non-code or certification skills
 6. Calculate match scores (0-100) for each job based on skill overlap and support levels
 7. Determine preferred_role based on which job has the highest match score
+8. For the preferred_role, calculate skill_coverage_percentage:
+   - Count how many required skills are matched (using flexible matching above)
+   - Divide by total number of required skills
+   - Express as percentage (0-100)
+   - Example: If job requires 10 skills and candidate has 7 matches (exact or related), coverage = 70%
 
 Return ONLY valid JSON with this exact schema:
 {
@@ -461,12 +471,14 @@ Return ONLY valid JSON with this exact schema:
   "role_match_scores": {
     ${jobSpecs.map((_, index) => `"Job ${index + 1}": number`).join(',\n    ')}
   },
+  "skill_coverage_percentage": number,
   "summary": string,
   "matched_skills": string[],
   "missing_skills": string[]
 }
 
 The preferred_role should be "Job 1", "Job 2", etc. (up to "Job ${jobSpecs.length}") based on which has the highest match score.
+The skill_coverage_percentage should show what percentage of required skills for the preferred_role are covered (using flexible matching).
 The summary should explain the match reasoning and highlight key strengths/gaps.
 Return ONLY the JSON object, no other text.`
 
@@ -520,6 +532,15 @@ Return ONLY the JSON object, no other text.`
             { status: 500 }
           )
         }
+      }
+
+      if (typeof jobMatchData.skill_coverage_percentage !== 'number' || 
+          jobMatchData.skill_coverage_percentage < 0 || 
+          jobMatchData.skill_coverage_percentage > 100) {
+        return NextResponse.json(
+          { error: 'Invalid response format: skill_coverage_percentage must be a number between 0 and 100' },
+          { status: 500 }
+        )
       }
 
       if (!jobMatchData.summary || typeof jobMatchData.summary !== 'string') {

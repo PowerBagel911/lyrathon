@@ -682,5 +682,5 @@
     }
   ],
   "cv_match_score": 54.17,
-  "cv_match_summary": "The match score reflects the alignment between the listed code skills and the evidence found in the provided GitHub repositories.  Skills like Docker, AWS Cloud Service and Azure could not be verified through GitHub.  The score is based solely on 'code' category skills. Some skills are marked as 'indirectly_supported' when strong contextual clues exist, but direct evidence is absent. Note that the 'mention_count' on the CV increases the confidence of skills, but this has no impact on the score due to Github's limitations in verifying these skills."
+  "cv_match_summary": "The match score reflects the alignment between the CV's listed coding skills and evidence found within the provided GitHub repositories. Several non-coding skills (Docker, AWS Cloud Service, Azure) could not be validated through GitHub evidence and are marked accordingly. The score prioritizes direct evidence such as language usage and dependencies. Indirect evidence, such as the presence of related libraries, contributed to a partial score. Note that GitHub evidence is limited and may not fully represent the candidate's skill set, particularly for tools and cloud services."
 }

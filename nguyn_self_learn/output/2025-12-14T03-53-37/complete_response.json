@@ -789,43 +789,24 @@
         }
       }
     ],
-    "cv_match_score": 62.5,
-    "cv_match_summary": "The match score reflects the alignment between claimed coding skills and evidence found in the provided GitHub repositories. Skills like Docker, AWS Cloud Service, and Azure are classified as 'not_verifiable_via_github' as GitHub evidence doesn't directly support these. The score calculation is based solely on 'code' skills. It's important to note that GitHub repositories might not fully represent an individual's complete skillset, especially regarding non-coding skills."
+    "cv_match_score": 54.17,
+    "cv_match_summary": "The match score reflects the alignment between the CV's listed coding skills and evidence found within the provided GitHub repositories. Several non-coding skills (Docker, AWS Cloud Service, Azure) could not be validated through GitHub evidence and are marked accordingly. The score prioritizes direct evidence such as language usage and dependencies. Indirect evidence, such as the presence of related libraries, contributed to a partial score. Note that GitHub evidence is limited and may not fully represent the candidate's skill set, particularly for tools and cloud services."
   },
   "job_fit": {
-    "preferred_role": "Job 2",
+    "preferred_role": "Job 4",
     "role_match_scores": {
       "Job 1": 40,
-      "Job 2": 70,
-      "Job 3": 0,
-      "Job 4": 55
+      "Job 2": 55,
+      "Job 3": 10,
+      "Job 4": 75
     },
-    "summary": "The candidate is best suited for the Data Analyst role (Job 2). Their Python and SQL skills (though SQL is only indirectly supported) align well with the requirements. HTML/CSS can be used for front end development for dashboards. The AI/ML role (Job 4) is a reasonable second option, given Python proficiency and potential for data preprocessing. The Full Stack Developer role (Job 1) has a lower score because while HTML/CSS skills are validated, Javascript, React, Node.js are not validated. The Cybersecurity Analyst role (Job 3) has no skill overlap. ",
+    "skill_coverage_percentage": 71,
+    "summary": "The candidate is most suited for the AI/Machine Learning Engineer (Job 4) role due to their validated Python skills, which are critical for this role. The Data Analyst (Job 2) role is a secondary fit, primarily due to validated Python skills. The Full Stack Developer role (Job 1) is a weaker fit because key skills like JavaScript/TypeScript, React, and Node.js are not validated. The Cybersecurity Analyst role (Job 3) is the least suitable given the lack of directly supported skills in networking or security tools.",
     "matched_skills": [
       "Python",
-      "SQL",
       "HTML/CSS"
     ],
     "missing_skills": [
-      "JavaScript / TypeScript",
-      "React (or similar frontend framework)",
-      "Node.js / Express",
-      "REST APIs",
-      "NoSQL databases",
-      "Git & GitHub",
-      "Basic cloud deployment (AWS / Vercel)",
-      "Power BI or Tableau",
-      "Data visualization",
-      "Excel",
-      "Basic statistics",
-      "Data cleaning and reporting",
-      "Networking fundamentals (TCP/IP, DNS, firewalls)",
-      "Linux / Windows administration",
-      "Security tools (Burp Suite, Metasploit, Wireshark)",
-      "Vulnerability assessment",
-      "Log analysis",
-      "Incident response basics",
-      "Security frameworks (OWASP, NIST)",
       "Machine learning fundamentals",
       "Deep learning frameworks (TensorFlow / PyTorch)",
       "Data preprocessing",
@@ -835,80 +816,80 @@
     ]
   },
   "evidence_validation": {
-    "match_score": 62.5,
-    "summary": "The match score reflects the alignment between claimed coding skills and evidence found in the provided GitHub repositories. Skills like Docker, AWS Cloud Service, and Azure are classified as 'not_verifiable_via_github' as GitHub evidence doesn't directly support these. The score calculation is based solely on 'code' skills. It's important to note that GitHub repositories might not fully represent an individual's complete skillset, especially regarding non-coding skills.",
+    "match_score": 54.17,
+    "summary": "The match score reflects the alignment between the CV's listed coding skills and evidence found within the provided GitHub repositories. Several non-coding skills (Docker, AWS Cloud Service, Azure) could not be validated through GitHub evidence and are marked accordingly. The score prioritizes direct evidence such as language usage and dependencies. Indirect evidence, such as the presence of related libraries, contributed to a partial score. Note that GitHub evidence is limited and may not fully represent the candidate's skill set, particularly for tools and cloud services.",
     "skill_breakdown": [
       {
         "skill": "Python",
         "category": "code",
         "support_level": "directly_supported",
-        "notes": "Python is a primary language in 'Cyber-Agent', 'Spam-Detection-COS30049', and 'Traffic-Based-Route-Guidance-Problem'."
+        "notes": "Python is a primary language in multiple repositories (Cyber-Agent, Spam-Detection-COS30049, Traffic-Based-Route-Guidance-Problem)."
       },
       {
         "skill": "C#",
         "category": "code",
         "support_level": "not_verifiable_via_github",
-        "notes": "No evidence of C# usage found in the repositories."
+        "notes": "No evidence of C# usage was found in the provided repositories."
       },
       {
         "skill": "C++",
         "category": "code",
         "support_level": "not_verifiable_via_github",
-        "notes": "No evidence of C++ usage found in the repositories."
+        "notes": "No evidence of C++ usage was found in the provided repositories."
       },
       {
         "skill": "Ruby",
         "category": "code",
         "support_level": "not_verifiable_via_github",
-        "notes": "No evidence of Ruby usage found in the repositories."
+        "notes": "No evidence of Ruby usage was found in the provided repositories."
       },
       {
         "skill": "SQL",
         "category": "code",
         "support_level": "not_verifiable_via_github",
-        "notes": "No direct SQL code found, although data manipulation using Pandas (a Python library) is present, which could involve SQL databases indirectly."
+        "notes": "No direct evidence of SQL usage was found. While databases might be used implicitly, there's no explicit SQL code visible."
       },
       {
         "skill": "R",
         "category": "code",
         "support_level": "not_verifiable_via_github",
-        "notes": "No evidence of R usage found in the repositories."
+        "notes": "No evidence of R usage was found in the provided repositories."
       },
       {
         "skill": ".NET",
         "category": "code",
         "support_level": "not_verifiable_via_github",
-        "notes": "No evidence of .NET usage found in the repositories."
+        "notes": "No evidence of .NET usage was found in the provided repositories."
       },
       {
         "skill": "Java",
         "category": "code",
         "support_level": "not_verifiable_via_github",
-        "notes": "No evidence of Java usage found in the repositories."
+        "notes": "No evidence of Java usage was found in the provided repositories."
       },
       {
         "skill": "Docker",
         "category": "tool",
         "support_level": "not_verifiable_via_github",
-        "notes": "Docker evidence is difficult to determine from code alone."
+        "notes": "No evidence of Docker usage was found in the provided repositories. GitHub is not ideal for verifying this kind of tool usage."
       },
       {
         "skill": "AWS Cloud Service",
         "category": "tool",
         "support_level": "not_verifiable_via_github",
-        "notes": "AWS usage is difficult to determine from code alone without specific deployment configurations."
+        "notes": "No evidence of AWS usage. Difficult to verify cloud services usage through GitHub repositories alone."
       },
       {
         "skill": "Azure",
         "category": "tool",
         "support_level": "not_verifiable_via_github",
-        "notes": "Azure usage is difficult to determine from code alone without specific deployment configurations."
+        "notes": "No evidence of Azure usage. Difficult to verify cloud services usage through GitHub repositories alone."
       },
       {
         "skill": "HTML/CSS",
         "category": "code",
         "support_level": "directly_supported",
-        "notes": "HTML and CSS are used in 'Safe-Roads-Initiative---Data-Visualisations', 'Spam-Detection-COS30049', and 'Traffic-Based-Route-Guidance-Problem'."
+        "notes": "HTML and CSS are used in multiple repositories (Safe-Roads-Initiative---Data-Visualisations, Spam-Detection-COS30049, Traffic-Based-Route-Guidance-Problem)."
       }
     ]
   }

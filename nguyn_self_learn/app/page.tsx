@@ -118,7 +118,13 @@ export default function Home() {
       if (data.job_fit && data.job_fit.preferred_role !== undefined) {
         if (formatted) formatted += `\n\n---\n\n`
         formatted += `Job Matching Results:\n`
-        formatted += `Preferred Role: ${data.job_fit.preferred_role}\n\n`
+        formatted += `Preferred Role: ${data.job_fit.preferred_role}\n`
+        
+        if (typeof data.job_fit.skill_coverage_percentage === 'number') {
+          formatted += `Skill Coverage for ${data.job_fit.preferred_role}: ${data.job_fit.skill_coverage_percentage}%\n`
+        }
+        
+        formatted += `\n`
         
         if (data.job_fit.role_match_scores) {
           formatted += `Match Scores:\n`
