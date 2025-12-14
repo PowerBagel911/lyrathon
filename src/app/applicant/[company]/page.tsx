@@ -4,6 +4,7 @@ import { use, useState, useRef, useEffect } from "react";
 import { Sandwich, Upload, Check } from "lucide-react";
 import Link from "next/link";
 import { api } from "~/trpc/react";
+import { useRouter } from "next/navigation";
 
 interface CompanyPageProps {
   params: Promise<{
@@ -22,6 +23,16 @@ export default function CompanyPage({ params }: CompanyPageProps) {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
+  const [isExiting, setIsExiting] = useState(false);
+
+  const handleNavigation = (path: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsExiting(true);
+    setTimeout(() => {
+      router.push(path);
+    }, 400);
+  };
 
   // Get companyId from sessionStorage on mount
   useEffect(() => {
@@ -53,7 +64,11 @@ export default function CompanyPage({ params }: CompanyPageProps) {
     const file = e.target.files?.[0];
     if (file) {
       // Basic validation - accept PDF, DOC, DOCX files
-      const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+      const allowedTypes = [
+        "application/pdf",
+        "application/msword",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      ];
       if (allowedTypes.includes(file.type)) {
         setUploadedFile(file);
         console.log("Resume uploaded:", file.name, "Size:", file.size, "bytes");
@@ -170,24 +185,28 @@ export default function CompanyPage({ params }: CompanyPageProps) {
   };
 
   return (
-    <main className="min-h-screen bg-linear-to-br from-[#5A38A4] to-[#254BA4] font-sans flex items-center justify-center p-6">
+    <main className="flex min-h-screen items-center justify-center bg-linear-to-br from-[#5A38A4] to-[#254BA4] p-6 font-sans">
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <img
+          src="/b.png"
+          alt="background effect"
+          className="h-full w-full object-cover opacity-30"
+        />
+      </div>
       {/* Central Glassmorphism Card */}
-      <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-10 lg:p-12">
-        
-        {/* Header with Logo */}
-        <div className="flex items-center gap-3 mb-8">
-          <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-linear-to-br from-orange-400 to-orange-600">
-            <Sandwich className="h-4 w-4 text-white" />
-          </div>
-          <span className="text-lg font-semibold text-white tracking-tight">BanhMiBandit</span>
-        </div>
-
+      <div className={`w-full max-w-4xl rounded-3xl border border-white/20 bg-white/10 p-10 backdrop-blur-md lg:p-12 ${isExiting ? 'animate-fade-out' : 'animate-fade-in'}`}>
+        <span
+          style={{ fontFamily: "var(--font-my-font)" }}
+          className="cursor-pointer pb-1.5 text-xl font-normal tracking-tight text-white transition-opacity hover:opacity-80 sm:text-2xl md:text-3xl"
+        >
+          BanhMiBandit
+        </span>
         {/* Company Title */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-6">
+        <div className="mb-8 text-center">
+          <h1 className="mb-6 font-serif text-4xl font-bold text-white lg:text-5xl">
             {companyName} Careers
           </h1>
-          
+
           {/* Upload Resume Button */}
           <div className="relative">
             <input
@@ -197,17 +216,16 @@ export default function CompanyPage({ params }: CompanyPageProps) {
               onChange={handleFileChange}
               className="hidden"
             />
-            <button 
+            <button
               onClick={handleFileUpload}
-              className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 px-6 py-3 rounded-full text-white font-medium transition-all duration-200"
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3 font-medium text-white backdrop-blur-sm transition-all duration-200 hover:bg-white/20"
             >
               {uploadedFile ? (
                 <>
                   <Check className="h-4 w-4" />
-                  {uploadedFile.name.length > 20 
-                    ? `${uploadedFile.name.substring(0, 20)}...` 
-                    : uploadedFile.name
-                  }
+                  {uploadedFile.name.length > 20
+                    ? `${uploadedFile.name.substring(0, 20)}...`
+                    : uploadedFile.name}
                 </>
               ) : (
                 <>
@@ -246,17 +264,17 @@ export default function CompanyPage({ params }: CompanyPageProps) {
 
           <div className="flex flex-col sm:flex-row gap-4 items-center">
             {/* GitHub URL Input */}
-            <div className="flex-1 w-full">
+            <div className="w-full flex-1">
               <input
                 type="url"
                 value={githubUrl}
                 onChange={(e) => setGithubUrl(e.target.value)}
                 placeholder="Paste your GitHub URL"
-                className="w-full px-6 py-4 bg-white text-gray-900 placeholder-gray-500 rounded-full border-0 focus:ring-4 focus:ring-white/20 focus:outline-none text-lg"
+                className="w-full rounded-full border-0 bg-white px-6 py-4 text-lg text-gray-900 placeholder-gray-500 focus:ring-4 focus:ring-white/20 focus:outline-none"
                 required
               />
             </div>
-            
+
             {/* Apply Button */}
             <button
               type="submit"
@@ -309,7 +327,7 @@ export default function CompanyPage({ params }: CompanyPageProps) {
                   )}
                   
                   {/* Required Skills */}
-                  {job.requiredSkills && (job.requiredSkills as string[]).length > 0 && (
+                  {Array.isArray(job.requiredSkills) && job.requiredSkills.length > 0 && (
                     <div className="mt-4">
                       <h4 className="text-sm font-semibold text-white/90 mb-2">Required Skills:</h4>
                       <div className="flex flex-wrap gap-2">
@@ -342,8 +360,36 @@ export default function CompanyPage({ params }: CompanyPageProps) {
       </div>
 
       {/* Decorative Elements */}
-      <div className="absolute top-1/4 right-1/4 h-64 w-64 rounded-full bg-purple-400/20 blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-1/4 left-1/4 h-48 w-48 rounded-full bg-blue-400/20 blur-3xl pointer-events-none"></div>
+      <div className="pointer-events-none absolute top-1/4 right-1/4 h-64 w-64 rounded-full bg-purple-400/20 blur-3xl"></div>
+      <div className="pointer-events-none absolute bottom-1/4 left-1/4 h-48 w-48 rounded-full bg-blue-400/20 blur-3xl"></div>
+      
+      <style jsx>{`
+        @keyframes fadeIn {
+          0% {
+            opacity: 0;
+          }
+          100% {
+            opacity: 1;
+          }
+        }
+
+        @keyframes fadeOut {
+          0% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 0;
+          }
+        }
+
+        .animate-fade-in {
+          animation: fadeIn 0.4s ease-in forwards;
+        }
+
+        .animate-fade-out {
+          animation: fadeOut 0.4s ease-out forwards;
+        }
+      `}</style>
     </main>
   );
 }
