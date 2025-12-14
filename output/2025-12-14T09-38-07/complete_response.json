@@ -88,18 +88,20 @@
           "K-Means",
           "TF-IDF",
           "Chart.js",
-          "D3"
+          "D3",
+          "REST API",
+          "Uvicorn"
         ]
       },
       {
         "name": "Safe Road Initiative – Data Visualisations",
         "technologies": [
           "D3 v7",
-          "CSV",
-          "JSON",
           "HTML",
           "CSS",
           "SVG",
+          "CSV",
+          "JSON",
           "GitHub Pages"
         ]
       }
@@ -790,103 +792,104 @@
       }
     ],
     "cv_match_score": 62.5,
-    "cv_match_summary": "The match score reflects the alignment between the candidate's claimed code skills and the evidence found in their GitHub repositories. Skills like Docker, AWS Cloud Service, and Azure are categorized as tools and therefore 'not_verifiable_via_github', they do not contribute to the score. While mention_count might increase confidence in non-code skills, GitHub's visibility into these is limited.  The final score is 62.5%."
+    "cv_match_summary": "The match score is 62.5%, reflecting alignment between the CV's coding skills and evidence found in the provided GitHub repositories. Python and HTML/CSS are directly supported by the repositories' language statistics and dependencies. C#, C++, Ruby, SQL, R, and Java are not verifiable through GitHub evidence. Docker, AWS Cloud Service, and Azure are non-code skills, and therefore categorized as not verifiable via GitHub, but their mention counts indicate confidence in the claims."
   },
   "job_fit": {
     "preferred_role": "Job 2",
     "role_match_scores": {
-      "Job 1": 0,
-      "Job 2": 75
+      "Job 1": 10,
+      "Job 2": 85,
+      "Job 3": 20
     },
-    "skill_coverage_percentage": 75,
-    "summary": "The candidate is a better fit for Job 2 (Data Analyst) due to their validated Python and SQL skills. Job 1 (Cybersecurity Analyst) has no directly or indirectly supported skills matched. For Job 2, the candidate has directly supported Python skills which meets the requirements. They also have indirectly supported SQL skills. No validation available via Github for visualization or statistics skills. They are missing data cleaning and reporting skills. Job 2 has a significantly higher match score.",
+    "skill_coverage_percentage": 85,
+    "summary": "Job 2 (Data Analyst) is the best fit due to the candidate's validated Python and SQL skills, plus data visualization via HTML/CSS. Job 1 (Cybersecurity Analyst) is a poor fit since no validated skills directly align with the requirements. Job 3 (Web Developer) shows a minor match (HTML/CSS) but lacks other front-end technologies and server-side skills.",
     "matched_skills": [
-      "Python",
-      "SQL"
+      "SQL",
+      "Python (Pandas, NumPy)",
+      "Data visualization",
+      "Data cleaning and reporting"
     ],
     "missing_skills": [
       "Power BI or Tableau",
-      "Data visualization",
       "Excel",
-      "Basic statistics",
-      "Data cleaning and reporting"
+      "Basic statistics"
     ]
   },
   "evidence_validation": {
     "match_score": 62.5,
-    "summary": "The match score reflects the alignment between the candidate's claimed code skills and the evidence found in their GitHub repositories. Skills like Docker, AWS Cloud Service, and Azure are categorized as tools and therefore 'not_verifiable_via_github', they do not contribute to the score. While mention_count might increase confidence in non-code skills, GitHub's visibility into these is limited.  The final score is 62.5%.",
+    "summary": "The match score is 62.5%, reflecting alignment between the CV's coding skills and evidence found in the provided GitHub repositories. Python and HTML/CSS are directly supported by the repositories' language statistics and dependencies. C#, C++, Ruby, SQL, R, and Java are not verifiable through GitHub evidence. Docker, AWS Cloud Service, and Azure are non-code skills, and therefore categorized as not verifiable via GitHub, but their mention counts indicate confidence in the claims.",
     "skill_breakdown": [
       {
         "skill": "Python",
         "category": "code",
         "support_level": "directly_supported",
-        "notes": "Python is listed as a primary language in multiple repositories."
+        "notes": "Python is a primary language in 'Cyber-Agent', 'Spam-Detection-COS30049', and 'Traffic-Based-Route-Guidance-Problem' repositories."
       },
       {
         "skill": "C#",
         "category": "code",
         "support_level": "not_verifiable_via_github",
-        "notes": "No evidence of C# usage found in the repositories."
+        "notes": "No evidence of C# usage found in the GitHub repositories."
       },
       {
         "skill": "C++",
         "category": "code",
         "support_level": "not_verifiable_via_github",
-        "notes": "No evidence of C++ usage found in the repositories."
+        "notes": "No evidence of C++ usage found in the GitHub repositories."
       },
       {
         "skill": "Ruby",
         "category": "code",
         "support_level": "not_verifiable_via_github",
-        "notes": "No evidence of Ruby usage found in the repositories."
+        "notes": "No evidence of Ruby usage found in the GitHub repositories."
       },
       {
         "skill": "SQL",
         "category": "code",
-        "support_level": "indirectly_supported",
-        "notes": "While SQL isn't explicitly listed as a language, libraries like SQLAlchemy (Python repo) and mentions of databases suggest familiarity. Giving 50% credit."
+        "support_level": "not_verifiable_via_github",
+        "notes": "No direct evidence of SQL usage, though data processing and database interaction are present in projects. Not directly verifiable."
       },
       {
         "skill": "R",
         "category": "code",
         "support_level": "not_verifiable_via_github",
-        "notes": "No evidence of R usage found in the repositories."
+        "notes": "No evidence of R usage found in the GitHub repositories."
       },
       {
         "skill": ".NET",
         "category": "code",
         "support_level": "not_verifiable_via_github",
-        "notes": "No direct evidence of .NET usage found in the repositories."
+        "notes": "No evidence of .NET usage found in the GitHub repositories."
       },
       {
         "skill": "Java",
         "category": "code",
         "support_level": "not_verifiable_via_github",
-        "notes": "No evidence of Java usage found in the repositories."
+        "notes": "No evidence of Java usage found in the GitHub repositories."
       },
       {
         "skill": "Docker",
         "category": "tool",
         "support_level": "not_verifiable_via_github",
-        "notes": "Docker usage isn't directly verifiable via GitHub repository content."
+        "notes": "Tool; cannot be verified via GitHub repository content. Mention count may increase confidence."
       },
       {
         "skill": "AWS Cloud Service",
         "category": "tool",
         "support_level": "not_verifiable_via_github",
-        "notes": "AWS usage isn't directly verifiable via GitHub repository content."
+        "notes": "Tool; cannot be verified via GitHub repository content. Mention count may increase confidence."
       },
       {
         "skill": "Azure",
         "category": "tool",
         "support_level": "not_verifiable_via_github",
-        "notes": "Azure usage isn't directly verifiable via GitHub repository content."
+        "notes": "Tool; cannot be verified via GitHub repository content. Mention count may increase confidence."
       },
       {
         "skill": "HTML/CSS",
         "category": "code",
         "support_level": "directly_supported",
-        "notes": "HTML and CSS are listed as languages in multiple repositories, especially the Safe Roads Initiative."
+        "notes": "HTML and CSS are used in 'Safe-Roads-Initiative---Data-Visualisations', 'Spam-Detection-COS30049', and 'Traffic-Based-Route-Guidance-Problem'."
       }
     ]
   }

@@ -21,48 +21,38 @@ export const postRouter = createTRPCRouter({
       const search = input.search?.trim() || "";
       
       if (!search) {
-        // Return all company names if no search
+        // Return all companies if no search
         const result = await ctx.db
-          .select({ name: companies.name })
+          .select({ id: companies.id, name: companies.name })
           .from(companies)
           .limit(50);
-        return result.map((row) => row.name);
+        return result;
       }
       
       // Case-insensitive search
       const result = await ctx.db
-        .select({ name: companies.name })
+        .select({ id: companies.id, name: companies.name })
         .from(companies)
         .where(sql`LOWER(${companies.name}) LIKE LOWER(${`%${search}%`})`)
         .limit(50);
       
-      return result.map((row) => row.name);
+      return result;
     }),
 
-  // Get or create a company by name
-  getOrCreateCompany: publicProcedure
+  // Get a company by name (case-insensitive)
+  getCompanyByName: publicProcedure
     .input(z.object({ name: z.string().min(1) }))
-    .mutation(async ({ ctx, input }) => {
+    .query(async ({ ctx, input }) => {
       const companyName = input.name.trim();
       
-      // Check if company already exists
-      const existing = await ctx.db
+      // Check if company exists
+      const [company] = await ctx.db
         .select()
         .from(companies)
         .where(sql`LOWER(${companies.name}) = LOWER(${companyName})`)
         .limit(1);
       
-      if (existing.length > 0) {
-        return existing[0]!;
-      }
-      
-      // Create new company
-      const [newCompany] = await ctx.db
-        .insert(companies)
-        .values({ name: companyName })
-        .returning();
-      
-      return newCompany!;
+      return company ?? null;
     }),
 
   // Get company by ID

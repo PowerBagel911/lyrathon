@@ -2,73 +2,10 @@ import { NextRequest, NextResponse } from 'next/server'
 import pdfParse from 'pdf-parse'
 import mammoth from 'mammoth'
 import { GoogleGenerativeAI } from '@google/generative-ai'
-import { writeFile, mkdir } from 'fs/promises'
-import { join } from 'path'
 import { env } from '~/env'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
-
-/**
- * Save structured response to JSON files
- */
-async function saveStructuredResponse(structuredResponse: {
-  cv_claims: any
-  github_evidence?: any
-  evidence_validation?: any
-  job_fit?: any
-}) {
-  try {
-    // Create output directory with timestamp
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5)
-    const outputDir = join(process.cwd(), 'output', timestamp)
-    await mkdir(outputDir, { recursive: true })
-
-    // Save each section to separate files
-    await writeFile(
-      join(outputDir, 'cv_claims.json'),
-      JSON.stringify(structuredResponse.cv_claims, null, 2),
-      'utf-8'
-    )
-
-    if (structuredResponse.github_evidence) {
-      await writeFile(
-        join(outputDir, 'github_evidence.json'),
-        JSON.stringify(structuredResponse.github_evidence, null, 2),
-        'utf-8'
-      )
-    }
-
-    if (structuredResponse.evidence_validation) {
-      await writeFile(
-        join(outputDir, 'evidence_validation.json'),
-        JSON.stringify(structuredResponse.evidence_validation, null, 2),
-        'utf-8'
-      )
-    }
-
-    if (structuredResponse.job_fit) {
-      await writeFile(
-        join(outputDir, 'job_fit.json'),
-        JSON.stringify(structuredResponse.job_fit, null, 2),
-        'utf-8'
-      )
-    }
-
-    // Save complete structured response
-    await writeFile(
-      join(outputDir, 'complete_response.json'),
-      JSON.stringify(structuredResponse, null, 2),
-      'utf-8'
-    )
-
-    return outputDir
-  } catch (error) {
-    console.error('Error saving structured response:', error)
-    // Don't throw - file saving is optional
-    return null
-  }
-}
 
 export async function POST(request: NextRequest) {
   try {
@@ -284,8 +221,6 @@ Return ONLY the JSON object, no other text.`
 
     // If no GitHub URL provided, return CV extraction only
     if (!githubUrl || !githubUrl.trim()) {
-      // Save structured response to files
-      await saveStructuredResponse(structuredResponse)
       return NextResponse.json(structuredResponse)
     }
 
@@ -581,9 +516,6 @@ Return ONLY the JSON object, no other text.`
         structuredResponse.github_evidence.cv_match_summary = matchData.summary
       }
       
-      // Save structured response to files
-      await saveStructuredResponse(structuredResponse)
-      
       // Return complete structured response
       return NextResponse.json(structuredResponse)
     }
@@ -596,9 +528,6 @@ Return ONLY the JSON object, no other text.`
       structuredResponse.github_evidence.cv_match_score = matchData.match_score
       structuredResponse.github_evidence.cv_match_summary = matchData.summary
     }
-    
-    // Save structured response to files
-    await saveStructuredResponse(structuredResponse)
     
     // Return structured response with CV claims, GitHub evidence, and evidence validation
     return NextResponse.json(structuredResponse)

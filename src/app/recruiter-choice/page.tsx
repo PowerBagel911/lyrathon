@@ -8,6 +8,7 @@ import { api } from "~/trpc/react";
 
 export default function RecruiterChoicePage() {
   const [companyName, setCompanyName] = useState("");
+  const [selectedCompanyId, setSelectedCompanyId] = useState<string | null>(null);
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -38,7 +39,10 @@ export default function RecruiterChoicePage() {
         setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1));
       } else if (e.key === "Enter" && selectedIndex >= 0) {
         e.preventDefault();
-        handleSelectCompany(companyOptions[selectedIndex]!);
+        const selected = companyOptions[selectedIndex];
+        if (selected) {
+          handleSelectCompany(selected.id, selected.name);
+        }
       } else if (e.key === "Escape") {
         setShowDropdown(false);
         setSelectedIndex(-1);
@@ -51,37 +55,34 @@ export default function RecruiterChoicePage() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCompanyName(e.target.value);
+    setSelectedCompanyId(null); // Reset selection when typing
     setShowDropdown(true);
     setSelectedIndex(-1);
   };
 
-  const handleSelectCompany = (name: string) => {
+  const handleSelectCompany = (id: string, name: string) => {
     setCompanyName(name);
+    setSelectedCompanyId(id);
     setShowDropdown(false);
     setSelectedIndex(-1);
   };
 
-  // Mutation to get or create company
-  const getOrCreateCompany = api.post.getOrCreateCompany.useMutation();
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!companyName.trim()) {
+    if (!selectedCompanyId) {
+      alert("Please select a company from the dropdown list.");
       return;
     }
 
     try {
-      // Get or create the company
-      const company = await getOrCreateCompany.mutateAsync({ name: companyName });
-      
       // Store company ID in session storage
-      sessionStorage.setItem("companyId", company.id);
+      sessionStorage.setItem("companyId", selectedCompanyId);
       
       // Navigate to recruiter page without exposing company ID in URL
       router.push("/recruiter");
     } catch (error) {
-      console.error("Error creating/fetching company:", error);
+      console.error("Error processing company:", error);
       alert("Failed to process company. Please try again.");
     }
   };
@@ -129,9 +130,9 @@ export default function RecruiterChoicePage() {
                   ref={dropdownRef}
                   className="absolute left-0 right-0 top-full mt-2 bg-white rounded-xl shadow-2xl max-h-64 overflow-y-auto z-50 border border-gray-200"
                 >
-                  {companyOptions.map((name, idx) => (
+                  {companyOptions.map((company, idx) => (
                     <li
-                      key={idx}
+                      key={company.id}
                       className={`px-8 py-4 text-lg cursor-pointer transition-colors ${
                         selectedIndex === idx
                           ? "bg-blue-100 text-blue-900"
@@ -141,10 +142,10 @@ export default function RecruiterChoicePage() {
                       } ${
                         idx === companyOptions.length - 1 ? "rounded-b-xl" : "border-b border-gray-100"
                       }`}
-                      onMouseDown={() => handleSelectCompany(name)}
+                      onMouseDown={() => handleSelectCompany(company.id, company.name)}
                       onMouseEnter={() => setSelectedIndex(idx)}
                     >
-                      {name}
+                      {company.name}
                     </li>
                   ))}
                 </ul>
@@ -161,7 +162,12 @@ export default function RecruiterChoicePage() {
             {/* Submit Button */}
             <button
               type="submit"
-              className="group relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-600 to-blue-700 px-12 py-6 text-xl font-semibold text-white shadow-xl transition-all duration-300 hover:from-blue-500 hover:to-blue-600 hover:shadow-2xl hover:-translate-y-1 tracking-wide whitespace-nowrap"
+              disabled={!selectedCompanyId}
+              className={`group relative overflow-hidden rounded-2xl px-12 py-6 text-xl font-semibold text-white shadow-xl transition-all duration-300 tracking-wide whitespace-nowrap ${
+                selectedCompanyId
+                  ? "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 hover:shadow-2xl hover:-translate-y-1 cursor-pointer"
+                  : "bg-gray-400 cursor-not-allowed opacity-60"
+              }`}
             >
               <span className="relative z-10">Start Hiring</span>
               <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-500 opacity-0 transition-opacity duration-300 group-hover:opacity-20"></div>
