@@ -7,6 +7,8 @@ import { api } from "~/trpc/react";
 export default function WhoAppliedPage() {
   const [companyId, setCompanyId] = useState<string | null>(null);
   const [selectedApplicationId, setSelectedApplicationId] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
 
   // Get companyId from sessionStorage on mount
   useEffect(() => {
@@ -34,8 +36,43 @@ export default function WhoAppliedPage() {
     { enabled: !!selectedApplicationId }
   );
 
+  // Filter and sort applications
+  const filteredAndSortedApplications = applications
+    .filter((app) => {
+      if (!searchTerm.trim()) return true;
+      const searchLower = searchTerm.toLowerCase();
+      const name = app.applicant.name?.toLowerCase() || "";
+      const email = app.applicant.email.toLowerCase();
+      return name.includes(searchLower) || email.includes(searchLower);
+    })
+    .sort((a, b) => {
+      const dateA = new Date(a.appliedAt).getTime();
+      const dateB = new Date(b.appliedAt).getTime();
+      return sortOrder === "newest" ? dateB - dateA : dateA - dateB;
+    });
+
   return (
     <main className="min-h-screen bg-linear-to-br from-[#5A38A4] to-[#254BA4] font-sans pb-10 md:pb-16 lg:pb-20">
+      {/* Custom styles for dropdown */}
+      <style jsx global>{`
+        select {
+          background-color: rgba(90, 56, 164, 0.1) !important;
+        }
+        select option {
+          background-color: #5A38A4 !important;
+          color: white !important;
+        }
+        select option:checked,
+        select option:hover,
+        select option:focus {
+          background-color: #6B4AB8 !important;
+          color: white !important;
+        }
+        select:focus option:checked {
+          background-color: #6B4AB8 !important;
+          color: white !important;
+        }
+      `}</style>
       {/* Navbar */}
       <nav className="relative z-10 flex items-center justify-between px-4 py-6 sm:px-6 sm:py-8 lg:px-12 lg:py-10">
         <div className="flex items-center">
@@ -72,7 +109,44 @@ export default function WhoAppliedPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Applicants List */}
           <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
-            <h2 className="text-2xl font-bold text-white mb-4">Applicants</h2>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-2xl font-bold text-white">Applicants</h2>
+              <div className="text-sm text-white/60">
+                {filteredAndSortedApplications.length} {filteredAndSortedApplications.length === 1 ? "applicant" : "applicants"}
+              </div>
+            </div>
+
+            {/* Search and Sort Controls */}
+            <div className="mb-4 space-y-3">
+              {/* Search Input */}
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Search by name or email..."
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-white/30"
+              />
+              
+              {/* Sort Dropdown */}
+              <div className="flex items-center gap-2">
+                <label className="text-sm text-white/80">Sort by:</label>
+                <select
+                  value={sortOrder}
+                  onChange={(e) => setSortOrder(e.target.value as "newest" | "oldest")}
+                  className="px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-white/30 appearance-none cursor-pointer"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E")`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'right 0.75rem center',
+                    paddingRight: '2.5rem',
+                  }}
+                >
+                  <option value="newest">Newest First</option>
+                  <option value="oldest">Oldest First</option>
+                </select>
+              </div>
+            </div>
+
             {isLoading ? (
               <div className="text-center py-8">
                 <p className="text-white/60">Loading applicants...</p>
@@ -81,9 +155,13 @@ export default function WhoAppliedPage() {
               <div className="text-center py-8 border border-white/20 rounded-2xl bg-white/5">
                 <p className="text-white/60">No applications yet</p>
               </div>
+            ) : filteredAndSortedApplications.length === 0 ? (
+              <div className="text-center py-8 border border-white/20 rounded-2xl bg-white/5">
+                <p className="text-white/60">No applicants found matching "{searchTerm}"</p>
+              </div>
             ) : (
               <div className="space-y-3">
-                {applications.map((app) => (
+                {filteredAndSortedApplications.map((app) => (
                   <button
                     key={app.id}
                     onClick={() => setSelectedApplicationId(app.id)}
