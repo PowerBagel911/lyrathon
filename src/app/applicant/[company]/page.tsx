@@ -309,11 +309,11 @@ export default function CompanyPage({ params }: CompanyPageProps) {
                   )}
                   
                   {/* Required Skills */}
-                  {job.requiredSkills && (job.requiredSkills as string[]).length > 0 && (
+                  {Array.isArray(job.requiredSkills) && job.requiredSkills.length > 0 && (
                     <div className="mt-4">
                       <h4 className="text-sm font-semibold text-white/90 mb-2">Required Skills:</h4>
                       <div className="flex flex-wrap gap-2">
-                        {(job.requiredSkills as string[]).map((skill, idx) => (
+                        {job.requiredSkills.map((skill, idx) => (
                           <span
                             key={idx}
                             className="px-3 py-1 bg-white/20 rounded-full text-sm text-white"

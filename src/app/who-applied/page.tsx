@@ -160,11 +160,11 @@ export default function WhoAppliedPage() {
                         ))}
                       </div>
                     </div>
-                    {analysis.jobFitAnalysis.matchedSkills && (analysis.jobFitAnalysis.matchedSkills as string[]).length > 0 && (
+                    {Array.isArray(analysis.jobFitAnalysis.matchedSkills) && analysis.jobFitAnalysis.matchedSkills.length > 0 && (
                       <div className="mb-3">
                         <p className="text-white/80 font-semibold mb-1">Matched Skills:</p>
                         <div className="flex flex-wrap gap-2">
-                          {(analysis.jobFitAnalysis.matchedSkills as string[]).map((skill, idx) => (
+                          {analysis.jobFitAnalysis.matchedSkills.map((skill, idx) => (
                             <span key={idx} className="px-2 py-1 bg-green-500/20 rounded text-sm text-green-200">
                               {skill}
                             </span>
@@ -172,11 +172,11 @@ export default function WhoAppliedPage() {
                         </div>
                       </div>
                     )}
-                    {analysis.jobFitAnalysis.missingSkills && (analysis.jobFitAnalysis.missingSkills as string[]).length > 0 && (
+                    {Array.isArray(analysis.jobFitAnalysis.missingSkills) && analysis.jobFitAnalysis.missingSkills.length > 0 && (
                       <div className="mb-3">
                         <p className="text-white/80 font-semibold mb-1">Missing Skills:</p>
                         <div className="flex flex-wrap gap-2">
-                          {(analysis.jobFitAnalysis.missingSkills as string[]).map((skill, idx) => (
+                          {analysis.jobFitAnalysis.missingSkills.map((skill, idx) => (
                             <span key={idx} className="px-2 py-1 bg-red-500/20 rounded text-sm text-red-200">
                               {skill}
                             </span>
@@ -194,11 +194,11 @@ export default function WhoAppliedPage() {
                 {analysis.cvClaims && (
                   <div className="p-4 bg-white/5 rounded-xl">
                     <h3 className="text-lg font-semibold text-white mb-2">Extracted Skills</h3>
-                    {analysis.cvClaims.skills && (analysis.cvClaims.skills as any[]).length > 0 && (
+                    {Array.isArray(analysis.cvClaims.skills) && analysis.cvClaims.skills.length > 0 && (
                       <div className="mb-3">
                         <p className="text-white/80 font-semibold mb-1">Skills:</p>
                         <div className="flex flex-wrap gap-2">
-                          {(analysis.cvClaims.skills as any[]).slice(0, 20).map((skill, idx) => (
+                          {analysis.cvClaims.skills.slice(0, 20).map((skill, idx) => (
                             <span key={idx} className="px-2 py-1 bg-white/20 rounded text-sm text-white">
                               {skill.name} ({skill.category})
                             </span>
