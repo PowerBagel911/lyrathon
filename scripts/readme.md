@@ -20,3 +20,14 @@ read test.json file (for now let's read it manually) to input to repositories ta
 ```bash
 npx tsx --env-file=.env scripts/importGitHubRepos.ts
 ```
+```bash
+npx tsx --env-file=.env scripts/importCV.ts
+```
+
+```bash
+npx tsx --env-file=.env scripts/importCVClaims.ts
+```
+
+```bash
+npx tsx --env-file=.env scripts/importJobFit.ts
+```

@@ -126,3 +126,22 @@ export const jobFitAnalysis = pgTable("job_fit_analysis", {
     .defaultNow()
     .notNull()
 });
+
+/* =======================
+   CV Claims
+   ======================= */
+export const cvClaims = pgTable("cv_claims", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  
+  applicantId: uuid("applicant_id")
+    .references(() => applicants.id)
+    .notNull(),
+  
+  skills: jsonb("skills").notNull(), // array of skill objects with name, category, mention_count
+  projects: jsonb("projects").notNull(), // array of project objects with name and technologies
+  certifications: jsonb("certifications").notNull(), // array of strings
+  
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull()
+});

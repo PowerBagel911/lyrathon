@@ -6,7 +6,7 @@ import { db } from "../src/server/db/index.js";
 import { jobFitAnalysis } from "../src/server/db/schema.js";
 
 // ===== CONFIG =====
-const APPLICANT_ID = "2f5fa3d8-9424-4674-98b9-62c3a626be08"; // placeholder
+const APPLICANT_ID = "12c5a047-4dfa-45e6-a4d3-4d113ef24a71"; // placeholder
 const INPUT_FILE = path.join(
   process.cwd(),
   "nguyn_self_learn/output/2025-12-14T03-53-37/job_fit.json"

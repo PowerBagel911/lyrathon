@@ -6,7 +6,7 @@ import { db } from "../src/server/db/index.js";
 import { applicantCV } from "../src/server/db/schema.js";
 
 // ===== CONFIG =====
-const APPLICANT_ID = "3c761ae0-5d2a-4e39-b89e-d805efb53eed"; // placeholder
+const APPLICANT_ID = "12c5a047-4dfa-45e6-a4d3-4d113ef24a71"; // placeholder
 const INPUT_FILE = path.join(process.cwd(), "extractedData.json"); // adjust path as needed
 
 // ==================
