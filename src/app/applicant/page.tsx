@@ -7,7 +7,7 @@ export default function ApplicantPage() {
   const [companyInput, setCompanyInput] = useState("");
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-[#5A38A4] to-[#254BA4] font-sans pb-10 md:pb-16 lg:pb-20">
+    <main className="min-h-screen bg-linear-to-br from-[#5A38A4] to-[#254BA4] font-sans pb-10 md:pb-16 lg:pb-20">
       {/* Main Card */}
       {/* Navbar */}
       <nav className="relative z-10 flex items-center justify-between px-4 py-6 sm:px-6 sm:py-8 lg:px-12 lg:py-10">

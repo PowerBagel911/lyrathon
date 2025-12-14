@@ -65,7 +65,7 @@ export default function RecruiterPage() {
             Your existing role:
           </h2>
           {/* Empty state - roles would be displayed here */}
-          <div className="min-h-[150px] sm:min-h-[200px] rounded-2xl border-2 border-dashed border-white/30 bg-white/5 p-6 sm:p-8 text-center">
+          <div className="min-h-37.5 sm:min-h-50 rounded-2xl border-2 border-dashed border-white/30 bg-white/5 p-6 sm:p-8 text-center">
             <p className="text-sm sm:text-base text-white/60">No roles created yet</p>
           </div>
         </div>
