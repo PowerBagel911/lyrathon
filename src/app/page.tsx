@@ -66,7 +66,7 @@ export default function Home() {
               </p>
               <div className="flex flex-col gap-4 sm:flex-row sm:gap-6 w-full sm:w-auto">
                 <Link
-                  href="/recruiter-choice"
+                  href="/recruiter-auth"
                   className="group relative overflow-hidden rounded-2xl border border-white/30 bg-white/10 px-12 py-6 text-xl font-semibold tracking-wide text-white shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20 hover:shadow-2xl"
                 >
                   <span className="relative z-10">For Recruiters</span>
