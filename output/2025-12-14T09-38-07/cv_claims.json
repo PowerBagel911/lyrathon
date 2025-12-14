@@ -87,18 +87,20 @@
         "K-Means",
         "TF-IDF",
         "Chart.js",
-        "D3"
+        "D3",
+        "REST API",
+        "Uvicorn"
       ]
     },
     {
       "name": "Safe Road Initiative – Data Visualisations",
       "technologies": [
         "D3 v7",
-        "CSV",
-        "JSON",
         "HTML",
         "CSS",
         "SVG",
+        "CSV",
+        "JSON",
         "GitHub Pages"
       ]
     }

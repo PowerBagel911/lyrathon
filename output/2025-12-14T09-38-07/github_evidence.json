@@ -682,5 +682,5 @@
     }
   ],
   "cv_match_score": 62.5,
-  "cv_match_summary": "The match score reflects the alignment between the candidate's claimed code skills and the evidence found in their GitHub repositories. Skills like Docker, AWS Cloud Service, and Azure are categorized as tools and therefore 'not_verifiable_via_github', they do not contribute to the score. While mention_count might increase confidence in non-code skills, GitHub's visibility into these is limited.  The final score is 62.5%."
+  "cv_match_summary": "The match score is 62.5%, reflecting alignment between the CV's coding skills and evidence found in the provided GitHub repositories. Python and HTML/CSS are directly supported by the repositories' language statistics and dependencies. C#, C++, Ruby, SQL, R, and Java are not verifiable through GitHub evidence. Docker, AWS Cloud Service, and Azure are non-code skills, and therefore categorized as not verifiable via GitHub, but their mention counts indicate confidence in the claims."
 }

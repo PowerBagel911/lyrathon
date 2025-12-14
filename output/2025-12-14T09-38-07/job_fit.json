@@ -1,0 +1,21 @@
+{
+  "preferred_role": "Job 2",
+  "role_match_scores": {
+    "Job 1": 10,
+    "Job 2": 85,
+    "Job 3": 20
+  },
+  "skill_coverage_percentage": 85,
+  "summary": "Job 2 (Data Analyst) is the best fit due to the candidate's validated Python and SQL skills, plus data visualization via HTML/CSS. Job 1 (Cybersecurity Analyst) is a poor fit since no validated skills directly align with the requirements. Job 3 (Web Developer) shows a minor match (HTML/CSS) but lacks other front-end technologies and server-side skills.",
+  "matched_skills": [
+    "SQL",
+    "Python (Pandas, NumPy)",
+    "Data visualization",
+    "Data cleaning and reporting"
+  ],
+  "missing_skills": [
+    "Power BI or Tableau",
+    "Excel",
+    "Basic statistics"
+  ]
+}
