@@ -104,3 +104,25 @@ export const applicantCV = pgTable("applicant_cv", {
     .defaultNow()
     .notNull()
 });
+
+/* =======================
+   Job Fit Analysis
+   ======================= */
+export const jobFitAnalysis = pgTable("job_fit_analysis", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  
+  applicantId: uuid("applicant_id")
+    .references(() => applicants.id)
+    .notNull(),
+  
+  preferredRole: text("preferred_role").notNull(),
+  roleMatchScores: jsonb("role_match_scores").notNull(), // object with job names as keys
+  skillCoveragePercentage: jsonb("skill_coverage_percentage").notNull(), // number
+  summary: text("summary").notNull(),
+  matchedSkills: jsonb("matched_skills").notNull(), // array of strings
+  missingSkills: jsonb("missing_skills").notNull(), // array of strings
+  
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull()
+});
