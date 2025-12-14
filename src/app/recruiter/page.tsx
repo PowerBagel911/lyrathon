@@ -46,6 +46,11 @@ export default function RecruiterPage() {
     { enabled: !!companyId }
   );
 
+  // Filter jobs based on search input
+  const filteredJobs = jobs.filter(job => 
+    job.title.toLowerCase().includes(roleInput.toLowerCase())
+  );
+
   // Create job mutation
   const createJob = api.post.createJob.useMutation({
     onSuccess: () => {
@@ -205,7 +210,7 @@ export default function RecruiterPage() {
         <div className="flex flex-col gap-4 sm:flex-row sm:gap-4 lg:gap-6">
           <input
             type="text"
-            placeholder="Enter a job title (e.g., Senior Frontend Engineer)"
+            placeholder="Search existing roles..."
             value={roleInput}
             onChange={(e) => setRoleInput(e.target.value)}
             className="flex-1 rounded-full border-2 border-transparent bg-white px-4 py-3 text-sm text-gray-800 placeholder-gray-500 focus:border-purple-300 focus:outline-none sm:px-6 sm:py-4 sm:text-base"
@@ -232,9 +237,13 @@ export default function RecruiterPage() {
             <div className="min-h-37.5 sm:min-h-50 rounded-2xl border-2 border-dashed border-white/30 bg-white/5 p-6 sm:p-8 text-center">
               <p className="text-sm sm:text-base text-white/60">No roles created yet</p>
             </div>
+          ) : filteredJobs.length === 0 ? (
+            <div className="min-h-37.5 sm:min-h-50 rounded-2xl border-2 border-dashed border-white/30 bg-white/5 p-6 sm:p-8 text-center">
+              <p className="text-sm sm:text-base text-white/60">No roles match "{roleInput}"</p>
+            </div>
           ) : (
             <div className="space-y-3 sm:space-y-4">
-              {jobs.map((job) => (
+              {filteredJobs.map((job) => (
                 <div
                   key={job.id}
                   className="rounded-2xl border border-white/20 bg-white/10 p-4 sm:p-6 backdrop-blur-sm transition-all hover:border-white/30 hover:bg-white/15"
