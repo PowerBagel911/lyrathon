@@ -1,0 +1,915 @@
+{
+  "cv_claims": {
+    "skills": [
+      {
+        "name": "Python",
+        "category": "code",
+        "mention_count": 1
+      },
+      {
+        "name": "C#",
+        "category": "code",
+        "mention_count": 1
+      },
+      {
+        "name": "C++",
+        "category": "code",
+        "mention_count": 1
+      },
+      {
+        "name": "Ruby",
+        "category": "code",
+        "mention_count": 1
+      },
+      {
+        "name": "SQL",
+        "category": "code",
+        "mention_count": 1
+      },
+      {
+        "name": "R",
+        "category": "code",
+        "mention_count": 1
+      },
+      {
+        "name": ".NET",
+        "category": "code",
+        "mention_count": 1
+      },
+      {
+        "name": "Java",
+        "category": "code",
+        "mention_count": 1
+      },
+      {
+        "name": "Docker",
+        "category": "tool",
+        "mention_count": 1
+      },
+      {
+        "name": "AWS Cloud Service",
+        "category": "tool",
+        "mention_count": 1
+      },
+      {
+        "name": "Azure",
+        "category": "tool",
+        "mention_count": 1
+      },
+      {
+        "name": "HTML/CSS",
+        "category": "code",
+        "mention_count": 1
+      }
+    ],
+    "projects": [
+      {
+        "name": "Multi-Agent Cybersecurity Analysis System",
+        "technologies": [
+          "LangChain",
+          "LangGraph",
+          "ChromaDB",
+          "sentence-transformers",
+          "mitreattack-python",
+          "CSV",
+          "JSON",
+          "Streamlit"
+        ]
+      },
+      {
+        "name": "Spam Detection System",
+        "technologies": [
+          "FastAPI",
+          "React",
+          "Vite",
+          "XGBoost",
+          "BiLSTM",
+          "PyTorch",
+          "K-Means",
+          "TF-IDF",
+          "Chart.js",
+          "D3"
+        ]
+      },
+      {
+        "name": "Safe Road Initiative – Data Visualisations",
+        "technologies": [
+          "D3 v7",
+          "CSV",
+          "JSON",
+          "HTML",
+          "CSS",
+          "SVG",
+          "GitHub Pages"
+        ]
+      }
+    ],
+    "certifications": []
+  },
+  "github_evidence": {
+    "type": "repositories",
+    "data": [
+      {
+        "repo": {
+          "name": "Cyber-Agent",
+          "url": "https://github.com/anne-tr-anh/Cyber-Agent",
+          "fork": true,
+          "pushed_at": "2025-11-02T01:42:54Z"
+        },
+        "evidence": {
+          "languages": {
+            "Python": 1439445,
+            "Jupyter Notebook": 45979
+          },
+          "root_files": [
+            ".gitattributes",
+            ".gitignore",
+            "README.md",
+            "app.py",
+            "requirements.in",
+            "requirements.txt"
+          ],
+          "dependencies": [
+            "aiohappyeyeballs",
+            "aiohttp",
+            "aiosignal",
+            "altair",
+            "annotated-types",
+            "antlr4-python3-runtime",
+            "anyio",
+            "argparse",
+            "attrs",
+            "backoff",
+            "bcrypt",
+            "blinker",
+            "build",
+            "cachetools",
+            "certifi",
+            "charset-normalizer",
+            "chromadb",
+            "click",
+            "colorama",
+            "coloredlogs",
+            "colour",
+            "dataclasses-json",
+            "deepdiff",
+            "distro",
+            "drawsvg",
+            "durationpy",
+            "et-xmlfile",
+            "filelock",
+            "filetype",
+            "flatbuffers",
+            "frozenlist",
+            "fsspec",
+            "gitdb",
+            "gitpython",
+            "google-ai-generativelanguage",
+            "google-api-core[grpc]",
+            "google-auth",
+            "googleapis-common-protos",
+            "greenlet",
+            "groq",
+            "grpcio",
+            "grpcio-status",
+            "h11",
+            "httpcore",
+            "httptools",
+            "httpx",
+            "httpx-sse",
+            "huggingface-hub",
+            "humanfriendly",
+            "idna",
+            "importlib-metadata",
+            "importlib-resources",
+            "jinja2",
+            "jiter",
+            "joblib",
+            "jsonpatch",
+            "jsonpointer",
+            "jsonschema",
+            "jsonschema-specifications",
+            "kubernetes",
+            "langchain",
+            "langchain-chroma",
+            "langchain-community",
+            "langchain-core",
+            "langchain-google-genai",
+            "langchain-groq",
+            "langchain-huggingface",
+            "langchain-ollama",
+            "langchain-openai",
+            "langchain-tavily",
+            "langchain-text-splitters",
+            "langgraph",
+            "langgraph-checkpoint",
+            "langgraph-prebuilt",
+            "langgraph-sdk",
+            "langgraph-supervisor",
+            "langsmith",
+            "loguru",
+            "markdown",
+            "markdown-it-py",
+            "markupsafe",
+            "marshmallow",
+            "mdurl",
+            "mitreattack-python",
+            "mmh3",
+            "mpmath",
+            "multidict",
+            "mypy-extensions",
+            "narwhals",
+            "networkx",
+            "nltk",
+            "numpy",
+            "oauthlib",
+            "ollama",
+            "onnxruntime",
+            "openai",
+            "openpyxl",
+            "opentelemetry-api",
+            "opentelemetry-exporter-otlp-proto-common",
+            "opentelemetry-exporter-otlp-proto-grpc",
+            "opentelemetry-proto",
+            "opentelemetry-sdk",
+            "opentelemetry-semantic-conventions",
+            "orderly-set",
+            "orjson",
+            "ormsgpack",
+            "overrides",
+            "packaging",
+            "pandas",
+            "pillow",
+            "pip-tools",
+            "platformdirs",
+            "pooch",
+            "posthog",
+            "propcache",
+            "proto-plus",
+            "protobuf",
+            "pyarrow",
+            "pyasn1",
+            "pyasn1-modules",
+            "pybase64",
+            "pydantic",
+            "pydantic-core",
+            "pydantic-settings",
+            "pydeck",
+            "pygments",
+            "pypdf2",
+            "pypika",
+            "pyproject-hooks",
+            "pyreadline3",
+            "python-dateutil",
+            "python-dotenv",
+            "pytz",
+            "pyyaml",
+            "rank-bm25",
+            "referencing",
+            "regex",
+            "requests",
+            "requests-oauthlib",
+            "requests-toolbelt",
+            "rich",
+            "rpds-py",
+            "rsa",
+            "safetensors",
+            "scikit-learn",
+            "scipy",
+            "sentence-transformers",
+            "shellingham",
+            "simplejson",
+            "six",
+            "smmap",
+            "sniffio",
+            "sqlalchemy",
+            "stix2",
+            "stix2-patterns",
+            "streamlit",
+            "sympy",
+            "tabulate",
+            "tenacity",
+            "threadpoolctl",
+            "tiktoken",
+            "tokenizers",
+            "toml",
+            "torch",
+            "tornado",
+            "tqdm",
+            "transformers",
+            "typer",
+            "typing-extensions",
+            "typing-inspect",
+            "typing-inspection",
+            "tzdata",
+            "urllib3",
+            "uvicorn[standard]",
+            "watchdog",
+            "watchfiles",
+            "websocket-client",
+            "websockets",
+            "wheel",
+            "win32-setctime",
+            "xlsxwriter",
+            "xxhash",
+            "yarl",
+            "zipp",
+            "zstandard"
+          ],
+          "imports": [
+            "os",
+            "sys",
+            "tempfile",
+            "shutil",
+            "time",
+            "streamlit",
+            "pathlib",
+            "typing",
+            "src",
+            "dotenv",
+            "huggingface_hub"
+          ],
+          "recent_commits": [
+            {
+              "author": "minhan6559",
+              "date": "2025-11-02T01:42:52Z",
+              "message": "Update README.md"
+            },
+            {
+              "author": "minhan6559",
+              "date": "2025-11-01T22:37:27Z",
+              "message": "update readme"
+            },
+            {
+              "author": "Rinekochan",
+              "date": "2025-10-31T23:00:51Z",
+              "message": "Fix Google Cloud Credentials bugs"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-10-30T11:11:05Z",
+              "message": "reformat evaluation"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-10-30T00:14:41Z",
+              "message": "update evaluation of gpt-oss and gemini-2.0-flash"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-10-29T22:07:56Z",
+              "message": "2.5 flash lite response and evaluation"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-10-29T12:32:39Z",
+              "message": "Merge branch 'main' of https://github.com/minhan6559/Cyber-Agent"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-10-29T12:32:29Z",
+              "message": "modify analysis format and add evaluation for 2.0 flash and 2.0 flash lite"
+            },
+            {
+              "author": "minhan6559",
+              "date": "2025-10-29T07:57:12Z",
+              "message": "Update README.md"
+            },
+            {
+              "author": "minhan6559",
+              "date": "2025-10-29T07:55:15Z",
+              "message": "Delete .idea directory"
+            },
+            {
+              "author": "minhan6559",
+              "date": "2025-10-29T07:55:04Z",
+              "message": "Delete .cursor/rules directory"
+            },
+            {
+              "author": "minhan6559",
+              "date": "2025-10-29T06:41:13Z",
+              "message": "Merge branch 'main' of https://github.com/minhan6559/Cyber-Agent"
+            },
+            {
+              "author": "minhan6559",
+              "date": "2025-10-29T06:40:29Z",
+              "message": "Add GPT-5 support and improve log analysis token handling\n\nAdded GPT-5 and related models to the provider list and updated pipeline logic to handle them with appropriate reasoning effort. Improved log analysis agent to dynamically determine max input tokens based on model capabilities, switched token encoding to 'o200k_base', and enhanced logging and preprocessing for better performance and clarity. Updated database agent and log analysis utilities for consistent tokenization. Minor prompt and output formatting adjustments."
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-10-28T23:59:43Z",
+              "message": "evaluation of flash lite"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-10-28T23:15:42Z",
+              "message": "change response format and truncate token for log agent"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-10-28T11:33:35Z",
+              "message": "modify log agent and test run"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-10-28T10:56:03Z",
+              "message": "Merge branch 'main' of https://github.com/minhan6559/Cyber-Agent"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-10-28T10:55:57Z",
+              "message": "modify log analysis agent to increase sample size and line-aware sampling"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-10-28T09:58:18Z",
+              "message": "remove redundant part"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-10-28T09:54:50Z",
+              "message": "Merge branch 'main' of https://github.com/minhan6559/Cyber-Agent"
+            }
+          ],
+          "readme_excerpt": "# Cybersecurity Agent Pipeline - COS30049\n\nA comprehensive LLM-based multi-agent cybersecurity analysis system that processes security logs and correlates them with MITRE ATT&CK techniques to provide detailed threat intelligence and mitigation recommendations.\n\n## Table of Contents\n\n- [Project Overview](#project-overview)\n- [System Architecture](#system-architecture)\n- [File Structure](#file-structure)\n- [Quick Start Guide](#quick-start-guide)\n- [Advanced Usage](#advanced-usage)\n- [Evaluation and Testing](#evaluation-and-testing)\n- [Model Performance](#model-performance)\n- [Project Architecture](#project-architecture)\n\n## Project Overview\n\nThis project implements a sophisticated multi-agent cybersecurity analysis system that combines traditional log analysis with modern LLM-based reasoning. The system processes security logs from various sources and applies advanced AI techniques to:\n\n1. **Log Analysis Agent**: Detects suspicious activities and anomalies in security logs\n2. **Retrieval Supervisor**: Intelligently searches MITRE ATT&CK knowledge base for relevant techniques\n3. **Response Agent**: Synthesizes findings into comprehensive threat intelligence reports\n\n### Key Features\n\n- **Multi-Agent Architecture**: Hierarchical agent system using LangGraph for orchestration\n- **MITRE ATT&CK Integration**: Semantic search over comprehensive technique database\n- **Real-time Analysis**: Process security logs and generate immediate threat assessments\n- **Web Interface**: User-friendly Streamlit application for easy interaction\n- **Comprehensive Evaluation**: Built-in evaluation framework for system performance testing\n\n## System Architecture\n\n### Current System Architecture\n\n>**Note**: The full hierarchical design is still under development. Currently, the system uses a linear pipeline with separate reflection on each module.\n\n```\nLinear Pipeline (Current Implementation)\n├── Log Analysis Agent\n│   ├── Event ID Validation\n│   ├── Timeline Analysis\n│   ├── Command Decoding\n│"
+        }
+      },
+      {
+        "repo": {
+          "name": "Safe-Roads-Initiative---Data-Visualisations",
+          "url": "https://github.com/anne-tr-anh/Safe-Roads-Initiative---Data-Visualisations",
+          "fork": false,
+          "pushed_at": "2025-11-17T05:14:04Z"
+        },
+        "evidence": {
+          "languages": {
+            "JavaScript": 141564,
+            "CSS": 22516,
+            "HTML": 12094
+          },
+          "root_files": [
+            "README.md",
+            "australiaLow.json",
+            "bar.js",
+            "card.js",
+            "filter.js",
+            "finaldata.csv",
+            "finesbyjurisdiction.json",
+            "index.html",
+            "interaction.js",
+            "line-chart.js",
+            "load-bar-data.js",
+            "load-card-data.js",
+            "load-linechart-data.js",
+            "load-map-data.js",
+            "load-stacked-bar-data.js",
+            "main.js",
+            "map.js",
+            "package-lock.json",
+            "package.json",
+            "scales.js",
+            "script.js",
+            "shared-constants.js",
+            "stacked-bar-data-1.csv",
+            "stacked-bar-data.csv",
+            "stacked-bar.js",
+            "stacked.json"
+          ],
+          "dependencies": [
+            "d3-array",
+            "d3-axis",
+            "d3-brush",
+            "d3-force",
+            "d3-format",
+            "d3-geo",
+            "d3-random",
+            "d3-scale",
+            "d3-scale-chromatic",
+            "d3-selection",
+            "d3-shape",
+            "d3-transition",
+            "d3-zoom",
+            "parcel"
+          ],
+          "imports": [
+            "map",
+            "fines"
+          ],
+          "recent_commits": [
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-11-16T13:49:56Z",
+              "message": "upload old repo"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-11-16T13:40:07Z",
+              "message": "Update README.md"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-11-16T13:25:24Z",
+              "message": "Initial commit"
+            }
+          ],
+          "readme_excerpt": "# Safe Roads Initiative — COS30045 / Data Visualisation Project\n\nInteractive client-side visualisations of 2023 speeding fines across Australian jurisdictions. Built with D3 v7, the project provides multiple coordinated charts (line, stacked bar, bar, summary card) and a choropleth map to explore fines by state/territory and month.\n\n## Table of Contents\n- [Project Overview](#project-overview)\n- [What’s Included](#whats-included)\n- [Folder Structure](#folder-structure)\n- [How to Run (Quick Start)](#how-to-run-quick-start)\n- [Data](#data)\n- [Development / Advanced Usage](#development--advanced-usage)\n- [Troubleshooting](#troubleshooting)\n- [License & Acknowledgements](#license--acknowledgements)\n\n## Project Overview\nThis is a static web project that visualises speeding fine data for Australia (2023). The UI contains:\n- Home page with project description\n- Visualisation page with:\n  - Small summary card (key metrics)\n  - Line chart (monthly trends)\n  - Stacked bar (composition by categories)\n  - Bar chart (comparisons)\n  - Choropleth map (geographic distribution)\n- Interactive jurisdiction filter to select states/territories\n\n## What’s Included\n- src/index.html — main page and layout\n- src/css/ — styling and layout files\n- src/js/ — chart modules, filters, and data loaders\n  - script.js (navigation + wiring)\n  - filter.js (UI filter handling)\n  - card.js, line-chart.js, stacked-bar.js, bar.js, map.js (visuals)\n  - load-*.js (data loading for each visual)\n- src/images/ — logo and team photos\n- src/data/ — CSV/JSON data files referenced by loaders\n\n## Folder Structure (recommended)\n- README.md\n- src/\n  - index.html\n  - css/\n    - style.css\n    - visualisation.css\n    - layout-row1.css\n    - layout-row2.css\n    - layout-row3.css\n    - home.css\n  - js/\n    - script.js\n    - filter.js\n    - card.js\n    - line-chart.js\n    - stacked-bar.js\n    - bar.js\n    - map.js\n    - load-linechart-data.js\n    - load-stacked-bar-data.js\n    - load-map-data.js\n    - load-card-data.js\n    "
+        }
+      },
+      {
+        "repo": {
+          "name": "Spam-Detection-COS30049",
+          "url": "https://github.com/anne-tr-anh/Spam-Detection-COS30049",
+          "fork": true,
+          "pushed_at": "2025-11-09T12:13:01Z"
+        },
+        "evidence": {
+          "languages": {
+            "Python": 320423,
+            "Jupyter Notebook": 227753,
+            "JavaScript": 110885,
+            "CSS": 85568,
+            "HTML": 22891
+          },
+          "root_files": [
+            ".gitignore",
+            "README_PHASE1.md",
+            "README_PHASE2.md",
+            "combined_notebook.ipynb",
+            "requirements.txt"
+          ],
+          "dependencies": [
+            "pandas",
+            "pyarrow",
+            "fastparquet",
+            "numpy",
+            "scikit-learn",
+            "seaborn",
+            "matplotlib",
+            "nltk",
+            "xgboost",
+            "torch",
+            "joblib",
+            "fastapi",
+            "uvicorn"
+          ],
+          "imports": null,
+          "recent_commits": [
+            {
+              "author": "minhan6559",
+              "date": "2025-11-09T11:32:07Z",
+              "message": "Update README_PHASE2.md"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-11-09T07:37:08Z",
+              "message": "show error when pasted text exceeds 1000 words"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-11-08T11:13:43Z",
+              "message": "Update page title to 'Spam or Ham?'\n\nChanged the HTML title from 'spam-detection-app' to 'Spam or Ham?' to better reflect the application's purpose."
+            },
+            {
+              "author": "minhan6559",
+              "date": "2025-11-07T12:06:39Z",
+              "message": "Add Phase 2 documentation and update backend setup\n\nRenamed README.md to README_PHASE1.md and added a comprehensive README_PHASE2.md detailing the web application, setup, API, and features. Added .claude/settings.local.json for local permissions. Minor cleanup in backend/main.py to remove a commented uvicorn command."
+            },
+            {
+              "author": "minhan6559",
+              "date": "2025-11-07T11:22:57Z",
+              "message": "Merge branch 'main' of https://github.com/minhan6559/Spam-Detection-COS30049"
+            },
+            {
+              "author": "minhan6559",
+              "date": "2025-11-07T11:22:54Z",
+              "message": "Add batch prediction endpoint to FastAPI backend\n\nIntroduces a /predict/batch endpoint supporting batch spam detection requests, including input validation, per-text statistics, and summary aggregation. Refactors model selection and prediction logic for consistency and maintainability. Updates About.jsx to clarify BiLSTM description. Dependency lock files updated for peer field and new platform support."
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-11-07T11:22:29Z",
+              "message": "Change default model to LSTM in SpamDetector\n\nUpdated the initial state of selectedModels from 'xgboost' to 'lstm' in SpamDetector.jsx to set LSTM as the default model for spam detection."
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-11-07T11:01:22Z",
+              "message": "Add metric overrides and adjust chart layout\n\nIntroduces metric overrides for LSTM and XGBoost models in ModelComparisonChart.jsx to ensure consistent display values. Updates CSS to refine grid column sizing and gaps for improved chart header layout, and adds a comment in backend/main.py for running the server."
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-11-06T10:06:19Z",
+              "message": "web icon"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-11-06T09:47:58Z",
+              "message": "update error handling"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-11-06T09:47:30Z",
+              "message": "spelling"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-11-05T02:15:02Z",
+              "message": "Big updates on responsiveness and kmeans fix"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-11-04T11:13:34Z",
+              "message": "Merge branch 'main' of https://github.com/minhan6559/Spam-Detection-COS30049"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-11-04T11:11:59Z",
+              "message": "test"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-11-04T10:45:37Z",
+              "message": "visualisations"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-11-04T10:45:14Z",
+              "message": "update package json"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-11-04T10:44:54Z",
+              "message": "backend update"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-10-30T13:28:19Z",
+              "message": "Merge branch 'main' of https://github.com/minhan6559/Spam-Detection-COS30049"
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-10-30T10:13:02Z",
+              "message": "Sort clusters and update legend instructions\n\nClusters in KMeansClusterChart are now sorted as ham, mixed, spam for both chart legend and summary cards. The legend instructions in ModelComparisonChart were updated for clarity, and the font size was increased for better visibility."
+            },
+            {
+              "author": "NevanPham",
+              "date": "2025-10-30T05:38:00Z",
+              "message": "Style model selector title for improved UI\n\nAdjusted the font size, letter spacing, and alignment of the model selector section title to make it smaller, less wide, and better centered within the flex column layout."
+            }
+          ],
+          "readme_excerpt": null
+        }
+      },
+      {
+        "repo": {
+          "name": "Traffic-Based-Route-Guidance-Problem",
+          "url": "https://github.com/anne-tr-anh/Traffic-Based-Route-Guidance-Problem",
+          "fork": false,
+          "pushed_at": "2025-05-25T13:49:07Z"
+        },
+        "evidence": {
+          "languages": {
+            "HTML": 106887,
+            "Python": 76658
+          },
+          "root_files": [
+            "09.pdf",
+            "data_processing.py",
+            "main.py",
+            "map.html",
+            "model_evaluating.py",
+            "model_training.py",
+            "prediction_making.py",
+            "requirements.txt"
+          ],
+          "dependencies": [
+            "category_encoders",
+            "folium",
+            "haversine",
+            "matplotlib",
+            "numpy",
+            "openpyxl",
+            "pandas",
+            "pillow",
+            "python-dateutil",
+            "pytz",
+            "scikit-learn",
+            "seaborn",
+            "streamlit",
+            "streamlit_folium",
+            "tensorflow",
+            "tensorboard",
+            "tqdm"
+          ],
+          "imports": [
+            "numpy",
+            "pandas",
+            "sklearn",
+            "os",
+            "pickle",
+            "warnings",
+            "networkx",
+            "folium",
+            "webbrowser",
+            "math",
+            "tkinter",
+            "geopy",
+            "heapq",
+            "collections",
+            "matplotlib",
+            "matplotlib.pyplot",
+            "seaborn",
+            "data_processing",
+            "pathlib",
+            "time",
+            "tensorflow",
+            "datetime"
+          ],
+          "recent_commits": [
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-05-25T13:48:59Z",
+              "message": "final"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-05-25T13:17:29Z",
+              "message": "change file name"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-05-24T17:36:13Z",
+              "message": "for submission"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-05-24T17:35:09Z",
+              "message": "final final"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-05-24T05:12:43Z",
+              "message": "update file name"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-05-24T05:11:12Z",
+              "message": "rename file"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-05-24T05:10:00Z",
+              "message": "rename file"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-05-24T05:07:55Z",
+              "message": "comments and code readability"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-05-24T05:07:24Z",
+              "message": "comments and code readability"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-05-24T05:06:47Z",
+              "message": "comments and code readability"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-05-24T05:03:58Z",
+              "message": "minor changes"
+            },
+            {
+              "author": "anne-tr-anh",
+              "date": "2025-05-22T15:39:08Z",
+              "message": "final program"
+            }
+          ],
+          "readme_excerpt": null
+        }
+      }
+    ],
+    "cv_match_score": 62.5,
+    "cv_match_summary": "The match score reflects the alignment between claimed coding skills and evidence found in the provided GitHub repositories. Skills like Docker, AWS Cloud Service, and Azure are classified as 'not_verifiable_via_github' as GitHub evidence doesn't directly support these. The score calculation is based solely on 'code' skills. It's important to note that GitHub repositories might not fully represent an individual's complete skillset, especially regarding non-coding skills."
+  },
+  "job_fit": {
+    "preferred_role": "Job 2",
+    "role_match_scores": {
+      "Job 1": 40,
+      "Job 2": 70,
+      "Job 3": 0,
+      "Job 4": 55
+    },
+    "summary": "The candidate is best suited for the Data Analyst role (Job 2). Their Python and SQL skills (though SQL is only indirectly supported) align well with the requirements. HTML/CSS can be used for front end development for dashboards. The AI/ML role (Job 4) is a reasonable second option, given Python proficiency and potential for data preprocessing. The Full Stack Developer role (Job 1) has a lower score because while HTML/CSS skills are validated, Javascript, React, Node.js are not validated. The Cybersecurity Analyst role (Job 3) has no skill overlap. ",
+    "matched_skills": [
+      "Python",
+      "SQL",
+      "HTML/CSS"
+    ],
+    "missing_skills": [
+      "JavaScript / TypeScript",
+      "React (or similar frontend framework)",
+      "Node.js / Express",
+      "REST APIs",
+      "NoSQL databases",
+      "Git & GitHub",
+      "Basic cloud deployment (AWS / Vercel)",
+      "Power BI or Tableau",
+      "Data visualization",
+      "Excel",
+      "Basic statistics",
+      "Data cleaning and reporting",
+      "Networking fundamentals (TCP/IP, DNS, firewalls)",
+      "Linux / Windows administration",
+      "Security tools (Burp Suite, Metasploit, Wireshark)",
+      "Vulnerability assessment",
+      "Log analysis",
+      "Incident response basics",
+      "Security frameworks (OWASP, NIST)",
+      "Machine learning fundamentals",
+      "Deep learning frameworks (TensorFlow / PyTorch)",
+      "Data preprocessing",
+      "LLMs and prompt engineering",
+      "APIs and model deployment",
+      "Basic cloud/GPU usage"
+    ]
+  },
+  "evidence_validation": {
+    "match_score": 62.5,
+    "summary": "The match score reflects the alignment between claimed coding skills and evidence found in the provided GitHub repositories. Skills like Docker, AWS Cloud Service, and Azure are classified as 'not_verifiable_via_github' as GitHub evidence doesn't directly support these. The score calculation is based solely on 'code' skills. It's important to note that GitHub repositories might not fully represent an individual's complete skillset, especially regarding non-coding skills.",
+    "skill_breakdown": [
+      {
+        "skill": "Python",
+        "category": "code",
+        "support_level": "directly_supported",
+        "notes": "Python is a primary language in 'Cyber-Agent', 'Spam-Detection-COS30049', and 'Traffic-Based-Route-Guidance-Problem'."
+      },
+      {
+        "skill": "C#",
+        "category": "code",
+        "support_level": "not_verifiable_via_github",
+        "notes": "No evidence of C# usage found in the repositories."
+      },
+      {
+        "skill": "C++",
+        "category": "code",
+        "support_level": "not_verifiable_via_github",
+        "notes": "No evidence of C++ usage found in the repositories."
+      },
+      {
+        "skill": "Ruby",
+        "category": "code",
+        "support_level": "not_verifiable_via_github",
+        "notes": "No evidence of Ruby usage found in the repositories."
+      },
+      {
+        "skill": "SQL",
+        "category": "code",
+        "support_level": "not_verifiable_via_github",
+        "notes": "No direct SQL code found, although data manipulation using Pandas (a Python library) is present, which could involve SQL databases indirectly."
+      },
+      {
+        "skill": "R",
+        "category": "code",
+        "support_level": "not_verifiable_via_github",
+        "notes": "No evidence of R usage found in the repositories."
+      },
+      {
+        "skill": ".NET",
+        "category": "code",
+        "support_level": "not_verifiable_via_github",
+        "notes": "No evidence of .NET usage found in the repositories."
+      },
+      {
+        "skill": "Java",
+        "category": "code",
+        "support_level": "not_verifiable_via_github",
+        "notes": "No evidence of Java usage found in the repositories."
+      },
+      {
+        "skill": "Docker",
+        "category": "tool",
+        "support_level": "not_verifiable_via_github",
+        "notes": "Docker evidence is difficult to determine from code alone."
+      },
+      {
+        "skill": "AWS Cloud Service",
+        "category": "tool",
+        "support_level": "not_verifiable_via_github",
+        "notes": "AWS usage is difficult to determine from code alone without specific deployment configurations."
+      },
+      {
+        "skill": "Azure",
+        "category": "tool",
+        "support_level": "not_verifiable_via_github",
+        "notes": "Azure usage is difficult to determine from code alone without specific deployment configurations."
+      },
+      {
+        "skill": "HTML/CSS",
+        "category": "code",
+        "support_level": "directly_supported",
+        "notes": "HTML and CSS are used in 'Safe-Roads-Initiative---Data-Visualisations', 'Spam-Detection-COS30049', and 'Traffic-Based-Route-Guidance-Problem'."
+      }
+    ]
+  }
+}

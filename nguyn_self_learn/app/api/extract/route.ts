@@ -2,18 +2,91 @@ import { NextRequest, NextResponse } from 'next/server'
 import pdfParse from 'pdf-parse'
 import mammoth from 'mammoth'
 import { GoogleGenerativeAI } from '@google/generative-ai'
+import { writeFile, mkdir } from 'fs/promises'
+import { join } from 'path'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
+
+/**
+ * Save structured response to JSON files
+ */
+async function saveStructuredResponse(structuredResponse: {
+  cv_claims: any
+  github_evidence?: any
+  evidence_validation?: any
+  job_fit?: any
+}) {
+  try {
+    // Create output directory with timestamp
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5)
+    const outputDir = join(process.cwd(), 'output', timestamp)
+    await mkdir(outputDir, { recursive: true })
+
+    // Save each section to separate files
+    await writeFile(
+      join(outputDir, 'cv_claims.json'),
+      JSON.stringify(structuredResponse.cv_claims, null, 2),
+      'utf-8'
+    )
+
+    if (structuredResponse.github_evidence) {
+      await writeFile(
+        join(outputDir, 'github_evidence.json'),
+        JSON.stringify(structuredResponse.github_evidence, null, 2),
+        'utf-8'
+      )
+    }
+
+    if (structuredResponse.evidence_validation) {
+      await writeFile(
+        join(outputDir, 'evidence_validation.json'),
+        JSON.stringify(structuredResponse.evidence_validation, null, 2),
+        'utf-8'
+      )
+    }
+
+    if (structuredResponse.job_fit) {
+      await writeFile(
+        join(outputDir, 'job_fit.json'),
+        JSON.stringify(structuredResponse.job_fit, null, 2),
+        'utf-8'
+      )
+    }
+
+    // Save complete structured response
+    await writeFile(
+      join(outputDir, 'complete_response.json'),
+      JSON.stringify(structuredResponse, null, 2),
+      'utf-8'
+    )
+
+    return outputDir
+  } catch (error) {
+    console.error('Error saving structured response:', error)
+    // Don't throw - file saving is optional
+    return null
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData()
     const cvFile = formData.get('cv') as File | null
     const geminiKey = formData.get('geminiKey') as string | null
+    const githubToken = formData.get('githubToken') as string | null
     const githubUrl = formData.get('githubUrl') as string | null
-    const jobSpecA = formData.get('jobSpecA') as string | null
-    const jobSpecB = formData.get('jobSpecB') as string | null
+    
+    // Collect job specs dynamically
+    const jobCountStr = formData.get('jobCount') as string | null
+    const jobCount = jobCountStr ? parseInt(jobCountStr) : 0
+    const jobSpecs: string[] = []
+    for (let i = 1; i <= jobCount; i++) {
+      const spec = formData.get(`jobSpec${i}`) as string | null
+      if (spec && spec.trim()) {
+        jobSpecs.push(spec.trim())
+      }
+    }
 
     if (!cvFile) {
       return NextResponse.json(
@@ -25,6 +98,13 @@ export async function POST(request: NextRequest) {
     if (!geminiKey || !geminiKey.trim()) {
       return NextResponse.json(
         { error: 'Gemini API key is required' },
+        { status: 400 }
+      )
+    }
+
+    if (!githubToken || !githubToken.trim()) {
+      return NextResponse.json(
+        { error: 'GitHub API token is required' },
         { status: 400 }
       )
     }
@@ -185,16 +265,36 @@ Return ONLY the JSON object, no other text.`
       }
     }
 
+    // Build structured response
+    type StructuredResponse = {
+      cv_claims: typeof extractedData
+      github_evidence?: any
+      evidence_validation?: any
+      job_fit?: any
+    }
+    
+    const structuredResponse: StructuredResponse = {
+      cv_claims: extractedData,
+    }
+
     // If no GitHub URL provided, return CV extraction only
     if (!githubUrl || !githubUrl.trim()) {
-      return NextResponse.json(extractedData)
+      // Save structured response to files
+      await saveStructuredResponse(structuredResponse)
+      return NextResponse.json(structuredResponse)
     }
 
     // Scrape GitHub profile
-    let repositoriesData
+    let repositoriesData: any
     try {
       const scraperModule = await import('../../../lib/github-scraper.mjs')
-      repositoriesData = await scraperModule.scrapeGitHubProfile(githubUrl.trim())
+      // githubToken is guaranteed to be non-null at this point due to validation above
+      const token = githubToken!.trim()
+      // @ts-expect-error - github-scraper.mjs accepts string for token, but TypeScript infers wrong type
+      repositoriesData = await scraperModule.scrapeGitHubProfile(githubUrl.trim(), token)
+      
+      // Add GitHub evidence to structured response
+      structuredResponse.github_evidence = repositoriesData
     } catch (error) {
       return NextResponse.json(
         { error: `Failed to scrape GitHub profile: ${error instanceof Error ? error.message : 'Unknown error'}` },
@@ -330,17 +430,18 @@ Return ONLY the JSON object, no other text.`
     }
 
     // If job specs provided, make second LLM call for job matching
-    if ((jobSpecA && jobSpecA.trim()) || (jobSpecB && jobSpecB.trim())) {
-      const jobMatchingPrompt = `Compare the validated candidate skills against two job specifications and determine which role is a better fit.
+    if (jobSpecs.length > 0) {
+      // Build job specifications section dynamically
+      const jobSpecsSection = jobSpecs.map((spec, index) => 
+        `Job Specification ${index + 1}:\n${spec}`
+      ).join('\n\n')
+
+      const jobMatchingPrompt = `Compare the validated candidate skills against ${jobSpecs.length} job specification(s) and determine which role is a better fit.
 
 Validated Candidate Skills (from GitHub validation):
 ${JSON.stringify(matchData.skill_breakdown, null, 2)}
 
-Job Specification A:
-${jobSpecA?.trim() || 'Not provided'}
-
-Job Specification B:
-${jobSpecB?.trim() || 'Not provided'}
+${jobSpecsSection}
 
 IMPORTANT RULES:
 1. Do NOT re-evaluate GitHub evidence - trust the support_level from the validated candidate data
@@ -352,21 +453,20 @@ IMPORTANT RULES:
    - not_verifiable_via_github = lower weight (assume candidate has it if mentioned in CV)
 5. Do NOT penalize non-code or certification skills
 6. Calculate match scores (0-100) for each job based on skill overlap and support levels
-7. Determine preferred_role based on which job has higher match score
+7. Determine preferred_role based on which job has the highest match score
 
 Return ONLY valid JSON with this exact schema:
 {
   "preferred_role": string,
   "role_match_scores": {
-    "Job A": number,
-    "Job B": number
+    ${jobSpecs.map((_, index) => `"Job ${index + 1}": number`).join(',\n    ')}
   },
   "summary": string,
   "matched_skills": string[],
   "missing_skills": string[]
 }
 
-The preferred_role should be "Job A" or "Job B" based on which has the higher match score.
+The preferred_role should be "Job 1", "Job 2", etc. (up to "Job ${jobSpecs.length}") based on which has the highest match score.
 The summary should explain the match reasoning and highlight key strengths/gaps.
 Return ONLY the JSON object, no other text.`
 
@@ -409,22 +509,17 @@ Return ONLY the JSON object, no other text.`
         )
       }
 
-      if (typeof jobMatchData.role_match_scores['Job A'] !== 'number' || 
-          jobMatchData.role_match_scores['Job A'] < 0 || 
-          jobMatchData.role_match_scores['Job A'] > 100) {
-        return NextResponse.json(
-          { error: 'Invalid response format: Job A match score must be a number between 0 and 100' },
-          { status: 500 }
-        )
-      }
-
-      if (typeof jobMatchData.role_match_scores['Job B'] !== 'number' || 
-          jobMatchData.role_match_scores['Job B'] < 0 || 
-          jobMatchData.role_match_scores['Job B'] > 100) {
-        return NextResponse.json(
-          { error: 'Invalid response format: Job B match score must be a number between 0 and 100' },
-          { status: 500 }
-        )
+      // Validate each job score dynamically
+      for (let i = 1; i <= jobSpecs.length; i++) {
+        const jobName = `Job ${i}`
+        if (typeof jobMatchData.role_match_scores[jobName] !== 'number' || 
+            jobMatchData.role_match_scores[jobName] < 0 || 
+            jobMatchData.role_match_scores[jobName] > 100) {
+          return NextResponse.json(
+            { error: `Invalid response format: ${jobName} match score must be a number between 0 and 100` },
+            { status: 500 }
+          )
+        }
       }
 
       if (!jobMatchData.summary || typeof jobMatchData.summary !== 'string') {
@@ -448,14 +543,39 @@ Return ONLY the JSON object, no other text.`
         )
       }
 
-      // Combine GitHub validation and job matching results
-      return NextResponse.json({
-        ...matchData,
-        ...jobMatchData,
-      })
+      // Add job fit to structured response
+      structuredResponse.job_fit = jobMatchData
+      
+      // Always include evidence validation (CV to GitHub match) even when job specs are provided
+      structuredResponse.evidence_validation = matchData
+      
+      // Add match score to github_evidence for easy access
+      if (structuredResponse.github_evidence) {
+        structuredResponse.github_evidence.cv_match_score = matchData.match_score
+        structuredResponse.github_evidence.cv_match_summary = matchData.summary
+      }
+      
+      // Save structured response to files
+      await saveStructuredResponse(structuredResponse)
+      
+      // Return complete structured response
+      return NextResponse.json(structuredResponse)
     }
 
-    return NextResponse.json(matchData)
+    // Add evidence validation to structured response (GitHub validation without jobs)
+    structuredResponse.evidence_validation = matchData
+    
+    // Add match score to github_evidence for easy access
+    if (structuredResponse.github_evidence) {
+      structuredResponse.github_evidence.cv_match_score = matchData.match_score
+      structuredResponse.github_evidence.cv_match_summary = matchData.summary
+    }
+    
+    // Save structured response to files
+    await saveStructuredResponse(structuredResponse)
+    
+    // Return structured response with CV claims, GitHub evidence, and evidence validation
+    return NextResponse.json(structuredResponse)
   } catch (error) {
     console.error('Error processing resume:', error)
     return NextResponse.json(

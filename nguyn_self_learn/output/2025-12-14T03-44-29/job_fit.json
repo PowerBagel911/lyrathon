@@ -1,0 +1,40 @@
+{
+  "preferred_role": "Job 2",
+  "role_match_scores": {
+    "Job 1": 40,
+    "Job 2": 75,
+    "Job 3": 0,
+    "Job 4": 60
+  },
+  "summary": "The candidate is best suited for the Data Analyst (Job 2) role. They have directly supported Python and indirectly supported SQL skills, both key requirements for the role. While Power BI/Tableau, Data Visualization, Excel, Basic Statistics, and Data cleaning and reporting are not verifiable, the candidate has a strong foundation to develop those skills. The AI/ML Engineer role (Job 4) is the second-best match given Python skills, however it requires strong knowledge of Deep learning frameworks and cloud/GPU usage, for which there is no evidence. The Full Stack Software Developer (Job 1) role is only partially matched, with confirmed HTML/CSS skills for frontend, but missing JavaScript/TypeScript, React, Node.js, REST APIs and basic cloud deployment (AWS / Vercel). Cybersecurity Analyst has no matching confirmed skills, making it the least likely role. ",
+  "matched_skills": [
+    "Python",
+    "SQL"
+  ],
+  "missing_skills": [
+    "JavaScript / TypeScript",
+    "React (or similar frontend framework)",
+    "Node.js / Express",
+    "REST APIs",
+    "Git & GitHub",
+    "Basic cloud deployment (AWS / Vercel)",
+    "Power BI or Tableau",
+    "Data visualization",
+    "Excel",
+    "Basic statistics",
+    "Data cleaning and reporting",
+    "Machine learning fundamentals",
+    "Deep learning frameworks (TensorFlow / PyTorch)",
+    "Data preprocessing",
+    "LLMs and prompt engineering",
+    "APIs and model deployment",
+    "Basic cloud/GPU usage",
+    "Networking fundamentals (TCP/IP, DNS, firewalls)",
+    "Linux / Windows administration",
+    "Security tools (Burp Suite, Metasploit, Wireshark)",
+    "Vulnerability assessment",
+    "Log analysis",
+    "Incident response basics",
+    "Security frameworks (OWASP, NIST)"
+  ]
+}

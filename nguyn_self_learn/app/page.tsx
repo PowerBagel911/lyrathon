@@ -5,12 +5,33 @@ import { useState } from 'react'
 export default function Home() {
   const [file, setFile] = useState<File | null>(null)
   const [geminiKey, setGeminiKey] = useState('')
+  const [githubToken, setGithubToken] = useState('')
   const [githubUrl, setGithubUrl] = useState('')
-  const [jobSpecA, setJobSpecA] = useState('')
-  const [jobSpecB, setJobSpecB] = useState('')
+  const [jobCount, setJobCount] = useState<number>(0)
+  const [jobSpecs, setJobSpecs] = useState<string[]>([])
   const [result, setResult] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  const handleJobCountChange = (count: number) => {
+    const numCount = Math.max(0, Math.min(20, Math.floor(count))) // Limit to 0-20 jobs
+    setJobCount(numCount)
+    // Resize jobSpecs array to match count
+    const newJobSpecs = [...jobSpecs]
+    while (newJobSpecs.length < numCount) {
+      newJobSpecs.push('')
+    }
+    while (newJobSpecs.length > numCount) {
+      newJobSpecs.pop()
+    }
+    setJobSpecs(newJobSpecs)
+  }
+
+  const handleJobSpecChange = (index: number, value: string) => {
+    const newJobSpecs = [...jobSpecs]
+    newJobSpecs[index] = value
+    setJobSpecs(newJobSpecs)
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -24,6 +45,11 @@ export default function Home() {
 
     if (!geminiKey.trim()) {
       setError('Please enter your Gemini API key')
+      return
+    }
+
+    if (!githubToken.trim()) {
+      setError('Please enter your GitHub API token')
       return
     }
 
@@ -45,15 +71,19 @@ export default function Home() {
       const formData = new FormData()
       formData.append('cv', file)
       formData.append('geminiKey', geminiKey)
+      if (githubToken.trim()) {
+        formData.append('githubToken', githubToken.trim())
+      }
       if (githubUrl.trim()) {
         formData.append('githubUrl', githubUrl.trim())
       }
-      if (jobSpecA.trim()) {
-        formData.append('jobSpecA', jobSpecA.trim())
-      }
-      if (jobSpecB.trim()) {
-        formData.append('jobSpecB', jobSpecB.trim())
-      }
+      
+      // Send job specs as array
+      const validJobSpecs = jobSpecs.filter(spec => spec.trim())
+      formData.append('jobCount', validJobSpecs.length.toString())
+      validJobSpecs.forEach((spec, index) => {
+        formData.append(`jobSpec${index + 1}`, spec.trim())
+      })
 
       const response = await fetch('/api/extract', {
         method: 'POST',
@@ -67,48 +97,53 @@ export default function Home() {
 
       const data = await response.json()
       
-      // Format results
+      // Format results (old format for display)
       let formatted = ''
       
-      // GitHub validation results
-      if (data.match_score !== undefined) {
+      // GitHub validation results - CV vs GitHub Match (always show if GitHub URL was provided)
+      if (data.evidence_validation && data.evidence_validation.match_score !== undefined) {
         formatted += `GitHub Validation Results:\n`
-        formatted += `Match Score: ${data.match_score}%\n\nSummary:\n${data.summary}\n\nSkill Breakdown:\n`
-        
-        if (data.skill_breakdown && Array.isArray(data.skill_breakdown)) {
-          for (const item of data.skill_breakdown) {
-            formatted += `\n${item.skill} (${item.category})\n`
-            formatted += `  Support Level: ${item.support_level}\n`
-            formatted += `  Notes: ${item.notes}\n`
-          }
+        formatted += `CV to GitHub Match Score: ${data.evidence_validation.match_score}%\n\n`
+        formatted += `Summary:\n${data.evidence_validation.summary}\n\n`
+      } else if (data.github_evidence && data.github_evidence.cv_match_score !== undefined) {
+        // Fallback: display from github_evidence if evidence_validation is not available
+        formatted += `GitHub Validation Results:\n`
+        formatted += `CV to GitHub Match Score: ${data.github_evidence.cv_match_score}%\n\n`
+        if (data.github_evidence.cv_match_summary) {
+          formatted += `Summary:\n${data.github_evidence.cv_match_summary}\n\n`
         }
       }
       
       // Job matching results
-      if (data.preferred_role !== undefined) {
+      if (data.job_fit && data.job_fit.preferred_role !== undefined) {
         if (formatted) formatted += `\n\n---\n\n`
         formatted += `Job Matching Results:\n`
-        formatted += `Preferred Role: ${data.preferred_role}\n\n`
+        formatted += `Preferred Role: ${data.job_fit.preferred_role}\n\n`
         
-        if (data.role_match_scores) {
+        if (data.job_fit.role_match_scores) {
           formatted += `Match Scores:\n`
-          if (data.role_match_scores['Job A'] !== undefined) {
-            formatted += `  Job A: ${data.role_match_scores['Job A']}%\n`
-          }
-          if (data.role_match_scores['Job B'] !== undefined) {
-            formatted += `  Job B: ${data.role_match_scores['Job B']}%\n`
-          }
+          const scores = data.job_fit.role_match_scores
+          Object.keys(scores).sort().forEach((jobName) => {
+            if (typeof scores[jobName] === 'number') {
+              formatted += `  ${jobName}: ${scores[jobName]}%\n`
+            }
+          })
         }
         
-        formatted += `\nSummary:\n${data.summary}\n\n`
+        formatted += `\nSummary:\n${data.job_fit.summary}\n\n`
         
-        if (data.matched_skills && Array.isArray(data.matched_skills) && data.matched_skills.length > 0) {
-          formatted += `Matched Skills:\n${data.matched_skills.join(', ')}\n\n`
+        if (data.job_fit.matched_skills && Array.isArray(data.job_fit.matched_skills) && data.job_fit.matched_skills.length > 0) {
+          formatted += `Matched Skills:\n${data.job_fit.matched_skills.join(', ')}\n\n`
         }
         
-        if (data.missing_skills && Array.isArray(data.missing_skills) && data.missing_skills.length > 0) {
-          formatted += `Missing Skills:\n${data.missing_skills.join(', ')}\n`
+        if (data.job_fit.missing_skills && Array.isArray(data.job_fit.missing_skills) && data.job_fit.missing_skills.length > 0) {
+          formatted += `Missing Skills:\n${data.job_fit.missing_skills.join(', ')}\n`
         }
+      }
+      
+      // If no validation or job fit, show CV claims
+      if (!formatted && data.cv_claims) {
+        formatted = JSON.stringify(data.cv_claims, null, 2)
       }
       
       if (formatted) {
@@ -147,6 +182,18 @@ export default function Home() {
           />
         </div>
         <div>
+          <label htmlFor="githubToken">GitHub API Token:</label>
+          <input
+            type="password"
+            id="githubToken"
+            value={githubToken}
+            onChange={(e) => setGithubToken(e.target.value)}
+            placeholder="ghp_xxxxxxxxxxxx"
+            disabled={loading}
+            required
+          />
+        </div>
+        <div>
           <label htmlFor="githubUrl">GitHub Profile URL (optional):</label>
           <input
             type="text"
@@ -158,27 +205,30 @@ export default function Home() {
           />
         </div>
         <div>
-          <label htmlFor="jobSpecA">Job Specification A (optional):</label>
-          <textarea
-            id="jobSpecA"
-            value={jobSpecA}
-            onChange={(e) => setJobSpecA(e.target.value)}
-            placeholder="Paste job description here..."
-            rows={5}
+          <label htmlFor="jobCount">Number of Job Specifications (optional):</label>
+          <input
+            type="number"
+            id="jobCount"
+            min="0"
+            max="20"
+            value={jobCount}
+            onChange={(e) => handleJobCountChange(parseInt(e.target.value) || 0)}
             disabled={loading}
           />
         </div>
-        <div>
-          <label htmlFor="jobSpecB">Job Specification B (optional):</label>
-          <textarea
-            id="jobSpecB"
-            value={jobSpecB}
-            onChange={(e) => setJobSpecB(e.target.value)}
-            placeholder="Paste job description here..."
-            rows={5}
-            disabled={loading}
-          />
-        </div>
+        {jobSpecs.map((spec, index) => (
+          <div key={index}>
+            <label htmlFor={`jobSpec${index + 1}`}>Job Specification {index + 1} (optional):</label>
+            <textarea
+              id={`jobSpec${index + 1}`}
+              value={spec}
+              onChange={(e) => handleJobSpecChange(index, e.target.value)}
+              placeholder="Paste job description here..."
+              rows={5}
+              disabled={loading}
+            />
+          </div>
+        ))}
         <button type="submit" disabled={loading}>
           {loading ? 'Processing...' : 'Extract'}
         </button>
@@ -199,4 +249,3 @@ export default function Home() {
     </div>
   )
 }
-
