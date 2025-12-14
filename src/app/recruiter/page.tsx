@@ -7,6 +7,12 @@ import { api } from "~/trpc/react";
 export default function RecruiterPage() {
   const [roleInput, setRoleInput] = useState("");
   const [companyId, setCompanyId] = useState<string | null>(null);
+  
+  // Modal state
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalDescription, setModalDescription] = useState("");
+  const [modalKeywords, setModalKeywords] = useState("");
 
   // Get companyId from sessionStorage on mount
   useEffect(() => {
@@ -23,10 +29,49 @@ export default function RecruiterPage() {
   );
 
   // Fetch jobs for this company
-  const { data: jobs = [], isLoading } = api.post.getJobsByCompany.useQuery(
+  const { data: jobs = [], isLoading, refetch } = api.post.getJobsByCompany.useQuery(
     { companyId: companyId! },
     { enabled: !!companyId }
   );
+
+  // Modal handlers
+  const handleOpenModal = () => {
+    // Open modal with empty fields for creating a new job
+    setModalTitle("");
+    setModalDescription("");
+    setModalKeywords("");
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSaveJob = async () => {
+    if (!modalTitle.trim() || !companyId) return;
+
+    // Parse keywords from comma-separated string
+    const keywordsArray = modalKeywords
+      .split(",")
+      .map((keyword) => keyword.trim())
+      .filter((keyword) => keyword.length > 0);
+
+    // TODO: Add tRPC mutation to create job
+    // For now, log the data
+    console.log("Creating job:", {
+      companyId,
+      title: modalTitle.trim(),
+      description: modalDescription.trim(),
+      keywords: keywordsArray,
+    });
+
+    // Clear and close
+    setRoleInput("");
+    setIsModalOpen(false);
+    
+    // Refetch jobs list
+    await refetch();
+  };
 
   return (
     <main className="min-h-screen bg-linear-to-br from-[#5A38A4] to-[#254BA4] font-sans pb-10 md:pb-16 lg:pb-20">
@@ -83,7 +128,10 @@ export default function RecruiterPage() {
             onChange={(e) => setRoleInput(e.target.value)}
             className="flex-1 rounded-full border-2 border-transparent bg-white px-4 py-3 sm:px-6 sm:py-4 text-sm sm:text-base text-gray-800 placeholder-gray-500 focus:border-purple-300 focus:outline-none"
           />
-          <button className="group relative overflow-hidden rounded-2xl border border-white/30 bg-white/10 px-6 py-3 sm:px-8 sm:py-4 text-lg sm:text-xl font-semibold tracking-wide text-white shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20 hover:shadow-2xl">
+          <button 
+            onClick={handleOpenModal}
+            className="group relative overflow-hidden rounded-2xl border border-white/30 bg-white/10 px-6 py-3 sm:px-8 sm:py-4 text-lg sm:text-xl font-semibold tracking-wide text-white shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20 hover:shadow-2xl"
+          >
             Create job role
           </button>
         </div>
@@ -132,6 +180,89 @@ export default function RecruiterPage() {
           )}
         </div>
       </div>
+
+      {/* Modal Overlay */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={handleCloseModal}
+          />
+
+          {/* Modal Content */}
+          <div className="relative bg-gradient-to-br from-[#3d2a6d] to-[#1e3a5f] border border-white/20 rounded-2xl p-6 sm:p-8 w-full max-w-lg shadow-2xl">
+            {/* Close Button */}
+            <button
+              onClick={handleCloseModal}
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 rounded-full transition-colors text-xl font-light"
+            >
+              ×
+            </button>
+
+            {/* Modal Header */}
+            <h2 className="text-xl sm:text-2xl font-serif font-bold text-white mb-6">
+              Create New Job Role
+            </h2>
+
+            {/* Form */}
+            <div className="space-y-5">
+              {/* Job Title Input */}
+              <div>
+                <label className="block text-sm font-medium text-white/80 mb-2">
+                  Job Title
+                </label>
+                <input
+                  type="text"
+                  value={modalTitle}
+                  onChange={(e) => setModalTitle(e.target.value)}
+                  placeholder="e.g., Senior Frontend Engineer"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-white/40 rounded-xl focus:ring-2 focus:ring-white/30 focus:outline-none"
+                />
+              </div>
+
+              {/* Description Textarea */}
+              <div>
+                <label className="block text-sm font-medium text-white/80 mb-2">
+                  Role Description
+                </label>
+                <textarea
+                  value={modalDescription}
+                  onChange={(e) => setModalDescription(e.target.value)}
+                  placeholder="Describe the responsibilities and requirements..."
+                  rows={4}
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-white/40 rounded-xl focus:ring-2 focus:ring-white/30 focus:outline-none resize-none"
+                />
+              </div>
+
+              {/* Keywords Input */}
+              <div>
+                <label className="block text-sm font-medium text-white/80 mb-2">
+                  Keywords
+                </label>
+                <input
+                  type="text"
+                  value={modalKeywords}
+                  onChange={(e) => setModalKeywords(e.target.value)}
+                  placeholder="React, TypeScript, Next.js (comma-separated)"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-white/40 rounded-xl focus:ring-2 focus:ring-white/30 focus:outline-none"
+                />
+                <p className="mt-1 text-xs text-white/50">
+                  Separate multiple keywords with commas
+                </p>
+              </div>
+
+              {/* Save Button */}
+              <button
+                onClick={handleSaveJob}
+                className="w-full bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white py-3 sm:py-4 rounded-xl font-semibold transition-all duration-200 hover:shadow-lg mt-4"
+              >
+                Save Job Role
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
