@@ -21,15 +21,17 @@ export default function Home() {
     <main className="relative min-h-screen bg-linear-to-br from-[#5A38A4] to-[#254BA4] font-sans">
       {/* Background Image */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <img 
-          src="/b.png" 
-          alt="background effect" 
-          className="h-full w-full object-cover opacity-30" 
+        <img
+          src="/b.png"
+          alt="background effect"
+          className="h-full w-full object-cover opacity-30"
         />
       </div>
-      
+
       {/* Navbar */}
-      <nav className={`relative z-10 flex items-center justify-start px-4 py-6 sm:px-6 sm:py-8 lg:px-12 lg:py-10 ${isExiting ? 'animate-fade-out' : 'animate-fade-in'}`}>
+      <nav
+        className={`relative z-10 flex items-center justify-start px-4 py-6 sm:px-6 sm:py-8 lg:px-12 lg:py-10 ${isExiting ? "animate-fade-out" : "animate-fade-in"}`}
+      >
         <div className="flex items-center">
           {/* <div className="flex h-15 w-15 -mt-2 items-center justify-center rounded-lg">
             <img
@@ -56,7 +58,9 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <div className={`relative px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 ${isExiting ? 'animate-fade-out' : 'animate-fade-in'}`}>
+      <div
+        className={`relative px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 ${isExiting ? "animate-fade-out" : "animate-fade-in"}`}
+      >
         <div className="max-w-9xl mx-auto flex flex-col items-center text-left">
           {/* Main Content */}
           <div className="max-w-4xl text-left lg:max-w-5xl xl:max-w-6xl">
@@ -93,13 +97,17 @@ export default function Home() {
               </p>
               <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:gap-6">
                 <Link
-                  href="/recruiter-choice"                  onClick={handleNavigation('/recruiter-choice')}                  className="group relative overflow-hidden rounded-2xl border border-white/30 bg-white/10 px-8 py-4 text-base font-semibold tracking-wide text-white shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20 hover:shadow-2xl sm:px-10 sm:py-5 sm:text-lg md:px-12 md:py-6 md:text-xl"
+                  href="/recruiter-auth"
+                  onClick={handleNavigation("/recruiter-auth")}
+                  className="group relative overflow-hidden rounded-2xl border border-white/30 bg-white/10 px-8 py-4 text-base font-semibold tracking-wide text-white shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20 hover:shadow-2xl sm:px-10 sm:py-5 sm:text-lg md:px-12 md:py-6 md:text-xl"
                 >
                   <span className="relative z-10">For Recruiters</span>
                   <div className="absolute inset-0 bg-linear-to-r from-blue-400 to-blue-500 opacity-0 transition-opacity duration-300 group-hover:opacity-20"></div>
                 </Link>
                 <Link
-                  href="/applicant"                  onClick={handleNavigation('/applicant')}                  className="group relative overflow-hidden rounded-2xl border border-white/30 bg-white/10 px-8 py-4 text-base font-semibold tracking-wide text-white shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20 hover:shadow-2xl sm:px-10 sm:py-5 sm:text-lg md:px-12 md:py-6 md:text-xl"
+                  href="/applicant"
+                  onClick={handleNavigation("/applicant")}
+                  className="group relative overflow-hidden rounded-2xl border border-white/30 bg-white/10 px-8 py-4 text-base font-semibold tracking-wide text-white shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20 hover:shadow-2xl sm:px-10 sm:py-5 sm:text-lg md:px-12 md:py-6 md:text-xl"
                 >
                   <span className="relative z-10">For Applicants</span>
                   <div className="absolute inset-0 bg-linear-to-r from-blue-400 to-blue-500 opacity-0 transition-opacity duration-300 group-hover:opacity-20"></div>
@@ -109,7 +117,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      
+
       <style jsx>{`
         @keyframes fadeIn {
           0% {

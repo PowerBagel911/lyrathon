@@ -52,16 +52,8 @@ export default function RecruiterSignupPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-[#5A38A4] to-[#254BA4] font-sans">
-      {/* Logo */}
-      <div className="px-6 pt-8 lg:px-12">
-        <Link href="/" className="flex items-center gap-3 w-fit">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-orange-400 to-orange-600">
-            <Sandwich className="h-5 w-5 text-white" />
-          </div>
-          <span className="text-xl font-semibold text-white tracking-tight">BanhMiBandit</span>
-        </Link>
-      </div>
+    <main className="min-h-screen bg-linear-to-br from-[#5A38A4] to-[#254BA4] font-sans">
+      
 
       {/* Main Content */}
       <div className="flex flex-col items-center justify-center px-6 lg:px-12 min-h-[80vh]">
@@ -133,16 +125,16 @@ export default function RecruiterSignupPage() {
             <button
               type="submit"
               disabled={createCompany.isPending}
-              className={`group relative overflow-hidden rounded-2xl w-full px-12 py-6 text-xl font-semibold text-white shadow-xl transition-all duration-300 tracking-wide ${
+              className={`group relative overflow-hidden rounded-2xl w-full px-12 py-8 text-xl font-semibold text-white shadow-xl transition-all duration-300 tracking-wide border ${
                 createCompany.isPending
-                  ? "bg-gray-400 cursor-not-allowed opacity-60"
-                  : "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 hover:shadow-2xl hover:-translate-y-1 cursor-pointer"
+                  ? "bg-gray-400 border-gray-500 cursor-not-allowed opacity-60"
+                  : "border-white/30 bg-white/10 backdrop-blur-sm hover:border-white/40 hover:bg-white/20 hover:shadow-2xl hover:-translate-y-1 cursor-pointer"
               }`}
             >
               <span className="relative z-10">
-                {createCompany.isPending ? "Creating Company..." : "1 Banh Mi per Company"}
+                {createCompany.isPending ? "Creating Company..." : "One Banh Mi per Company"}
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-500 opacity-0 transition-opacity duration-300 group-hover:opacity-20"></div>
+              <div className="absolute inset-0 bg-linear-to-r from-blue-400 to-blue-500 opacity-0 transition-opacity duration-300 group-hover:opacity-20"></div>
             </button>
 
             {/* Back Link */}

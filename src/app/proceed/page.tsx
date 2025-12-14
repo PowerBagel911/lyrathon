@@ -64,6 +64,14 @@ export default function ProceedPage() {
 
   return (
     <main className="min-h-screen bg-linear-to-br from-[#5A38A4] to-[#254BA4] font-sans pb-10 md:pb-16 lg:pb-20">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <img
+          src="/b.png"
+          alt="background effect"
+          className="h-full w-full object-cover opacity-30"
+        />
+      </div>
       {/* Custom styles for dropdown */}
       <style jsx global>{`
         select {
@@ -125,7 +133,7 @@ export default function ProceedPage() {
               </span>
             </div>
           )}
-          <h1 className="mb-6 sm:mb-8 font-['Garamond'] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[0.9] font-normal tracking-tight text-white">
+          <h1 className="mb-6 sm:mb-8 font-['Garamond'] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[0.9] font-semibold tracking-tight text-white">
             Proceed
           </h1>
         </div>
