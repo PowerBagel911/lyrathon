@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { sql, eq } from "drizzle-orm";
+import { sql, eq, and } from "drizzle-orm";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { 
@@ -300,6 +300,7 @@ export const postRouter = createTRPCRouter({
         .values({
           applicantId,
           companyId: input.companyId,
+          status: "pending",
         })
         .returning();
 
@@ -375,8 +376,10 @@ export const postRouter = createTRPCRouter({
 
   // Get all applications for a company (for Who Applied page)
   getApplicationsByCompany: publicProcedure
-    .input(z.object({ companyId: z.string().uuid() }))
+    .input(z.object({ companyId: z.string().uuid(), status: z.string().optional() }))
     .query(async ({ ctx, input }) => {
+      const statusFilter = input.status || "pending";
+      
       const result = await ctx.db
         .select({
           application: applications,
@@ -384,14 +387,44 @@ export const postRouter = createTRPCRouter({
         })
         .from(applications)
         .innerJoin(applicants, eq(applications.applicantId, applicants.id))
-        .where(eq(applications.companyId, input.companyId))
+        .where(
+          and(
+            eq(applications.companyId, input.companyId),
+            eq(applications.status, statusFilter)
+          )
+        )
         .orderBy(applications.appliedAt);
 
       return result.map((row) => ({
         id: row.application.id,
         appliedAt: row.application.appliedAt,
         applicant: row.applicant,
+        status: row.application.status,
       }));
+    }),
+
+  // Drop an application (delete it)
+  dropApplication: publicProcedure
+    .input(z.object({ applicationId: z.string().uuid() }))
+    .mutation(async ({ ctx, input }) => {
+      await ctx.db
+        .delete(applications)
+        .where(eq(applications.id, input.applicationId));
+
+      return { success: true };
+    }),
+
+  // Proceed with an application (mark as proceeded)
+  proceedApplication: publicProcedure
+    .input(z.object({ applicationId: z.string().uuid() }))
+    .mutation(async ({ ctx, input }) => {
+      const [updated] = await ctx.db
+        .update(applications)
+        .set({ status: "proceeded" })
+        .where(eq(applications.id, input.applicationId))
+        .returning();
+
+      return updated!;
     }),
 
   // Get full analysis for an application

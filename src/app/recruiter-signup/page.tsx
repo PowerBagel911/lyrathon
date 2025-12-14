@@ -140,7 +140,7 @@ export default function RecruiterSignupPage() {
               }`}
             >
               <span className="relative z-10">
-                {createCompany.isPending ? "Creating Company..." : "Create Company & Start Hiring"}
+                {createCompany.isPending ? "Creating Company..." : "1 Banh Mi per Company"}
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-500 opacity-0 transition-opacity duration-300 group-hover:opacity-20"></div>
             </button>

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { api } from "~/trpc/react";
 
-export default function WhoAppliedPage() {
+export default function ProceedPage() {
   const [companyId, setCompanyId] = useState<string | null>(null);
   const [selectedApplicationId, setSelectedApplicationId] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -24,38 +24,11 @@ export default function WhoAppliedPage() {
     { enabled: !!companyId }
   );
 
-  // Fetch applications for this company (pending status by default)
-  const { data: applications = [], isLoading, refetch } = api.post.getApplicationsByCompany.useQuery(
-    { companyId: companyId!, status: "pending" },
+  // Fetch applications for this company (proceeded status)
+  const { data: applications = [], isLoading } = api.post.getApplicationsByCompany.useQuery(
+    { companyId: companyId!, status: "proceeded" },
     { enabled: !!companyId }
   );
-
-  // Mutations for drop and proceed
-  const dropApplication = api.post.dropApplication.useMutation({
-    onSuccess: () => {
-      refetch();
-      setSelectedApplicationId(null);
-    },
-  });
-
-  const proceedApplication = api.post.proceedApplication.useMutation({
-    onSuccess: () => {
-      refetch();
-      setSelectedApplicationId(null);
-    },
-  });
-
-  const handleDrop = (applicationId: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (confirm("Are you sure you want to drop this applicant?")) {
-      dropApplication.mutate({ applicationId });
-    }
-  };
-
-  const handleProceed = (applicationId: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-    proceedApplication.mutate({ applicationId });
-  };
 
   // Fetch analysis for selected application
   const { data: analysis, isLoading: analysisLoading } = api.post.getApplicationAnalysis.useQuery(
@@ -111,10 +84,10 @@ export default function WhoAppliedPage() {
         </div>
         <div className="flex items-center gap-3">
           <Link
-            href="/proceed"
+            href="/who-applied"
             className="group relative overflow-hidden rounded-2xl border border-white/30 bg-white/10 px-4 py-3 sm:px-6 sm:py-4 text-base sm:text-lg md:text-xl font-semibold tracking-wide text-white shadow-xl backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/20 hover:shadow-2xl"
           >
-            <span className="relative z-10">Proceeded Applicants</span>
+            <span className="relative z-10">Who Applied</span>
           </Link>
           <Link
             href="/recruiter"
@@ -137,7 +110,7 @@ export default function WhoAppliedPage() {
             </div>
           )}
           <h1 className="mb-6 sm:mb-8 font-['Garamond'] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[0.9] font-normal tracking-tight text-white">
-            Who Applied
+            Proceed
           </h1>
         </div>
 
@@ -145,7 +118,7 @@ export default function WhoAppliedPage() {
           {/* Applicants List */}
           <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-2xl font-bold text-white">Applicants</h2>
+              <h2 className="text-2xl font-bold text-white">Proceeded Applicants</h2>
               <div className="text-sm text-white/60">
                 {filteredAndSortedApplications.length} {filteredAndSortedApplications.length === 1 ? "applicant" : "applicants"}
               </div>
@@ -188,7 +161,7 @@ export default function WhoAppliedPage() {
               </div>
             ) : applications.length === 0 ? (
               <div className="text-center py-8 border border-white/20 rounded-2xl bg-white/5">
-                <p className="text-white/60">No applications yet</p>
+                <p className="text-white/60">No proceeded applicants yet</p>
               </div>
             ) : filteredAndSortedApplications.length === 0 ? (
               <div className="text-center py-8 border border-white/20 rounded-2xl bg-white/5">
@@ -197,47 +170,27 @@ export default function WhoAppliedPage() {
             ) : (
               <div className="space-y-3">
                 {filteredAndSortedApplications.map((app) => (
-                  <div
+                  <button
                     key={app.id}
-                    className={`w-full p-4 rounded-xl border transition-all ${
+                    onClick={() => setSelectedApplicationId(app.id)}
+                    className={`w-full text-left p-4 rounded-xl border transition-all ${
                       selectedApplicationId === app.id
                         ? "bg-white/20 border-white/40"
-                        : "bg-white/5 border-white/20"
+                        : "bg-white/5 border-white/20 hover:bg-white/10"
                     }`}
                   >
-                    <button
-                      onClick={() => setSelectedApplicationId(app.id)}
-                      className="w-full text-left"
-                    >
-                      <div className="flex items-center justify-between mb-3">
-                        <div>
-                          <p className="text-lg font-semibold text-white">
-                            {app.applicant.name || app.applicant.email}
-                          </p>
-                          <p className="text-sm text-white/60">{app.applicant.email}</p>
-                          <p className="text-xs text-white/40 mt-1">
-                            Applied: {new Date(app.appliedAt).toLocaleDateString()}
-                          </p>
-                        </div>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-lg font-semibold text-white">
+                          {app.applicant.name || app.applicant.email}
+                        </p>
+                        <p className="text-sm text-white/60">{app.applicant.email}</p>
+                        <p className="text-xs text-white/40 mt-1">
+                          Applied: {new Date(app.appliedAt).toLocaleDateString()}
+                        </p>
                       </div>
-                    </button>
-                    <div className="flex gap-2">
-                      <button
-                        onClick={(e) => handleDrop(app.id, e)}
-                        disabled={dropApplication.isPending}
-                        className="flex-1 px-4 py-2 rounded-lg bg-red-500/20 border border-red-400/50 text-red-200 hover:bg-red-500/30 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium"
-                      >
-                        {dropApplication.isPending ? "Dropping..." : "Drop"}
-                      </button>
-                      <button
-                        onClick={(e) => handleProceed(app.id, e)}
-                        disabled={proceedApplication.isPending}
-                        className="flex-1 px-4 py-2 rounded-lg bg-green-500/20 border border-green-400/50 text-green-200 hover:bg-green-500/30 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium"
-                      >
-                        {proceedApplication.isPending ? "Processing..." : "Proceed"}
-                      </button>
                     </div>
-                  </div>
+                  </button>
                 ))}
               </div>
             )}
@@ -373,4 +326,3 @@ export default function WhoAppliedPage() {
     </main>
   );
 }
-
