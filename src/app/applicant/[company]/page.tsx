@@ -60,13 +60,13 @@ export default function CompanyPage({ params }: CompanyPageProps) {
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-[#5A38A4] to-[#254BA4] font-sans flex items-center justify-center p-6">
+    <main className="min-h-screen bg-linear-to-br from-[#5A38A4] to-[#254BA4] font-sans flex items-center justify-center p-6">
       {/* Central Glassmorphism Card */}
       <div className="w-full max-w-4xl bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-10 lg:p-12">
         
         {/* Header with Logo */}
         <div className="flex items-center gap-3 mb-8">
-          <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-gradient-to-br from-orange-400 to-orange-600">
+          <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-linear-to-br from-orange-400 to-orange-600">
             <Sandwich className="h-4 w-4 text-white" />
           </div>
           <span className="text-lg font-semibold text-white tracking-tight">BanhMiBandit</span>
@@ -127,7 +127,7 @@ export default function CompanyPage({ params }: CompanyPageProps) {
             {/* Apply Button */}
             <button
               type="submit"
-              className="bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white px-8 py-4 rounded-full font-semibold transition-all duration-200 hover:shadow-lg whitespace-nowrap"
+              className="bg-linear-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white px-8 py-4 rounded-full font-semibold transition-all duration-200 hover:shadow-lg whitespace-nowrap"
             >
               Apply
             </button>

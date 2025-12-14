@@ -1,30 +1,84 @@
 import { z } from "zod";
+import { sql, eq } from "drizzle-orm";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { posts } from "~/server/db/schema";
+import { companies, jobs } from "~/server/db/schema";
 
 export const postRouter = createTRPCRouter({
-  hello: publicProcedure
-    .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
-      return {
-        greeting: `Hello ${input.text}`,
-      };
+  // Fetch company names, optionally filtered by search string
+  getCompanyNames: publicProcedure
+    .input(z.object({ search: z.string().optional() }))
+    .query(async ({ ctx, input }) => {
+      const search = input.search?.trim() || "";
+      
+      if (!search) {
+        // Return all company names if no search
+        const result = await ctx.db
+          .select({ name: companies.name })
+          .from(companies)
+          .limit(50);
+        return result.map((row) => row.name);
+      }
+      
+      // Case-insensitive search
+      const result = await ctx.db
+        .select({ name: companies.name })
+        .from(companies)
+        .where(sql`LOWER(${companies.name}) LIKE LOWER(${`%${search}%`})`)
+        .limit(50);
+      
+      return result.map((row) => row.name);
     }),
 
-  create: publicProcedure
+  // Get or create a company by name
+  getOrCreateCompany: publicProcedure
     .input(z.object({ name: z.string().min(1) }))
     .mutation(async ({ ctx, input }) => {
-      await ctx.db.insert(posts).values({
-        name: input.name,
-      });
+      const companyName = input.name.trim();
+      
+      // Check if company already exists
+      const existing = await ctx.db
+        .select()
+        .from(companies)
+        .where(sql`LOWER(${companies.name}) = LOWER(${companyName})`)
+        .limit(1);
+      
+      if (existing.length > 0) {
+        return existing[0]!;
+      }
+      
+      // Create new company
+      const [newCompany] = await ctx.db
+        .insert(companies)
+        .values({ name: companyName })
+        .returning();
+      
+      return newCompany!;
     }),
 
-  getLatest: publicProcedure.query(async ({ ctx }) => {
-    const post = await ctx.db.query.posts.findFirst({
-      orderBy: (posts, { desc }) => [desc(posts.createdAt)],
-    });
+  // Get company by ID
+  getCompanyById: publicProcedure
+    .input(z.object({ companyId: z.string().uuid() }))
+    .query(async ({ ctx, input }) => {
+      const [company] = await ctx.db
+        .select()
+        .from(companies)
+        .where(eq(companies.id, input.companyId))
+        .limit(1);
+      
+      return company ?? null;
+    }),
 
-    return post ?? null;
-  }),
+  // Get all jobs for a specific company
+  getJobsByCompany: publicProcedure
+    .input(z.object({ companyId: z.string().uuid() }))
+    .query(async ({ ctx, input }) => {
+      const result = await ctx.db
+        .select()
+        .from(jobs)
+        .where(eq(jobs.companyId, input.companyId))
+        .orderBy(jobs.createdAt);
+      
+      return result;
+    }),
 });
