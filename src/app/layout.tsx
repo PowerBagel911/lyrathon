@@ -2,7 +2,7 @@ import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 
 import "~/styles/globals.css";
-import { TRPCProvider } from "~/trpc/provider";
+import { TRPCReactProvider } from "~/trpc/react";
 
 export const metadata: Metadata = {
   title: "BanhMiBandit - Stop chasing opportunities. Let them find you.",
@@ -18,7 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <body className="font-sans antialiased">
-        <TRPCProvider>{children}</TRPCProvider>
+        <TRPCReactProvider>
+          {children}
+        </TRPCReactProvider>
       </body>
     </html>
   );
