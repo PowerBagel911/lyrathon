@@ -1,30 +1,32 @@
 import { z } from "zod";
+import { sql } from "drizzle-orm";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { posts } from "~/server/db/schema";
+import { companies } from "~/server/db/schema";
 
 export const postRouter = createTRPCRouter({
-  hello: publicProcedure
-    .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
-      return {
-        greeting: `Hello ${input.text}`,
-      };
+  // Fetch company names, optionally filtered by search string
+  getCompanyNames: publicProcedure
+    .input(z.object({ search: z.string().optional() }))
+    .query(async ({ ctx, input }) => {
+      const search = input.search?.trim() || "";
+      
+      if (!search) {
+        // Return all company names if no search
+        const result = await ctx.db
+          .select({ name: companies.name })
+          .from(companies)
+          .limit(50);
+        return result.map((row) => row.name);
+      }
+      
+      // Case-insensitive search
+      const result = await ctx.db
+        .select({ name: companies.name })
+        .from(companies)
+        .where(sql`LOWER(${companies.name}) LIKE LOWER(${`%${search}%`})`)
+        .limit(50);
+      
+      return result.map((row) => row.name);
     }),
-
-  create: publicProcedure
-    .input(z.object({ name: z.string().min(1) }))
-    .mutation(async ({ ctx, input }) => {
-      await ctx.db.insert(posts).values({
-        name: input.name,
-      });
-    }),
-
-  getLatest: publicProcedure.query(async ({ ctx }) => {
-    const post = await ctx.db.query.posts.findFirst({
-      orderBy: (posts, { desc }) => [desc(posts.createdAt)],
-    });
-
-    return post ?? null;
-  }),
 });
