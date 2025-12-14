@@ -34,10 +34,16 @@ export default function RecruiterSignupPage() {
       return;
     }
 
+    // Normalize website URL - add http:// if no protocol is provided
+    let normalizedWebsite = website.trim();
+    if (normalizedWebsite && !normalizedWebsite.match(/^https?:\/\//i)) {
+      normalizedWebsite = `http://${normalizedWebsite}`;
+    }
+
     try {
       createCompany.mutate({
         name: name.trim(),
-        website: website.trim() || undefined,
+        website: normalizedWebsite || undefined,
         description: description.trim() || undefined,
       });
     } catch (err) {
@@ -91,10 +97,10 @@ export default function RecruiterSignupPage() {
               </label>
               <input
                 id="website"
-                type="url"
+                type="text"
                 value={website}
                 onChange={(e) => setWebsite(e.target.value)}
-                placeholder="https://example.com"
+                placeholder="example.com or https://example.com"
                 className="w-full px-6 py-4 text-lg rounded-xl bg-white text-gray-900 placeholder-gray-500 border-0 focus:ring-4 focus:ring-blue-500/50 focus:outline-none shadow-xl transition-all duration-200"
                 autoComplete="off"
               />

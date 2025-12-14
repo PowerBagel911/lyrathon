@@ -127,7 +127,7 @@ export const postRouter = createTRPCRouter({
     .input(
       z.object({
         name: z.string().min(1),
-        website: z.union([z.string().url(), z.literal(""), z.undefined()]).optional(),
+        website: z.string().optional(),
         description: z.string().optional(),
       })
     )
@@ -143,13 +143,20 @@ export const postRouter = createTRPCRouter({
         throw new Error("A company with this name already exists.");
       }
 
-      // Validate and process website
+      // Validate and process website - add http:// if no protocol is provided
       let websiteValue: string | null = null;
       if (input.website && input.website.trim()) {
+        let websiteUrl = input.website.trim();
+        
+        // Add http:// if no protocol is provided
+        if (!websiteUrl.match(/^https?:\/\//i)) {
+          websiteUrl = `http://${websiteUrl}`;
+        }
+        
         try {
           // Validate URL format
-          new URL(input.website.trim());
-          websiteValue = input.website.trim();
+          new URL(websiteUrl);
+          websiteValue = websiteUrl;
         } catch {
           throw new Error("Invalid website URL format.");
         }
