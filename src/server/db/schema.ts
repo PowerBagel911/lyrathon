@@ -77,7 +77,9 @@ export const applications = pgTable("applications", {
   
   appliedAt: timestamp("applied_at", { withTimezone: true })
     .defaultNow()
-    .notNull()
+    .notNull(),
+  
+  status: text("status").default("pending").notNull(), // "pending", "proceeded", "dropped"
 });
 
 /* =======================

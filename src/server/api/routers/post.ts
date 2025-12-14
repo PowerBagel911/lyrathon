@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { sql, eq } from "drizzle-orm";
+import { sql, eq, and } from "drizzle-orm";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { 
@@ -12,6 +12,33 @@ import {
   evidenceValidation,
   jobFitAnalysis
 } from "~/server/db/schema";
+
+// Helper function to remove null bytes from strings (PostgreSQL doesn't allow 0x00 in text fields)
+function sanitizeString(value: string | null | undefined): string {
+  if (!value) return '';
+  return value.replace(/\0/g, '');
+}
+
+// Helper function to recursively sanitize JSONB objects and arrays
+function sanitizeJsonb(value: any): any {
+  if (value === null || value === undefined) {
+    return value;
+  }
+  if (typeof value === 'string') {
+    return sanitizeString(value);
+  }
+  if (Array.isArray(value)) {
+    return value.map(sanitizeJsonb);
+  }
+  if (typeof value === 'object') {
+    const sanitized: Record<string, any> = {};
+    for (const [key, val] of Object.entries(value)) {
+      sanitized[key] = sanitizeJsonb(val);
+    }
+    return sanitized;
+  }
+  return value;
+}
 
 export const postRouter = createTRPCRouter({
   // Fetch company names, optionally filtered by search string
@@ -95,6 +122,59 @@ export const postRouter = createTRPCRouter({
       return result;
     }),
 
+  // Create a new company
+  createCompany: publicProcedure
+    .input(
+      z.object({
+        name: z.string().min(1),
+        website: z.string().optional(),
+        description: z.string().optional(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      // Check if company with same name already exists (case-insensitive)
+      const [existingCompany] = await ctx.db
+        .select()
+        .from(companies)
+        .where(sql`LOWER(${companies.name}) = LOWER(${input.name.trim()})`)
+        .limit(1);
+
+      if (existingCompany) {
+        throw new Error("A company with this name already exists.");
+      }
+
+      // Validate and process website - add http:// if no protocol is provided
+      let websiteValue: string | null = null;
+      if (input.website && input.website.trim()) {
+        let websiteUrl = input.website.trim();
+        
+        // Add http:// if no protocol is provided
+        if (!websiteUrl.match(/^https?:\/\//i)) {
+          websiteUrl = `http://${websiteUrl}`;
+        }
+        
+        try {
+          // Validate URL format
+          new URL(websiteUrl);
+          websiteValue = websiteUrl;
+        } catch {
+          throw new Error("Invalid website URL format.");
+        }
+      }
+
+      // Create new company
+      const [newCompany] = await ctx.db
+        .insert(companies)
+        .values({
+          name: input.name.trim(),
+          website: websiteValue,
+          description: (input.description && input.description.trim()) || null,
+        })
+        .returning();
+
+      return newCompany!;
+    }),
+
   // Get all jobs for a specific company
   getJobsByCompany: publicProcedure
     .input(z.object({ companyId: z.string().uuid() }))
@@ -130,6 +210,41 @@ export const postRouter = createTRPCRouter({
         .returning();
 
       return newJob!;
+    }),
+
+  // Update an existing job
+  updateJob: publicProcedure
+    .input(
+      z.object({
+        jobId: z.string().uuid(),
+        title: z.string().min(1),
+        description: z.string().optional(),
+        requiredSkills: z.array(z.string()),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const [updatedJob] = await ctx.db
+        .update(jobs)
+        .set({
+          title: input.title.trim(),
+          description: input.description?.trim() || null,
+          requiredSkills: input.requiredSkills,
+        })
+        .where(eq(jobs.id, input.jobId))
+        .returning();
+
+      return updatedJob!;
+    }),
+
+  // Delete a job
+  deleteJob: publicProcedure
+    .input(z.object({ jobId: z.string().uuid() }))
+    .mutation(async ({ ctx, input }) => {
+      await ctx.db
+        .delete(jobs)
+        .where(eq(jobs.id, input.jobId));
+
+      return { success: true };
     }),
 
   // Create application (create applicant if needed, then application)
@@ -185,6 +300,7 @@ export const postRouter = createTRPCRouter({
         .values({
           applicantId,
           companyId: input.companyId,
+          status: "pending",
         })
         .returning();
 
@@ -207,9 +323,9 @@ export const postRouter = createTRPCRouter({
       if (analysisResult.cv_claims) {
         await ctx.db.insert(cvClaims).values({
           applicationId,
-          skills: analysisResult.cv_claims.skills || [],
-          projects: analysisResult.cv_claims.projects || [],
-          certifications: analysisResult.cv_claims.certifications || [],
+          skills: sanitizeJsonb(analysisResult.cv_claims.skills || []),
+          projects: sanitizeJsonb(analysisResult.cv_claims.projects || []),
+          certifications: sanitizeJsonb(analysisResult.cv_claims.certifications || []),
         });
       }
 
@@ -218,16 +334,16 @@ export const postRouter = createTRPCRouter({
         for (const repoData of analysisResult.github_evidence.data) {
           await ctx.db.insert(repositories).values({
             applicationId,
-            repoName: repoData.repo?.name || '',
-            repoUrl: repoData.repo?.url || '',
+            repoName: sanitizeString(repoData.repo?.name || ''),
+            repoUrl: sanitizeString(repoData.repo?.url || ''),
             isFork: repoData.repo?.fork || false,
             pushedAt: repoData.repo?.pushed_at ? new Date(repoData.repo.pushed_at) : null,
-            languages: repoData.evidence?.languages || null,
-            rootFiles: repoData.evidence?.root_files || null,
-            dependencies: repoData.evidence?.dependencies || null,
-            imports: repoData.evidence?.imports || null,
-            recentCommits: repoData.evidence?.recent_commits || null,
-            readmeExcerpt: repoData.evidence?.readme_excerpt || null,
+            languages: sanitizeJsonb(repoData.evidence?.languages) || null,
+            rootFiles: sanitizeJsonb(repoData.evidence?.root_files) || null,
+            dependencies: sanitizeJsonb(repoData.evidence?.dependencies) || null,
+            imports: sanitizeJsonb(repoData.evidence?.imports) || null,
+            recentCommits: sanitizeJsonb(repoData.evidence?.recent_commits) || null,
+            readmeExcerpt: sanitizeString(repoData.evidence?.readme_excerpt) || null,
           });
         }
       }
@@ -237,8 +353,8 @@ export const postRouter = createTRPCRouter({
         await ctx.db.insert(evidenceValidation).values({
           applicationId,
           matchScore: analysisResult.evidence_validation.match_score || 0,
-          summary: analysisResult.evidence_validation.summary || '',
-          skillBreakdown: analysisResult.evidence_validation.skill_breakdown || [],
+          summary: sanitizeString(analysisResult.evidence_validation.summary || ''),
+          skillBreakdown: sanitizeJsonb(analysisResult.evidence_validation.skill_breakdown || []),
         });
       }
 
@@ -246,12 +362,12 @@ export const postRouter = createTRPCRouter({
       if (analysisResult.job_fit) {
         await ctx.db.insert(jobFitAnalysis).values({
           applicationId,
-          preferredRole: analysisResult.job_fit.preferred_role || '',
-          roleMatchScores: analysisResult.job_fit.role_match_scores || {},
+          preferredRole: sanitizeString(analysisResult.job_fit.preferred_role || ''),
+          roleMatchScores: sanitizeJsonb(analysisResult.job_fit.role_match_scores || {}),
           skillCoveragePercentage: analysisResult.job_fit.skill_coverage_percentage || 0,
-          summary: analysisResult.job_fit.summary || '',
-          matchedSkills: analysisResult.job_fit.matched_skills || [],
-          missingSkills: analysisResult.job_fit.missing_skills || [],
+          summary: sanitizeString(analysisResult.job_fit.summary || ''),
+          matchedSkills: sanitizeJsonb(analysisResult.job_fit.matched_skills || []),
+          missingSkills: sanitizeJsonb(analysisResult.job_fit.missing_skills || []),
         });
       }
 
@@ -260,8 +376,10 @@ export const postRouter = createTRPCRouter({
 
   // Get all applications for a company (for Who Applied page)
   getApplicationsByCompany: publicProcedure
-    .input(z.object({ companyId: z.string().uuid() }))
+    .input(z.object({ companyId: z.string().uuid(), status: z.string().optional() }))
     .query(async ({ ctx, input }) => {
+      const statusFilter = input.status || "pending";
+      
       const result = await ctx.db
         .select({
           application: applications,
@@ -269,14 +387,44 @@ export const postRouter = createTRPCRouter({
         })
         .from(applications)
         .innerJoin(applicants, eq(applications.applicantId, applicants.id))
-        .where(eq(applications.companyId, input.companyId))
+        .where(
+          and(
+            eq(applications.companyId, input.companyId),
+            eq(applications.status, statusFilter)
+          )
+        )
         .orderBy(applications.appliedAt);
 
       return result.map((row) => ({
         id: row.application.id,
         appliedAt: row.application.appliedAt,
         applicant: row.applicant,
+        status: row.application.status,
       }));
+    }),
+
+  // Drop an application (delete it)
+  dropApplication: publicProcedure
+    .input(z.object({ applicationId: z.string().uuid() }))
+    .mutation(async ({ ctx, input }) => {
+      await ctx.db
+        .delete(applications)
+        .where(eq(applications.id, input.applicationId));
+
+      return { success: true };
+    }),
+
+  // Proceed with an application (mark as proceeded)
+  proceedApplication: publicProcedure
+    .input(z.object({ applicationId: z.string().uuid() }))
+    .mutation(async ({ ctx, input }) => {
+      const [updated] = await ctx.db
+        .update(applications)
+        .set({ status: "proceeded" })
+        .where(eq(applications.id, input.applicationId))
+        .returning();
+
+      return updated!;
     }),
 
   // Get full analysis for an application

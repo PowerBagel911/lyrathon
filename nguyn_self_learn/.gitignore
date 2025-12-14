@@ -1,15 +1,6 @@
-# Dependencies
-node_modules/
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Environment variables
-.env
-
-# Output directory
-
-
-# OS files
-.DS_Store
-Thumbs.db
-
-.next/
-random.txt
+# dependencies
+/node_modules
+/.next
+/random.txt
