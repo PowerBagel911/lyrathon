@@ -7,6 +7,31 @@ import { env } from '~/env'
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
+// Helper function to generate content with fallback models
+async function generateContentWithFallback(
+  genAI: GoogleGenerativeAI,
+  prompt: string,
+  models: string[] = ['gemini-2.0-flash-exp', 'gemini-1.5-flash']
+) {
+  let lastError: Error | null = null
+  
+  for (const modelName of models) {
+    try {
+      const model = genAI.getGenerativeModel({ model: modelName })
+      const result = await model.generateContent(prompt)
+      const response = await result.response
+      return response
+    } catch (error) {
+      lastError = error instanceof Error ? error : new Error(String(error))
+      console.warn(`Failed to use model ${modelName}, trying next model...`, error)
+      // Continue to next model
+    }
+  }
+  
+  // If all models failed, throw the last error
+  throw lastError || new Error('All models failed')
+}
+
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData()
@@ -82,8 +107,6 @@ export async function POST(request: NextRequest) {
 
     // Call Gemini 2.0 Flash
     const genAI = new GoogleGenerativeAI(finalGeminiKey)
-    // Try gemini-2.0-flash-exp first, fallback to gemini-1.5-flash if needed
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' })
 
     const prompt = `Extract ONLY explicit technical skills, projects, and certifications from the following resume text. 
 
@@ -125,8 +148,8 @@ ${resumeText}
 
 Return ONLY the JSON object, no other text.`
 
-    const result = await model.generateContent(prompt)
-    const response = await result.response
+    // Use helper function with fallback
+    const response = await generateContentWithFallback(genAI, prompt)
     const text = response.text()
 
     // Extract JSON from response (handle cases where Gemini adds markdown formatting)
@@ -298,8 +321,8 @@ The summary must:
 
 Return ONLY the JSON object, no other text.`
 
-    const comparisonResult = await model.generateContent(comparisonPrompt)
-    const comparisonResponse = await comparisonResult.response
+    // Use helper function with fallback for comparison
+    const comparisonResponse = await generateContentWithFallback(genAI, comparisonPrompt)
     const comparisonText = comparisonResponse.text()
 
     // Extract JSON from comparison response
@@ -427,8 +450,8 @@ The skill_coverage_percentage should show what percentage of required skills for
 The summary should explain the match reasoning and highlight key strengths/gaps.
 Return ONLY the JSON object, no other text.`
 
-      const jobMatchingResult = await model.generateContent(jobMatchingPrompt)
-      const jobMatchingResponse = await jobMatchingResult.response
+      // Use helper function with fallback for job matching
+      const jobMatchingResponse = await generateContentWithFallback(genAI, jobMatchingPrompt)
       const jobMatchingText = jobMatchingResponse.text()
 
       // Extract JSON from job matching response
