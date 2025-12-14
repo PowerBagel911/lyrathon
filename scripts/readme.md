@@ -7,7 +7,9 @@ create .env file from the sample (should work out of the box if you use docker c
 if you use database from other sources like locally or supabase, make sure to create empty postgres datbaase and put the link in .env shown in sample
 
 push drizzle schema to postgres database with 
+```bash
 npm run db:push
+```
 
 populate applicants, companies, jobs with mock data by
 ```bash
