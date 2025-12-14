@@ -61,22 +61,29 @@ export default function RecruiterChoicePage() {
     setSelectedIndex(-1);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Mutation to get or create company
+  const getOrCreateCompany = api.post.getOrCreateCompany.useMutation();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!companyName.trim()) {
       return;
     }
 
-    console.log("Company Name:", companyName);
-    
-    // TODO: Add database interaction here
-    // - Check if the company exists in the database
-    // - If not, create a new company record
-    // - Store company information for the recruiter session
-    
-    // For now, navigate to the recruiter page
-    router.push("/recruiter");
+    try {
+      // Get or create the company
+      const company = await getOrCreateCompany.mutateAsync({ name: companyName });
+      
+      // Store company ID in session storage
+      sessionStorage.setItem("companyId", company.id);
+      
+      // Navigate to recruiter page without exposing company ID in URL
+      router.push("/recruiter");
+    } catch (error) {
+      console.error("Error creating/fetching company:", error);
+      alert("Failed to process company. Please try again.");
+    }
   };
 
   return (

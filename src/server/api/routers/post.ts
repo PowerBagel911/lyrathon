@@ -1,8 +1,8 @@
 import { z } from "zod";
-import { sql } from "drizzle-orm";
+import { sql, eq } from "drizzle-orm";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { companies } from "~/server/db/schema";
+import { companies, jobs } from "~/server/db/schema";
 
 export const postRouter = createTRPCRouter({
   // Fetch company names, optionally filtered by search string
@@ -28,5 +28,57 @@ export const postRouter = createTRPCRouter({
         .limit(50);
       
       return result.map((row) => row.name);
+    }),
+
+  // Get or create a company by name
+  getOrCreateCompany: publicProcedure
+    .input(z.object({ name: z.string().min(1) }))
+    .mutation(async ({ ctx, input }) => {
+      const companyName = input.name.trim();
+      
+      // Check if company already exists
+      const existing = await ctx.db
+        .select()
+        .from(companies)
+        .where(sql`LOWER(${companies.name}) = LOWER(${companyName})`)
+        .limit(1);
+      
+      if (existing.length > 0) {
+        return existing[0]!;
+      }
+      
+      // Create new company
+      const [newCompany] = await ctx.db
+        .insert(companies)
+        .values({ name: companyName })
+        .returning();
+      
+      return newCompany!;
+    }),
+
+  // Get company by ID
+  getCompanyById: publicProcedure
+    .input(z.object({ companyId: z.string().uuid() }))
+    .query(async ({ ctx, input }) => {
+      const [company] = await ctx.db
+        .select()
+        .from(companies)
+        .where(eq(companies.id, input.companyId))
+        .limit(1);
+      
+      return company ?? null;
+    }),
+
+  // Get all jobs for a specific company
+  getJobsByCompany: publicProcedure
+    .input(z.object({ companyId: z.string().uuid() }))
+    .query(async ({ ctx, input }) => {
+      const result = await ctx.db
+        .select()
+        .from(jobs)
+        .where(eq(jobs.companyId, input.companyId))
+        .orderBy(jobs.createdAt);
+      
+      return result;
     }),
 });
