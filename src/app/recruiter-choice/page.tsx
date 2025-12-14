@@ -8,7 +8,9 @@ import { api } from "~/trpc/react";
 
 export default function RecruiterChoicePage() {
   const [companyName, setCompanyName] = useState("");
-  const [selectedCompanyId, setSelectedCompanyId] = useState<string | null>(null);
+  const [selectedCompanyId, setSelectedCompanyId] = useState<string | null>(
+    null,
+  );
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -25,13 +27,14 @@ export default function RecruiterChoicePage() {
   };
 
   // Fetch company names based on search input
-  const { data: companyOptions = [], isFetching } = api.post.getCompanyNames.useQuery(
-    { search: companyName },
-    { 
-      enabled: companyName.length > 0,
-      staleTime: 60_000,
-    }
-  );
+  const { data: companyOptions = [], isFetching } =
+    api.post.getCompanyNames.useQuery(
+      { search: companyName },
+      {
+        enabled: companyName.length > 0,
+        staleTime: 60_000,
+      },
+    );
 
   // Handle keyboard navigation
   useEffect(() => {
@@ -40,8 +43,8 @@ export default function RecruiterChoicePage() {
 
       if (e.key === "ArrowDown") {
         e.preventDefault();
-        setSelectedIndex((prev) => 
-          prev < companyOptions.length - 1 ? prev + 1 : prev
+        setSelectedIndex((prev) =>
+          prev < companyOptions.length - 1 ? prev + 1 : prev,
         );
       } else if (e.key === "ArrowUp") {
         e.preventDefault();
@@ -78,7 +81,7 @@ export default function RecruiterChoicePage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!selectedCompanyId) {
       alert("Please select a company from the dropdown list.");
       return;
@@ -87,7 +90,7 @@ export default function RecruiterChoicePage() {
     try {
       // Store company ID in session storage
       sessionStorage.setItem("companyId", selectedCompanyId);
-      
+
       // Navigate to recruiter page without exposing company ID in URL
       router.push("/recruiter");
     } catch (error) {
@@ -106,7 +109,9 @@ export default function RecruiterChoicePage() {
         />
       </div>
       {/* Navbar */}
-      <nav className={`relative z-10 flex items-center justify-start px-4 py-6 sm:px-6 sm:py-8 lg:px-12 lg:py-10 ${isExiting ? 'animate-fade-out' : 'animate-fade-in'}`}>
+      <nav
+        className={`relative z-10 flex items-center justify-start px-4 py-6 sm:px-6 sm:py-8 lg:px-12 lg:py-10 ${isExiting ? "animate-fade-out" : "animate-fade-in"}`}
+      >
         <div className="flex items-center">
           {/* <div className="flex h-15 w-15 -mt-2 items-center justify-center rounded-lg">
             <img
@@ -133,7 +138,9 @@ export default function RecruiterChoicePage() {
       </nav>
 
       {/* Main Content */}
-      <div className={`flex min-h-[80vh] flex-col items-center justify-center px-6 lg:px-12 ${isExiting ? 'animate-fade-out' : 'animate-fade-in'}`}>
+      <div
+        className={`flex min-h-[80vh] flex-col items-center justify-center px-6 lg:px-12 ${isExiting ? "animate-fade-out" : "animate-fade-in"}`}
+      >
         <div className="w-full max-w-4xl text-center">
           {/* Heading */}
           <h1 className="mb-12 font-serif text-4xl leading-tight font-bold text-white lg:text-6xl xl:text-7xl">
@@ -146,7 +153,7 @@ export default function RecruiterChoicePage() {
             className="mx-auto flex max-w-3xl flex-col items-center justify-center gap-4 sm:flex-row"
           >
             {/* Input Field */}
-            <div className="flex-1 w-full sm:w-auto relative">
+            <div className="relative w-full flex-1 sm:w-auto">
               <input
                 ref={inputRef}
                 type="text"
@@ -159,26 +166,28 @@ export default function RecruiterChoicePage() {
                 required
                 autoComplete="off"
               />
-              
+
               {/* Dropdown */}
               {showDropdown && companyOptions.length > 0 && (
                 <ul
                   ref={dropdownRef}
-                  className="absolute left-0 right-0 top-full mt-2 bg-white rounded-xl shadow-2xl max-h-64 overflow-y-auto z-50 border border-gray-200"
+                  className="absolute top-full right-0 left-0 z-50 mt-2 max-h-64 overflow-y-auto rounded-xl border border-gray-200 bg-white shadow-2xl"
                 >
                   {companyOptions.map((company, idx) => (
                     <li
                       key={company.id}
-                      className={`px-8 py-4 text-lg cursor-pointer transition-colors ${
+                      className={`cursor-pointer px-8 py-4 text-lg transition-colors ${
                         selectedIndex === idx
                           ? "bg-blue-100 text-blue-900"
                           : "text-gray-900 hover:bg-gray-100"
-                      } ${
-                        idx === 0 ? "rounded-t-xl" : ""
-                      } ${
-                        idx === companyOptions.length - 1 ? "rounded-b-xl" : "border-b border-gray-100"
+                      } ${idx === 0 ? "rounded-t-xl" : ""} ${
+                        idx === companyOptions.length - 1
+                          ? "rounded-b-xl"
+                          : "border-b border-gray-100"
                       }`}
-                      onMouseDown={() => handleSelectCompany(company.id, company.name)}
+                      onMouseDown={() =>
+                        handleSelectCompany(company.id, company.name)
+                      }
                       onMouseEnter={() => setSelectedIndex(idx)}
                     >
                       {company.name}
@@ -186,11 +195,11 @@ export default function RecruiterChoicePage() {
                   ))}
                 </ul>
               )}
-              
+
               {/* Loading indicator */}
               {isFetching && companyName && (
-                <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600"></div>
+                <div className="absolute top-1/2 right-4 -translate-y-1/2">
+                  <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-blue-600"></div>
                 </div>
               )}
             </div>
@@ -199,22 +208,31 @@ export default function RecruiterChoicePage() {
             <button
               type="submit"
               disabled={!selectedCompanyId}
-              className={`group relative overflow-hidden rounded-2xl px-12 py-6 text-xl font-semibold text-white shadow-xl transition-all duration-300 tracking-wide whitespace-nowrap ${
+              className={`group relative overflow-hidden rounded-2xl px-12 py-6 text-xl font-semibold tracking-wide whitespace-nowrap text-white shadow-xl transition-all duration-300 ${
                 selectedCompanyId
-                  ? "bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 hover:shadow-2xl hover:-translate-y-1 cursor-pointer"
-                  : "bg-gray-400 cursor-not-allowed opacity-60"
+                  ? "cursor-pointer bg-linear-to-r from-blue-600 to-blue-700 hover:-translate-y-1 hover:from-blue-500 hover:to-blue-600 hover:shadow-2xl"
+                  : "cursor-not-allowed bg-gray-400 opacity-60"
               }`}
             >
               <span className="relative z-10">Start Hiring</span>
             </button>
           </form>
+          {/* Back Link */}
+          <div className="pt-20 text-center">
+            <Link
+              href="/recruiter-auth"
+              className="text-lg text-white/80 underline transition-colors hover:text-white"
+            >
+              Back to options
+            </Link>
+          </div>
         </div>
       </div>
 
       {/* Decorative Elements */}
       <div className="pointer-events-none absolute top-1/4 right-1/4 h-64 w-64 rounded-full bg-purple-400/20 blur-3xl"></div>
       <div className="pointer-events-none absolute bottom-1/4 left-1/4 h-48 w-48 rounded-full bg-blue-400/20 blur-3xl"></div>
-      
+
       <style jsx>{`
         @keyframes fadeIn {
           0% {
