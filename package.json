@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "next build && npm run db:push",
+    "build": "next build && npm run db:push && npx tsx --env-file=.env scripts/populateMockData.ts",
     "check": "next lint && tsc --noEmit",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
