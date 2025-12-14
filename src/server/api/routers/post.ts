@@ -69,6 +69,33 @@ export const postRouter = createTRPCRouter({
       return company ?? null;
     }),
 
+  // Get all companies with optional search
+  getAllCompanies: publicProcedure
+    .input(z.object({ search: z.string().optional() }))
+    .query(async ({ ctx, input }) => {
+      const search = input.search?.trim() || "";
+      
+      if (!search) {
+        // Return all companies
+        const result = await ctx.db
+          .select()
+          .from(companies)
+          .orderBy(companies.name);
+        return result;
+      }
+      
+      // Case-insensitive search on name and description
+      const result = await ctx.db
+        .select()
+        .from(companies)
+        .where(
+          sql`LOWER(${companies.name}) LIKE LOWER(${`%${search}%`}) OR LOWER(${companies.description}) LIKE LOWER(${`%${search}%`})`
+        )
+        .orderBy(companies.name);
+      
+      return result;
+    }),
+
   // Get all jobs for a specific company
   getJobsByCompany: publicProcedure
     .input(z.object({ companyId: z.string().uuid() }))

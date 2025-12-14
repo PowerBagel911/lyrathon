@@ -1,8 +1,9 @@
 "use client";
 
-import { use, useState, useRef } from "react";
-import { Sandwich, Upload, MoreVertical, Check } from "lucide-react";
+import { use, useState, useRef, useEffect } from "react";
+import { Sandwich, Upload, Check } from "lucide-react";
 import Link from "next/link";
+import { api } from "~/trpc/react";
 
 interface CompanyPageProps {
   params: Promise<{
@@ -14,8 +15,30 @@ export default function CompanyPage({ params }: CompanyPageProps) {
   const { company } = use(params);
   const [githubUrl, setGithubUrl] = useState("");
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const [companyId, setCompanyId] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const companyName = company.charAt(0).toUpperCase() + company.slice(1);
+
+  // Get companyId from sessionStorage on mount
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedCompanyId = sessionStorage.getItem("applicantCompanyId");
+      setCompanyId(storedCompanyId);
+    }
+  }, []);
+
+  // Fetch company details
+  const { data: companyData, isLoading: companyLoading } = api.post.getCompanyById.useQuery(
+    { companyId: companyId! },
+    { enabled: !!companyId }
+  );
+
+  // Fetch jobs for this company
+  const { data: jobs = [], isLoading: jobsLoading } = api.post.getJobsByCompany.useQuery(
+    { companyId: companyId! },
+    { enabled: !!companyId }
+  );
+
+  const companyName = companyData?.name || company.charAt(0).toUpperCase() + company.slice(1);
 
   const handleFileUpload = () => {
     fileInputRef.current?.click();
@@ -41,23 +64,12 @@ export default function CompanyPage({ params }: CompanyPageProps) {
     if (!githubUrl.trim()) {
       return;
     }
-    console.log("GitHub URL:", githubUrl, "Company:", companyName);
+    console.log("GitHub URL:", githubUrl, "Company:", companyName, "Company ID:", companyId);
     if (uploadedFile) {
       console.log("Resume file:", uploadedFile.name);
     }
     // TODO: Implement application logic
   };
-
-  const jobListings = [
-    {
-      title: "Platform Engineer",
-      id: "platform-engineer"
-    },
-    {
-      title: "Back-end Lead", 
-      id: "backend-lead"
-    }
-  ];
 
   return (
     <main className="min-h-screen bg-linear-to-br from-[#5A38A4] to-[#254BA4] font-sans flex items-center justify-center p-6">
@@ -136,35 +148,53 @@ export default function CompanyPage({ params }: CompanyPageProps) {
 
         {/* Job Listings */}
         <div className="mb-12">
-          <div className="space-y-8">
-            {jobListings.map((job) => (
-              <div key={job.id} className="border-b border-white/10 pb-6 last:border-b-0">
-                <h3 className="text-2xl font-bold text-white mb-4">{job.title}</h3>
-                
-                {/* Description Placeholder Dots */}
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <MoreVertical className="h-4 w-4 text-white/50 rotate-90" />
-                    <div className="h-2 bg-white/30 rounded-full w-3/4"></div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MoreVertical className="h-4 w-4 text-white/50 rotate-90" />
-                    <div className="h-2 bg-white/30 rounded-full w-2/3"></div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MoreVertical className="h-4 w-4 text-white/50 rotate-90" />
-                    <div className="h-2 bg-white/30 rounded-full w-1/2"></div>
-                  </div>
+          <h2 className="text-2xl font-bold text-white mb-6">Available Positions</h2>
+          {jobsLoading || companyLoading ? (
+            <div className="text-center py-8">
+              <p className="text-white/60">Loading job positions...</p>
+            </div>
+          ) : jobs.length === 0 ? (
+            <div className="text-center py-8 border border-white/20 rounded-2xl bg-white/5">
+              <p className="text-white/60">No open positions at the moment.</p>
+            </div>
+          ) : (
+            <div className="space-y-6">
+              {jobs.map((job) => (
+                <div key={job.id} className="border border-white/20 rounded-2xl p-6 bg-white/5 hover:bg-white/10 transition-all">
+                  <h3 className="text-2xl font-bold text-white mb-3">{job.title}</h3>
+                  
+                  {job.description && (
+                    <p className="text-white/80 mb-4 leading-relaxed">
+                      {job.description}
+                    </p>
+                  )}
+                  
+                  {/* Required Skills */}
+                  {job.requiredSkills && (job.requiredSkills as string[]).length > 0 && (
+                    <div className="mt-4">
+                      <h4 className="text-sm font-semibold text-white/90 mb-2">Required Skills:</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {(job.requiredSkills as string[]).map((skill, idx) => (
+                          <span
+                            key={idx}
+                            className="px-3 py-1 bg-white/20 rounded-full text-sm text-white"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Footer - Back to Search */}
         <div className="text-center">
           <Link 
-            href="/"
+            href="/applicant"
             className="inline-block bg-black/20 hover:bg-black/30 backdrop-blur-sm border border-white/10 px-8 py-3 rounded-full text-white font-medium transition-all duration-200"
           >
             Back to Search
