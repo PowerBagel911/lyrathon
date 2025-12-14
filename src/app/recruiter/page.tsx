@@ -10,6 +10,7 @@ export default function RecruiterPage() {
   
   // Modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingJobId, setEditingJobId] = useState<string | null>(null);
   const [modalTitle, setModalTitle] = useState("");
   const [modalDescription, setModalDescription] = useState("");
   const [modalKeywords, setModalKeywords] = useState("");
@@ -41,21 +42,59 @@ export default function RecruiterPage() {
     },
   });
 
+  // Update job mutation
+  const updateJob = api.post.updateJob.useMutation({
+    onSuccess: () => {
+      refetch();
+    },
+  });
+
+  // Delete job mutation
+  const deleteJob = api.post.deleteJob.useMutation({
+    onSuccess: () => {
+      refetch();
+    },
+  });
+
   // Modal handlers
   const handleOpenModal = () => {
     // Open modal with empty fields for creating a new job
+    setEditingJobId(null);
     setModalTitle("");
     setModalDescription("");
     setModalKeywords("");
     setIsModalOpen(true);
   };
 
+  const handleEditJob = (job: typeof jobs[0]) => {
+    // Open modal with pre-filled fields for editing
+    setEditingJobId(job.id);
+    setModalTitle(job.title);
+    setModalDescription(job.description || "");
+    setModalKeywords((job.requiredSkills as string[]).join(", "));
+    setIsModalOpen(true);
+  };
+
+  const handleDeleteJob = async (jobId: string) => {
+    if (!confirm("Are you sure you want to delete this job role?")) {
+      return;
+    }
+
+    try {
+      await deleteJob.mutateAsync({ jobId });
+    } catch (error) {
+      console.error("Error deleting job:", error);
+      alert("Failed to delete job. Please try again.");
+    }
+  };
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    setEditingJobId(null);
   };
 
   const handleSaveJob = async () => {
-    if (!modalTitle.trim() || !companyId) return;
+    if (!modalTitle.trim()) return;
 
     // Parse keywords from comma-separated string
     const keywordsArray = modalKeywords
@@ -64,21 +103,34 @@ export default function RecruiterPage() {
       .filter((keyword) => keyword.length > 0);
 
     try {
-      await createJob.mutateAsync({
-        companyId,
-        title: modalTitle.trim(),
-        description: modalDescription.trim() || undefined,
-        requiredSkills: keywordsArray,
-      });
+      if (editingJobId) {
+        // Update existing job
+        await updateJob.mutateAsync({
+          jobId: editingJobId,
+          title: modalTitle.trim(),
+          description: modalDescription.trim() || undefined,
+          requiredSkills: keywordsArray,
+        });
+      } else {
+        // Create new job
+        if (!companyId) return;
+        await createJob.mutateAsync({
+          companyId,
+          title: modalTitle.trim(),
+          description: modalDescription.trim() || undefined,
+          requiredSkills: keywordsArray,
+        });
+      }
 
       // Clear and close
       setModalTitle("");
       setModalDescription("");
       setModalKeywords("");
+      setEditingJobId(null);
       setIsModalOpen(false);
     } catch (error) {
-      console.error("Error creating job:", error);
-      alert("Failed to create job. Please try again.");
+      console.error("Error saving job:", error);
+      alert("Failed to save job. Please try again.");
     }
   };
 
@@ -165,9 +217,25 @@ export default function RecruiterPage() {
                   key={job.id}
                   className="rounded-2xl border border-white/20 bg-white/10 p-4 sm:p-6 backdrop-blur-sm transition-all hover:border-white/30 hover:bg-white/15"
                 >
-                  <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">
-                    {job.title}
-                  </h3>
+                  <div className="flex items-start justify-between mb-2">
+                    <h3 className="text-lg sm:text-xl font-semibold text-white flex-1">
+                      {job.title}
+                    </h3>
+                    <div className="flex gap-2 ml-4">
+                      <button
+                        onClick={() => handleEditJob(job)}
+                        className="px-3 py-1.5 text-xs sm:text-sm font-medium text-white bg-white/10 hover:bg-white/20 rounded-lg transition-colors border border-white/20"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDeleteJob(job.id)}
+                        className="px-3 py-1.5 text-xs sm:text-sm font-medium text-white bg-red-500/20 hover:bg-red-500/30 rounded-lg transition-colors border border-red-500/30"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
                   {job.description && (
                     <p className="text-sm sm:text-base text-white/80 mb-3">
                       {job.description}
@@ -211,7 +279,7 @@ export default function RecruiterPage() {
 
             {/* Modal Header */}
             <h2 className="text-xl sm:text-2xl font-serif font-bold text-white mb-6">
-              Create New Job Role
+              {editingJobId ? "Edit Job Role" : "Create New Job Role"}
             </h2>
 
             {/* Form */}
@@ -266,7 +334,7 @@ export default function RecruiterPage() {
                 onClick={handleSaveJob}
                 className="w-full bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white py-3 sm:py-4 rounded-xl font-semibold transition-all duration-200 hover:shadow-lg mt-4"
               >
-                Save Job Role
+                {editingJobId ? "Update Job Role" : "Save Job Role"}
               </button>
             </div>
           </div>

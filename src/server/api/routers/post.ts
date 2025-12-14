@@ -132,6 +132,41 @@ export const postRouter = createTRPCRouter({
       return newJob!;
     }),
 
+  // Update an existing job
+  updateJob: publicProcedure
+    .input(
+      z.object({
+        jobId: z.string().uuid(),
+        title: z.string().min(1),
+        description: z.string().optional(),
+        requiredSkills: z.array(z.string()),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const [updatedJob] = await ctx.db
+        .update(jobs)
+        .set({
+          title: input.title.trim(),
+          description: input.description?.trim() || null,
+          requiredSkills: input.requiredSkills,
+        })
+        .where(eq(jobs.id, input.jobId))
+        .returning();
+
+      return updatedJob!;
+    }),
+
+  // Delete a job
+  deleteJob: publicProcedure
+    .input(z.object({ jobId: z.string().uuid() }))
+    .mutation(async ({ ctx, input }) => {
+      await ctx.db
+        .delete(jobs)
+        .where(eq(jobs.id, input.jobId));
+
+      return { success: true };
+    }),
+
   // Create application (create applicant if needed, then application)
   createApplication: publicProcedure
     .input(
