@@ -1,0 +1,311 @@
+{
+  "skills": [
+    {
+      "name": "Cisco routers and switches",
+      "category": "networking",
+      "mention_count": 1
+    },
+    {
+      "name": "VLANs",
+      "category": "networking",
+      "mention_count": 1
+    },
+    {
+      "name": "DHCP",
+      "category": "networking",
+      "mention_count": 1
+    },
+    {
+      "name": "DNS",
+      "category": "networking",
+      "mention_count": 1
+    },
+    {
+      "name": "NAT",
+      "category": "networking",
+      "mention_count": 1
+    },
+    {
+      "name": "STP",
+      "category": "networking",
+      "mention_count": 1
+    },
+    {
+      "name": "ACLs",
+      "category": "networking",
+      "mention_count": 1
+    },
+    {
+      "name": "IPv4/IPv6 subnetting",
+      "category": "networking",
+      "mention_count": 1
+    },
+    {
+      "name": "routing protocols",
+      "category": "networking",
+      "mention_count": 1
+    },
+    {
+      "name": "OSPF",
+      "category": "networking",
+      "mention_count": 1
+    },
+    {
+      "name": "EIGRP",
+      "category": "networking",
+      "mention_count": 1
+    },
+    {
+      "name": "RIP",
+      "category": "networking",
+      "mention_count": 1
+    },
+    {
+      "name": "Windows Server 2022",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "Active Directory",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "Group Policy",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "Microsoft 365",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "Amazon Web Services (AWS)",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "Jira Service Management",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "Zoho Desk",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "ITIL concepts",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "AnyDesk",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "Zoho Assist",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "Datto RMM",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "Wireshark",
+      "category": "tool",
+      "mention_count": 2
+    },
+    {
+      "name": "Nmap",
+      "category": "tool",
+      "mention_count": 2
+    },
+    {
+      "name": "Metasploit",
+      "category": "tool",
+      "mention_count": 2
+    },
+    {
+      "name": "Burp Suite",
+      "category": "tool",
+      "mention_count": 2
+    },
+    {
+      "name": "Ghidra",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "IDA Freeware",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "Detect It Easy (DiE)",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "CFF Explorer",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "Scylla",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "OLETools",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "PowerShell",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "Bash scripting",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "Python",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "C#",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "Ruby",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "HTML/CSS",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "PHP",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "SQL",
+      "category": "code",
+      "mention_count": 1
+    },
+    {
+      "name": "SQLmap",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "Tcpdump",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "Snort",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "Nginx",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "EC2",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "RDS",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "S3",
+      "category": "tool",
+      "mention_count": 2
+    },
+    {
+      "name": "Lambda",
+      "category": "tool",
+      "mention_count": 2
+    },
+    {
+      "name": "Auto Scaling",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "Elastic Load Balancer",
+      "category": "tool",
+      "mention_count": 1
+    },
+    {
+      "name": "MySQL",
+      "category": "tool",
+      "mention_count": 1
+    }
+  ],
+  "projects": [
+    {
+      "name": "Cybersecurity Multi-Agent Log Analysis System",
+      "technologies": [
+        "LLM",
+        "Windows event logs",
+        "MITRE ATT&CK",
+        "CTI",
+        "LangGraph"
+      ]
+    },
+    {
+      "name": "Virtualised Penetration Testing Home Lab",
+      "technologies": [
+        "VMware Workstation",
+        "Kali Linux",
+        "Windows VMs",
+        "Nmap",
+        "Burp Suite",
+        "Metasploit",
+        "SQLmap",
+        "Wireshark",
+        "Tcpdump",
+        "Snort",
+        "Nginx"
+      ]
+    },
+    {
+      "name": "AWS Cloud-Based Photo Album Application",
+      "technologies": [
+        "AWS",
+        "EC2",
+        "RDS",
+        "S3",
+        "Lambda",
+        "Auto Scaling",
+        "Elastic Load Balancer",
+        "MySQL"
+      ]
+    }
+  ],
+  "certifications": [
+    "Working With Children Check Volunteer (Service Victoria)",
+    "Pre Security Certificate (TryHackMe)",
+    "Cyber Security 101 Certificate (TryHackMe)",
+    "Google Cybersecurity Professional Certificate (Coursera)"
+  ]
+}

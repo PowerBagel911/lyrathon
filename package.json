@@ -30,6 +30,7 @@
     "drizzle-orm": "^0.41.0",
     "geist": "^1.5.1",
     "lucide-react": "^0.561.0",
+    "mammoth": "^1.11.0",
     "next": "^15.2.3",
     "pdf-parse": "^1.1.1",
     "postgres": "^3.4.4",

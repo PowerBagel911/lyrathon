@@ -108,4 +108,28 @@ export const postRouter = createTRPCRouter({
       
       return result;
     }),
+
+  // Create a new job
+  createJob: publicProcedure
+    .input(
+      z.object({
+        companyId: z.string().uuid(),
+        title: z.string().min(1),
+        description: z.string().optional(),
+        requiredSkills: z.array(z.string()),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const [newJob] = await ctx.db
+        .insert(jobs)
+        .values({
+          companyId: input.companyId,
+          title: input.title.trim(),
+          description: input.description?.trim() || null,
+          requiredSkills: input.requiredSkills,
+        })
+        .returning();
+
+      return newJob!;
+    }),
 });

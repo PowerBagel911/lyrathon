@@ -1,0 +1,10 @@
+{
+  "preferred_role": "Job 1",
+  "role_match_scores": {
+    "Job 1": 0
+  },
+  "skill_coverage_percentage": 0,
+  "summary": "The candidate information could not be automatically mapped to the single job description provided, because the description was not provided. Therefore, no skills could be matched. The match score is 0 and the skill coverage is 0%.",
+  "matched_skills": [],
+  "missing_skills": []
+}

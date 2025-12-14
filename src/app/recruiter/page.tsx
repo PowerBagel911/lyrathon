@@ -34,6 +34,13 @@ export default function RecruiterPage() {
     { enabled: !!companyId }
   );
 
+  // Create job mutation
+  const createJob = api.post.createJob.useMutation({
+    onSuccess: () => {
+      refetch();
+    },
+  });
+
   // Modal handlers
   const handleOpenModal = () => {
     // Open modal with empty fields for creating a new job
@@ -56,21 +63,23 @@ export default function RecruiterPage() {
       .map((keyword) => keyword.trim())
       .filter((keyword) => keyword.length > 0);
 
-    // TODO: Add tRPC mutation to create job
-    // For now, log the data
-    console.log("Creating job:", {
-      companyId,
-      title: modalTitle.trim(),
-      description: modalDescription.trim(),
-      keywords: keywordsArray,
-    });
+    try {
+      await createJob.mutateAsync({
+        companyId,
+        title: modalTitle.trim(),
+        description: modalDescription.trim() || undefined,
+        requiredSkills: keywordsArray,
+      });
 
-    // Clear and close
-    setRoleInput("");
-    setIsModalOpen(false);
-    
-    // Refetch jobs list
-    await refetch();
+      // Clear and close
+      setModalTitle("");
+      setModalDescription("");
+      setModalKeywords("");
+      setIsModalOpen(false);
+    } catch (error) {
+      console.error("Error creating job:", error);
+      alert("Failed to create job. Please try again.");
+    }
   };
 
   return (
