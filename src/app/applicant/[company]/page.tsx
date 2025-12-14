@@ -119,9 +119,11 @@ export default function CompanyPage({ params }: CompanyPageProps) {
     jobsList: Array<{ id: string; title: string; description: string | null; requiredSkills: unknown }>
   ) => {
     try {
-      // Build job specs
+      // Build job specs with titles
       const jobSpecs: string[] = [];
+      const jobTitles: string[] = [];
       jobsList.forEach((job) => {
+        jobTitles.push(job.title);
         if (job.description && job.description.trim()) {
           jobSpecs.push(job.description.trim());
         } else {
@@ -138,6 +140,10 @@ export default function CompanyPage({ params }: CompanyPageProps) {
       formData.append('jobCount', jobSpecs.length.toString());
       jobSpecs.forEach((spec, index) => {
         formData.append(`jobSpec${index + 1}`, spec);
+      });
+      // Add job titles
+      jobTitles.forEach((title, index) => {
+        formData.append(`jobTitle${index + 1}`, title);
       });
 
       const response = await fetch('/api/extract', {

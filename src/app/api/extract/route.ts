@@ -15,14 +15,18 @@ export async function POST(request: NextRequest) {
     const githubToken = formData.get('githubToken') as string | null
     const githubUrl = formData.get('githubUrl') as string | null
     
-    // Collect job specs dynamically
+    // Collect job specs and titles dynamically
     const jobCountStr = formData.get('jobCount') as string | null
     const jobCount = jobCountStr ? parseInt(jobCountStr) : 0
     const jobSpecs: string[] = []
+    const jobTitles: string[] = []
     for (let i = 1; i <= jobCount; i++) {
       const spec = formData.get(`jobSpec${i}`) as string | null
+      const title = formData.get(`jobTitle${i}`) as string | null
       if (spec && spec.trim()) {
         jobSpecs.push(spec.trim())
+        // Use provided title or fallback to "Job {i}"
+        jobTitles.push(title && title.trim() ? title.trim() : `Job ${i}`)
       }
     }
 
@@ -371,9 +375,9 @@ Return ONLY the JSON object, no other text.`
 
     // If job specs provided, make second LLM call for job matching
     if (jobSpecs.length > 0) {
-      // Build job specifications section dynamically
+      // Build job specifications section dynamically with titles
       const jobSpecsSection = jobSpecs.map((spec, index) => 
-        `Job Specification ${index + 1}:\n${spec}`
+        `Job Title: ${jobTitles[index] || `Job ${index + 1}`}\nJob Specification:\n${spec}`
       ).join('\n\n')
 
       const jobMatchingPrompt = `Compare the validated candidate skills against ${jobSpecs.length} job specification(s) and determine which role is a better fit.
@@ -409,7 +413,7 @@ Return ONLY valid JSON with this exact schema:
 {
   "preferred_role": string,
   "role_match_scores": {
-    ${jobSpecs.map((_, index) => `"Job ${index + 1}": number`).join(',\n    ')}
+    ${jobTitles.map((title, index) => `"${title}": number`).join(',\n    ')}
   },
   "skill_coverage_percentage": number,
   "summary": string,
@@ -417,7 +421,8 @@ Return ONLY valid JSON with this exact schema:
   "missing_skills": string[]
 }
 
-The preferred_role should be "Job 1", "Job 2", etc. (up to "Job ${jobSpecs.length}") based on which has the highest match score.
+The preferred_role must be one of the exact job titles provided: ${jobTitles.map(t => `"${t}"`).join(', ')}. Use the exact title as provided, based on which has the highest match score.
+The role_match_scores object must use the exact job titles as keys: ${jobTitles.map(t => `"${t}"`).join(', ')}.
 The skill_coverage_percentage should show what percentage of required skills for the preferred_role are covered (using flexible matching).
 The summary should explain the match reasoning and highlight key strengths/gaps.
 Return ONLY the JSON object, no other text.`
@@ -461,17 +466,25 @@ Return ONLY the JSON object, no other text.`
         )
       }
 
-      // Validate each job score dynamically
-      for (let i = 1; i <= jobSpecs.length; i++) {
-        const jobName = `Job ${i}`
-        if (typeof jobMatchData.role_match_scores[jobName] !== 'number' || 
-            jobMatchData.role_match_scores[jobName] < 0 || 
-            jobMatchData.role_match_scores[jobName] > 100) {
+      // Validate each job score dynamically using actual job titles
+      for (let i = 0; i < jobTitles.length; i++) {
+        const jobTitle = jobTitles[i]!
+        if (typeof jobMatchData.role_match_scores[jobTitle] !== 'number' || 
+            jobMatchData.role_match_scores[jobTitle] < 0 || 
+            jobMatchData.role_match_scores[jobTitle] > 100) {
           return NextResponse.json(
-            { error: `Invalid response format: ${jobName} match score must be a number between 0 and 100` },
+            { error: `Invalid response format: ${jobTitle} match score must be a number between 0 and 100` },
             { status: 500 }
           )
         }
+      }
+
+      // Validate that preferred_role is one of the actual job titles
+      if (!jobTitles.includes(jobMatchData.preferred_role)) {
+        return NextResponse.json(
+          { error: `Invalid response format: preferred_role must be one of: ${jobTitles.join(', ')}` },
+          { status: 500 }
+        )
       }
 
       if (typeof jobMatchData.skill_coverage_percentage !== 'number' || 
