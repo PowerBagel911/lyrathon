@@ -145,3 +145,22 @@ export const cvClaims = pgTable("cv_claims", {
     .defaultNow()
     .notNull()
 });
+
+/* =======================
+   Applications
+   ======================= */
+export const applications = pgTable("applications", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  
+  applicantId: uuid("applicant_id")
+    .references(() => applicants.id)
+    .notNull(),
+  
+  companyId: uuid("company_id")
+    .references(() => companies.id)
+    .notNull(),
+  
+  appliedAt: timestamp("applied_at", { withTimezone: true })
+    .defaultNow()
+    .notNull()
+});
