@@ -201,7 +201,7 @@ export default function RecruiterChoicePage() {
               disabled={!selectedCompanyId}
               className={`group relative overflow-hidden rounded-2xl px-12 py-6 text-xl font-semibold text-white shadow-xl transition-all duration-300 tracking-wide whitespace-nowrap ${
                 selectedCompanyId
-                  ? "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 hover:shadow-2xl hover:-translate-y-1 cursor-pointer"
+                  ? "bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 hover:shadow-2xl hover:-translate-y-1 cursor-pointer"
                   : "bg-gray-400 cursor-not-allowed opacity-60"
               }`}
             >

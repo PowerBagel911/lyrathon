@@ -222,7 +222,7 @@ export default function RecruiterPage() {
           />
 
           {/* Modal Content */}
-          <div className="relative bg-gradient-to-br from-[#3d2a6d] to-[#1e3a5f] border border-white/20 rounded-2xl p-6 sm:p-8 w-full max-w-lg shadow-2xl">
+          <div className="relative bg-linear-to-br from-[#3d2a6d] to-[#1e3a5f] border border-white/20 rounded-2xl p-6 sm:p-8 w-full max-w-lg shadow-2xl">
             {/* Close Button */}
             <button
               onClick={handleCloseModal}
@@ -286,7 +286,7 @@ export default function RecruiterPage() {
               {/* Save Button */}
               <button
                 onClick={handleSaveJob}
-                className="w-full bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white py-3 sm:py-4 rounded-xl font-semibold transition-all duration-200 hover:shadow-lg mt-4"
+                className="w-full bg-linear-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white py-3 sm:py-4 rounded-xl font-semibold transition-all duration-200 hover:shadow-lg mt-4"
               >
                 Save Job Role
               </button>
